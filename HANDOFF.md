@@ -8,7 +8,8 @@
 ## 0. Ringkasan 30 detik
 - **Apa ini?** Game PC online: avatar sosial ala AyoDance + brawler tim ala LostSaga + ekonomi kosmetik non-P2W. Penjelasan sederhana: [`docs/11-konsep-game-bahasa-sederhana.md`](docs/11-konsep-game-bahasa-sederhana.md).
 - **Sampai mana?** Semua desain game dan arsitektur sudah **dikunci**. **Belum ada satu baris kode game pun.**
-- **Langkah berikutnya?** **Fase 1 — Spike netcode (2–3 minggu)**. Lihat §5.
+- **Langkah berikutnya?** **Fase 1 — Spike netcode (2–3 minggu)**. Rencana detail langkah-demi-langkah di [`docs/20-rencana-spike-fase1.md`](docs/20-rencana-spike-fase1.md). Lihat juga §5.
+- **Mulai dari mana saat lanjut?** Tugas **S-00** = izin pemilik untuk mulai coding, lalu S-01 (pasang .NET 8 SDK). Semua desain sudah LOCKED (`docs/19`), jadi tinggal eksekusi.
 - **Aturan paling penting:** jangan mulai coding sebelum pemilik proyek memberi izin, dan jangan mengubah keputusan yang sudah dikunci tanpa mencatatnya di [`docs/90-decision-log.md`](docs/90-decision-log.md).
 
 ---
@@ -123,7 +124,9 @@
 
 ## 5. NEXT — Fase 1: Spike Netcode (2–3 minggu)
 
-**Tujuan:** membuktikan Combat Core custom + netcode terasa responsif pada lag nyata, **sebelum** produksi. Gagal → evaluasi Photon Quantum.
+> **Rencana eksekusi rinci (struktur .NET, kontrak data, tiap langkah + "selesai bila") ada di [`docs/20-rencana-spike-fase1.md`](docs/20-rencana-spike-fase1.md).** Ringkasan di bawah.
+
+**Tujuan:** membuktikan Combat Core custom + netcode terasa responsif pada lag nyata, **sebelum** produksi. Gagal → evaluasi Photon Quantum. **Spike = pure .NET headless, tanpa engine 3D** (plus Debug Viewer 2D opsional di akhir).
 
 **Kondisi uji:** ping 150 ms, jitter 20 ms, packet loss 2%.
 

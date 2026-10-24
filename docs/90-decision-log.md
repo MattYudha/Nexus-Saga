@@ -63,3 +63,5 @@
 | 2026-10-24 | Pipeline aset: **Claude + Blender headless (bpy)** untuk arena/collider/rig/LOD/retarget/export; MPFB2 untuk base body | Disepakati |
 | 2026-10-24 | **AI-mesh-gen lokal (TRELLIS/Hunyuan) TIDAK layak di GTX 1650 4GB** → mesh organik dari cloud/marketplace/artist; Claude pasca-proses | Disepakati (koreksi realita) |
 | 2026-10-24 | Engine client (Unity vs Godot 4 .NET) **ditunda**; bake-off awal Fase 2 fokus export mobile; Core/server tidak terpengaruh | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Spike S-12b: **Lightweight Debug Viewer** 2D (HTML5 Canvas/WebSocket) — kapsul, hitbox/hurtbox, prediksi vs snapshot; read-only, opsional (doc 20) | Disepakati |
+

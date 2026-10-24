@@ -95,6 +95,14 @@ Bot menjalankan skenario combo standar; instrumentasi ukur 5 metrik:
 N match bot headless di 1 vCPU (batasi afinitas/core). Ukur match/vCPU + bandwidth.
 - **Selesai bila:** metrik #4/#5 terukur.
 
+### S-12b — Lightweight Debug Viewer (opsional, ringan — TANPA engine 3D)
+Visualisasi mata untuk melihat kelancaran juggle di ping 150 ms, di luar metrik matematis.
+- **Bentuk:** satu file **HTML5 Canvas + WebSocket** (server kirim state per tick) atau jendela 2D sederhana. Top-down/side 2D, bukan game.
+- **Tampilkan:** 2 kapsul (posisi), **hitbox (merah) & hurtbox (biru)** per frame, dan **bayangan Client Prediction vs Server Snapshot** (2 warna) agar koreksi rollback terlihat.
+- **Overlay:** tick, ping simulasi, stateId, Break Stock, hitstun.
+- **Selesai bila:** bisa melihat combo juggle real-time + selisih prediksi vs server secara visual.
+- Catatan: read-only (hanya menggambar state dari server); tidak memengaruhi sim/determinisme.
+
 ### S-13 — Pembanding Photon Quantum (2–3 hari)
 Sampel brawler Quantum; bandingkan effort + rasa + metrik #1–3. Catatan perbandingan.
 - **Selesai bila:** ada rekomendasi berbasis bukti.
