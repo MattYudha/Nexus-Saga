@@ -1,12 +1,21 @@
-# 91 — Pertanyaan Terbuka
+﻿# 91 — Pertanyaan Terbuka (diperbarui 2026-10-24)
 
-1. ~~REA MCP belum terhubung~~ → ✅ terhubung 2026-10-24. Sisa: pasang Ghidra 12.1.x + JDK 21 untuk dekompilasi native .exe/.dll.
-> #2–#5 sudah diputuskan 2026-10-24 (lihat `90-decision-log.md`): PC dulu, 2.5D side-view, maks 5v5, 13+ / couple room 18+.
+> Pertanyaan desain inti sudah dijawab dan dikunci di `90-decision-log.md`. Daftar di bawah adalah yang **masih terbuka**. Rinciannya: `../HANDOFF.md` §4.
 
-2. ~~Target platform~~: PC saja, atau PC + mobile? (sangat memengaruhi skala grafik & kontrol combat)
-3. Kamera combat: side-view 2.5D seperti LostSaga, atau 3D third-person?
-4. Ukuran tim maksimal di arena: 5v5 atau lebih (8v8 seperti LostSaga)?
-5. Target umur player — menentukan aturan fitur dating/couple room.
-6. Ukuran tim development & budget server (menentukan Nakama self-host vs managed).
-7. ~~Path Audition~~ → `C:\Megaxus\AyoDance` (ditemukan 2026-10-24, ada Xigncode → analisis statis saja). **LostSaga belum ada** di PC — perlu disediakan.
-8. Setuju dengan scope MVP di `04-brainstorm-v2-system-map.md` bagian D?
+| # | Pertanyaan | Dibutuhkan sebelum |
+|---|---|---|
+| 1 | Izin mulai coding (Fase 1 spike) | Fase 1 |
+| 2 | Art direction: chibi / anime / low-poly / stylized? | Fase 2 |
+| 3 | Daftar skill & frame data hero Pegulat dan Zoner | Fase 2 |
+| 4 | Angka ekonomi: harga, rent-to-own %, rate gacha, pity | Fase 2–3 |
+| 5 | Formula MMR & Rank Points | Fase 2 |
+| 6 | Desain Relic, minigame, Squad War | Fase 3 |
+| 7 | Verifikasi regulasi (IGRS, PSE, gacha) | Sebelum rilis |
+| 8 | Payment gateway MiCash | Fase akhir |
+| 9 | Nama penyusun di sampul proposal | Saat proposal dikirim |
+
+## Sudah terjawab (arsip)
+- REA MCP → terhubung (rea-agents 6.7.0 + Ghidra 12.1.4).
+- Platform PC dulu; kamera 3D free-roam quarter-view; maks 5v5; 13+ / couple room 18+.
+- Path AyoDance `C:\Megaxus\AyoDance`; LostSaga `C:\Program Files (x86)\LSRebirth`.
+- Scope MVP → `HANDOFF.md` §6.

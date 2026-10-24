@@ -1,5 +1,7 @@
 ﻿# Nexus Saga: Chronicles — Design Docs
 
+> **Orang baru / pindah device: baca [`../HANDOFF.md`](../HANDOFF.md) dulu.** Checklist status & langkah berikutnya ada di sana.
+
 Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil analisis disimpan di sini.
 
 ## Ground Rules
@@ -28,12 +30,13 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 | `91-open-questions.md` | Pertanyaan terbuka untuk sesi berikutnya |
 | `research/` | Hasil bedah per sistem/game (diisi bertahap) |
 
-## Status Tooling
+## Riwayat Status Tooling (historis — status terkini di HANDOFF.md §7)
 - 2026-10-24: Server MCP **REA belum terdaftar** di Claude Code (tidak muncul di `claude mcp list`). Lihat `91-open-questions.md` #1.
 - 2026-10-24 (cek ulang): REA terpasang hanya sebagai **skill** di `~/.agents/skills/reverse-engineer-anything` (v42). MCP server belum terdaftar, CLI `rea` tidak ada di PATH, Terminal 2 Termul idle (tidak ada proses REA). Java/Ghidra tidak terdeteksi di PATH (dibutuhkan untuk dekompilasi .exe/.dll native). Node v24.22.0 tersedia.
 - 2026-10-24: `rea setup --client claude_code --yes` → registrasi Claude Code **aligned** di `~/.claude.json` (`cmd /d /c npx -y rea-agents@6.7.0 mcp`), skill v42 aligned. Butuh restart Claude Code. Provider analisis: **belum ada** (Ghidra/IDA/JADX/Kuna tidak dikonfigurasi) → dekompilasi .exe/.dll native belum bisa; untuk itu perlu Ghidra 12.1.x + `GHIDRA_INSTALL_DIR`.
 - 2026-10-24: ✅ **REA TERHUBUNG** ke Claude Code (rea-agents 6.7.0, 207 tools, client claude-code 2.1.310). Tersedia tanpa engine: `inspect_pe_resources`, `inspect_managed_artifact` (.NET), `inspect_sqlite_database`, `open_binary` (inventaris arsip), compare_*, Frida. Masih menunggu Ghidra: dekompilasi native (`analyze_function`, `batch_decompile`, pseudo code, xrefs).
   Langkah aktivasi: `npx -y rea-agents@6.7.0 doctor --client claude_code --json` → `setup --client claude_code --dry-run --json` → `setup --client claude_code --yes` → restart Claude Code.
+
 
 
 
