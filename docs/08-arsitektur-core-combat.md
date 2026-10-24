@@ -97,7 +97,8 @@ Kena hit (antrian T7 → T3 tick berikut):
   air                       → 1010 (juggle budget berkurang)
   stun / freeze / bind      → 1100 / 1110 / 1120 → Idle
   keluar arena              → 1500 → 1900
-  HP 0                      → 1900 → 1910
+  HP 0                      → masuk Critical (§7.2) — bukan KO
+  Break Stock habis / DropZone → 1900 KO → 1910 Respawn (aturan respawn per mode, lihat 10 §B2)
 ```
 Reaksi ditentukan oleh **HitDef penyerang**, bukan kode korban (prinsip Ikemen).
 
@@ -122,7 +123,7 @@ Reaksi ditentukan oleh **HitDef penyerang**, bukan kode korban (prinsip Ikemen).
 - Per frame animasi: daftar **hitbox** (serang) dan **hurtbox** (badan).
 - Bentuk: **capsule** (badan, tongkat) dan **OBB** (tebasan). Sphere untuk proyektil.
 - Koordinat lokal terhadap yaw karakter.
-- **Aturan siluet:** hurtbox ditetapkan per **hero**, bukan per kostum atau skin. Kostum dan skin gear tidak pernah mengubah box apa pun.
+- **Aturan siluet (revisi 2026-10-24):** hurtbox **satu standar untuk semua pemain**. Tidak bergantung pada hero, body type, kostum, atau skin. Body type yang lebih kecil tidak boleh berarti lebih sulit dipukul (itu P2W terselubung). Hitbox serangan ditentukan oleh senjata/skill.
 - Hitbox satu serangan hanya bisa mengenai target yang sama sekali, kecuali `multiHit` diset.
 
 ### 5.3 Resolusi (urutan)
@@ -224,17 +225,17 @@ Satu paket data per hero:
 - `hitdefs`: dirujuk dari state
 - `commands`: input → state, beserta buffer
 - `gear`: 4 slot → skill state yang dibuka masing-masing
-- `stats`: HP dasar, kecepatan, berat (pengaruh knockback)
+- `stats`: kecepatan, berat (pengaruh knockback), pengali defense. **Tanpa HP dasar per hero**, karena HP milik pemain (lihat 10 §B3)
 
 Di build/server ada validasi data: referensi state valid, box tidak kosong saat attack aktif, siluet dalam batas.
 
 ## 11. Status keputusan
 | # | Topik | Status |
 |---|---|---|
-| 1 | Guard busur depan 180° | ✅ Disepakati; patch G1 (batas putar) & G2 (guard gauge) menunggu |
-| 2 | Pickup gear lawan (kecuali senjata) | ✅ Disepakati; patch P1–P3 menunggu |
-| 3 | 3 hero/match, cooldown 3 s / 12 s | ✅ Disepakati; patch S1–S5 menunggu |
-| 4 | Critical di HP 0, senjata tidak rontok | ✅ Disepakati; patch C1–C4 menunggu |
+| 1 | Guard busur depan 180° | ✅ + G1 **diganti: Lock Facing saat guard ditahan**; berbalik = lepas guard atau Pivot (punya recovery tanpa guard). ✅ G2 guard gauge → crush → Faint |
+| 2 | Pickup gear lawan (kecuali senjata) | ✅ + P1–P3 (shared humanoid rig, body type standar, pickup = menukar) |
+| 3 | 3 hero/match, cooldown 3 s / 12 s | ✅ + S1–S4. ⏳ S5 (swap-cancel hanya setelah contact) belum dijawab |
+| 4 | Critical di HP 0, senjata tidak rontok | ✅ + C1 (3 Break Stock), C2 (Break Meter). C4 **diganti: penalti gerak/dash + indikator posisi di layar lawan**, tanpa bleed-out |
 | 5 | Snapshot 30 Hz atau 60 Hz | ⏳ Uji bandwidth di prototipe |
 | 6 | Format data hero | → `09-arsitektur-sistem.md` |
 | 7 | Engine & backend | → `09-arsitektur-sistem.md` |

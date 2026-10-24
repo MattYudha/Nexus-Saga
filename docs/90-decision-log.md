@@ -21,6 +21,9 @@
 | 2026-10-24 | Pickup gear lawan: **Helm/Armor/Trinket boleh** (siapa cepat dia dapat), **senjata tidak** | Disepakati |
 | 2026-10-24 | **3 hero per match** (MVP aset 2 hero); cooldown swap **3 s** netral/combo, **12 s** defensive cancel | Disepakati |
 | 2026-10-24 | HP 0 → **Critical**: pukulan berat merontokkan Helm → Trinket → Armor, lalu KO; DropZone = KO langsung; **senjata tidak rontok sebelum KO** | Disepakati |
-| 2026-10-24 | Patch G1–G2, S1–S5, C1–C4, P1–P3 (lihat 08) | Usulan — menunggu konfirmasi |
-| 2026-10-24 | Arsitektur sistem: Unity + Core C# murni + game server .NET + Nakama (lihat 09) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Patch: G1 **Lock Facing saat guard** + Pivot; G2 guard gauge; S1–S4; C1 3 Break Stock; C2 Break Meter; C4 **penalti gerak/dash + indikator posisi** (tanpa bleed-out); P1–P3 shared humanoid rig | Disepakati |
+| 2026-10-24 | Stack: **Unity** + **Core C# murni deterministik** (tanpa UnityEngine, tanpa root motion) + **game server .NET UDP** + **Nakama**; content bundle ber-hash | Disepakati |
+| 2026-10-24 | Tim: **solo architect + AI**; strategi spike berlapis (Core decoupled dari transport; Quantum sebagai cadangan) | Disepakati |
+| 2026-10-24 | Hurtbox satu standar untuk semua pemain; tanpa HP dasar per hero | Koreksi konsistensi (lihat 10 B3/B4) |
+| 2026-10-24 | Review v3: S5, B1, B2, B5, B6, A1, A2, A4 (lihat 10 §D) | Usulan — menunggu konfirmasi |
 
