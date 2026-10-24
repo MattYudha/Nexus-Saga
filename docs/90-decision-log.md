@@ -27,7 +27,12 @@
 | 2026-10-24 | Hurtbox satu standar untuk semua pemain; tanpa HP dasar per hero | Koreksi konsistensi (lihat 10 B3/B4) |
 | 2026-10-24 | B1 aim-assist ±22,5° saat startup + auto-face guard 6 m; B5 heal → shield, tanpa revive; B6 KO pemecah stock ke-3, assist 10 s, jatuh → musuh terakhir; S5 swap 3 s hanya netral/hit-confirm, whiff hanya bisa Burst 12 s; A1 Core data-oriented + uji Quantum; A2 predicted hit reaction = kriteria spike; A4 2 base body + hurtbox kapsul tunggal | Disepakati |
 | 2026-10-24 | **DropZone bukan KO**: fall damage + kembali ke zona spawn tim + i-frame; HP di-clamp ke 0; saat Critical jatuh = pecah 1 stock. Satu-satunya jalan KO = 3 Break Stock | Disepakati (koreksi user) |
-| 2026-10-24 | Aim-assist/auto-face dihitung client, `aimYaw` dikirim di input, divalidasi server (10 §E3) | Usulan — menunggu konfirmasi |
-| 2026-10-24 | Respawn TDM berbasis waktu match, bukan escalating per pemain (10 §E2) | Usulan — menunggu konfirmasi |
-| 2026-10-24 | Kriteria spike terukur (10 §E5) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Aim-assist/auto-face dihitung client, `aimYaw` dikirim di input, divalidasi server (10 §E3) | Disepakati |
+| 2026-10-24 | Respawn TDM berbasis waktu match (5 s → 10 s), bukan escalating per pemain | Disepakati |
+| 2026-10-24 | Kriteria spike terukur (10 §E5); misprediksi = Hit-Confirm/Combat State Misprediction | Disepakati |
+| 2026-10-24 | Mode MVP: **Survival/Elimination** per ronde 90–120 s (1v1, 3v3) + **TDM** | Disepakati |
+| 2026-10-24 | DropZone: **Gear Ejection** ke `lastGroundedPos` + **Sky-Drop + Landing Stagger** 0,5–0,6 s | Disepakati |
+| 2026-10-24 | Sky-Drop kembali ke titik lantai valid terakhir (±3 m ke dalam), tidak bisa diserang selama stagger (10 §F1) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Masuk Critical = reset netral; setiap stock pecah = hard knockdown, maks 1 stock per combo (10 §F2) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Tie-break ronde Elimination + target TTK diukur di prototipe (10 §F4) | Usulan — menunggu konfirmasi |
 

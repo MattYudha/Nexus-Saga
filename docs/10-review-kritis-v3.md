@@ -201,3 +201,43 @@ Gagal di 1–3 → evaluasi Quantum. Gagal di 4–5 → optimasi, bukan ganti st
 | KO = pemecah stock ke-3; assist 10 detik; jatuh → musuh terakhir | ✅ |
 | Core data-oriented (struct + fungsi statis murni) | ✅ |
 | 2 base body + hurtbox kapsul tunggal; beda hero lewat defense & weight | ✅ Catatan: weight membuat combo berbeda per hero korban (seperti Smash) — wajib diuji per hero |
+
+---
+
+## F. Sapuan akhir babak 5 (2026-10-24)
+
+### F1. 🔴 Konflik: Landing Stagger vs "kembali ke zona spawn"
+Usulan sebelumnya (spawn tim) dan tambalan user (landing stagger) **saling meniadakan**: stagger 0,6 detik di markas yang aman bukan hukuman apa pun, dan pemain tetap kabur jauh.
+- **Solusi:** Sky-Drop ke titik lantai valid terakhir, ditarik ±3 m ke dalam arena. Pemain kembali ke dekat lawan yang mendorongnya. Kabur menjadi mustahil, dan stagger benar-benar memotong tempo.
+- Tidak bisa diserang selama stagger, supaya lawan tidak menunggu di titik jatuh untuk combo gratis.
+
+### F2. 🔴 Celah: combo menembus seluruh Critical
+Damage Gate menahan HP di 0, tapi sisa combo yang sama bisa langsung memecahkan 3 stock (3 pukulan berat beruntun). Critical selesai dalam satu combo, dan keputusan "HP 0 → pukul sampai gear habis" kehilangan maknanya.
+- **Solusi:**
+  - Masuk Critical = pushback + knockdown + getup i-frame.
+  - **Setiap stock pecah = hard knockdown** + getup i-frame.
+  - Maksimal 1 stock per combo. Untuk KO, lawan harus menang 3 kali lagi.
+
+### F3. 🟡 Gear Ejection butuh titik valid
+"Titik tepi terakhir" bisa berupa udara (korban melompat dari platform) atau tempat yang tak terjangkau.
+- **Solusi:** Core menyimpan `lastGroundedPos` setiap tick (posisi terakhir kaki menyentuh lantai valid). Gear dan Sky-Drop memakai titik itu. Deterministik, tanpa navmesh.
+
+### F4. 🟡 Elimination: ronde habis waktu
+Ronde 90–120 detik + HP + 3 stock bisa sering berakhir **tanpa pemenang**.
+- **Solusi** (tie-break berurutan):
+  1. Tim dengan pemain hidup lebih banyak.
+  2. Total stock tersisa.
+  3. Total % HP.
+  4. Sudden death 20 detik: Break Meter terisi 2× lebih cepat.
+- TTK (time-to-kill) **wajib diukur di prototipe**. Target awal 1v1: 30–50 detik per KO.
+
+### F5. 🟢 Kejelasan per nyawa
+Respawn/ronde baru = HP penuh, 3 stock, gear lengkap, cooldown reset. Gear pungutan dan gear yang rontok tidak terbawa ke nyawa berikutnya.
+
+### F6. 🟢 Pickup = milik match
+Gear pungutan tidak pernah memindahkan kepemilikan item di inventory. Mencegah salah paham "item saya dicuri".
+
+### F7. ✅ Definisi metrik spike
+"Misprediksi < 5%" = **Hit-Confirm / Combat State Misprediction**: persentase pukulan yang di layar penyerang terprediksi kena (reaksi hit diputar) tetapi dibatalkan server. Koreksi gerak biasa tidak dihitung (sudah tercakup metrik koreksi posisi < 0,5 m).
+
+**Kesimpulan:** dengan F1–F6, tidak ada lagi celah yang memengaruhi struktur Core, input, atau snapshot. Sisanya adalah **angka tuning** (fall damage %, durasi stagger, TTK, cooldown) yang memang harus ditentukan lewat playtest, dan semuanya tersimpan di data.
