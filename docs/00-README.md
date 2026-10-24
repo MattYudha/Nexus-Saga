@@ -1,4 +1,4 @@
-# Nexus Saga: Chronicles — Design Docs
+﻿# Nexus Saga: Chronicles — Design Docs
 
 Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil analisis disimpan di sini.
 
@@ -19,6 +19,8 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 | `05-kekurangan-dan-target-riset.md` | Checklist tool/bahan yang kurang + daftar game target riset per sistem |
 | `06-camera-dan-avatar-arena.md` | Koreksi kamera (free-roam 3D), lapisan kostum vs gear, gold sink, 2 hero MVP |
 | `07-readiness-checklist.md` | Status bahan riset, tooling RE, kesiapan arsitektur & implementasi |
+| `08-arsitektur-core-combat.md` | Arsitektur core combat: pipeline tick, state 3D, HitDef/hitbox, Hero Swap, Gear Drop, netcode |
+| `research/state-machine-ikemen.md`, `research/netcode-ddnet.md` | Hasil bedah Ikemen GO & DDNet |
 | `90-decision-log.md` | Keputusan yang sudah disepakati |
 | `91-open-questions.md` | Pertanyaan terbuka untuk sesi berikutnya |
 | `research/` | Hasil bedah per sistem/game (diisi bertahap) |
@@ -29,3 +31,4 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 - 2026-10-24: `rea setup --client claude_code --yes` → registrasi Claude Code **aligned** di `~/.claude.json` (`cmd /d /c npx -y rea-agents@6.7.0 mcp`), skill v42 aligned. Butuh restart Claude Code. Provider analisis: **belum ada** (Ghidra/IDA/JADX/Kuna tidak dikonfigurasi) → dekompilasi .exe/.dll native belum bisa; untuk itu perlu Ghidra 12.1.x + `GHIDRA_INSTALL_DIR`.
 - 2026-10-24: ✅ **REA TERHUBUNG** ke Claude Code (rea-agents 6.7.0, 207 tools, client claude-code 2.1.310). Tersedia tanpa engine: `inspect_pe_resources`, `inspect_managed_artifact` (.NET), `inspect_sqlite_database`, `open_binary` (inventaris arsip), compare_*, Frida. Masih menunggu Ghidra: dekompilasi native (`analyze_function`, `batch_decompile`, pseudo code, xrefs).
   Langkah aktivasi: `npx -y rea-agents@6.7.0 doctor --client claude_code --json` → `setup --client claude_code --dry-run --json` → `setup --client claude_code --yes` → restart Claude Code.
+
