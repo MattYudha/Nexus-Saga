@@ -1,0 +1,18 @@
+﻿# 90 — Decision Log
+
+| Tanggal | Keputusan | Status |
+|---|---|---|
+| 2026-10-24 | Nama kerja: **Nexus Saga: Chronicles** | Disepakati |
+| 2026-10-24 | Belum coding; fase brainstorming + riset + dokumentasi | Disepakati |
+| 2026-10-24 | Dokumentasi disimpan di `docs/` sebagai `.md` | Disepakati |
+| 2026-10-24 | 3 mata uang: Gold / Ticket / MiCash, kosmetik nol stat, rent-to-own sebagai Gold sink utama | Disepakati |
+| 2026-10-24 | Developer mode berbasis role di server + audit log; otorisasi tidak pernah di client | Disepakati |
+| 2026-10-24 | Urutan riset: **Wardrobe AyoDance + format state Ikemen GO** dulu; state machine LostSaga setelah client tersedia | Disepakati |
+| 2026-10-24 | Platform: **PC dulu**, mobile di fase berikutnya | Disepakati |
+| 2026-10-24 | ~~Kamera arena: 2.5D side-view (seperti LostSaga)~~ — keliru: LostSaga bergerak bebas X/Z. Diganti usulan: **arena 3D free-roam, kamera tetap quarter-view** (lihat 06) | Revisi — menunggu konfirmasi |
+| 2026-10-24 | Ukuran tim maksimal: **5v5** | Disepakati |
+| 2026-10-24 | Rating umur **13+**; couple/dating room **18+ dengan verifikasi umur** | Disepakati |
+| 2026-10-24 | Riset AyoDance hanya **statis** (ada Xigncode); tidak menjalankan/attach game | Disepakati |
+| 2026-10-24 | Avatar di arena: **lapisan kostum tidak pernah lepas; slot gear tempur (senjata/armor/helm/jubah) bisa rontok**; skin gear tidak mengubah siluet | Usulan — menunggu konfirmasi |
+| 2026-10-24 | MVP: **2 hero** (Melee Grappler + Ranged Zoner), mode 1v1 & 2v2 | Disepakati |
+

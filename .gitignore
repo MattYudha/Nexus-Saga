@@ -1,0 +1,28 @@
+# Hasil ekstrak / dump game pihak ketiga — JANGAN di-push (hak cipta)
+re-lab/
+extracted/
+dumps/
+*.acv
+*.tbm
+*.pak
+*.gzf
+*.rep
+
+# Evidence REA mentah (bisa berisi konten target)
+docs/research/raw/
+*.evidence.json
+
+# Ghidra project
+*.gpr
+*.rep/
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Secrets
+.env
+.env.*
