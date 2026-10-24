@@ -108,7 +108,7 @@
 | Audio | Fase 2–3 | |
 
 ### 4.3 Riset tertunda
-- [x] **AyoDance (statis) — selesai 2026-10-24**: wardrobe → `docs/research/ayodance-avatar-wardrobe.md`; sosial/lobi/rhythm/live-ops → `docs/research/ayodance-social-lobby-rhythm.md`. Data modern terenkripsi = UNKNOWN; lanjutan hanya via observasi gameplay akun sendiri
+- [x] **AyoDance (statis) — selesai 2026-10-24**: wardrobe + sosial/lobi/rhythm/live-ops (statis) + **observasi manual** (`docs/research/ayodance-*.md`, termasuk `ayodance-observasi.md`). 13 slot, sewa 7/30/permanen, 3 mata uang, room 6+30 terkonfirmasi
 - [ ] **Observasi video LostSaga** (rekam match di LSRebirth): perilaku jatuh ke jurang, guard, gear — untuk validasi, bukan penentu
 - [ ] Format arsip `.iop` LostSaga (opsional; jangan bongkar proteksi)
 
@@ -217,5 +217,6 @@ Claude akan memakai dokumen ini sebagai sumber kebenaran.
 ## 9. Kontak & kepemilikan
 - Pemilik proyek / solo architect: pemilik repo `MattYudha/Nexus-Saga`
 - Keputusan desain hanya sah bila tercatat di `docs/90-decision-log.md`
+
 
 

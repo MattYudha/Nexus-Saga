@@ -40,4 +40,8 @@
 | 2026-10-24 | Riset AyoDance statis **selesai** (2 dokumen di `docs/research/`) | Selesai |
 | 2026-10-24 | Wardrobe: item mendaftar **set slot yang ditempati**; sistem **Dye** (color mask) menggantikan 'warna = item'; `itemId` numerik + `assetKey`; harga Gold & MiCash per item; skala per item; slot aksesori kepala terpisah | Usulan — menunggu konfirmasi |
 | 2026-10-24 | Sosial/live-ops: event shell generik + modul per event; Dance Duel = 'level = panjang urutan panah'; room sosial 6 pemain; gifting + outfit tersimpan + deal harian; **tanpa slot machine, tanpa upgrade berbayar, tanpa mata uang ke-4** | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Observasi AyoDance manual selesai (`docs/research/ayodance-observasi.md`) | Selesai |
+| 2026-10-24 | **Tetap 3 mata uang** (tolak mata uang ke-4 relasional); konten couple pakai token non-tradable, bukan mata uang inti | Usulan — menunggu konfirmasi |
+| 2026-10-24 | **Tolak booster EXP/progres berbayar** (anti-P2W); MiCash hanya kosmetik + kenyamanan non-kompetitif | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Pet/Badge/Platform = kosmetik **nol stat**; Nexus Saga punya **rent-to-own** (AyoDance tidak) sebagai pembeda | Usulan — menunggu konfirmasi |
 
