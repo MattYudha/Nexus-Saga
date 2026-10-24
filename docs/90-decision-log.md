@@ -36,4 +36,8 @@
 | 2026-10-24 | Masuk Critical = reset netral; setiap stock pecah = hard knockdown, maks 1 stock per combo (10 §F2) | Disepakati |
 | 2026-10-24 | Tie-break ronde Elimination + target TTK diukur di prototipe (10 §F4) | Disepakati |
 | 2026-10-24 | **Base model game dikunci** (dokumen 08–11) | Disepakati |
+| 2026-10-24 | **Riset AyoDance dimajukan**: diselesaikan menyeluruh **sebelum implementasi apa pun** (menggantikan jadwal 'setelah core combat'). Prinsip: riset tuntas dulu, baru implementasi | Disepakati (permintaan user) |
+| 2026-10-24 | Riset AyoDance statis **selesai** (2 dokumen di `docs/research/`) | Selesai |
+| 2026-10-24 | Wardrobe: item mendaftar **set slot yang ditempati**; sistem **Dye** (color mask) menggantikan 'warna = item'; `itemId` numerik + `assetKey`; harga Gold & MiCash per item; skala per item; slot aksesori kepala terpisah | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Sosial/live-ops: event shell generik + modul per event; Dance Duel = 'level = panjang urutan panah'; room sosial 6 pemain; gifting + outfit tersimpan + deal harian; **tanpa slot machine, tanpa upgrade berbayar, tanpa mata uang ke-4** | Usulan — menunggu konfirmasi |
 

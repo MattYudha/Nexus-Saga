@@ -1,4 +1,4 @@
-# HANDOFF — Nexus Saga: Chronicles
+﻿# HANDOFF — Nexus Saga: Chronicles
 
 > **Baca file ini pertama kali** jika kamu pindah device, atau kamu orang baru yang melanjutkan proyek ini.
 > Terakhir diperbarui: **2026-10-24** · Status: **Fase 0 selesai (desain terkunci) → siap Fase 1 (Spike)**
@@ -78,7 +78,7 @@
 - [x] Ikemen GO v1.0.0 — state machine, HitDef, juggle, cancel, rollback (`docs/research/state-machine-ikemen.md`)
 - [x] DDNet 20.1.1 — tick, snapshot delta, prediksi, quantize (`docs/research/netcode-ddnet.md`)
 - [x] LostSaga (LSRebirth) — temuan statis awal: exe & iopac.dll terproteksi → **tidak dibongkar** (`07 §E`)
-- [x] AyoDance — lokasi & struktur file dicatat (`04`, `07`); **bedah wardrobe belum** (lihat §4)
+- [x] AyoDance — wardrobe, sosial, lobi/room, rhythm, live-ops (`docs/research/ayodance-*.md`)
 
 ### 3.4 Tooling & infrastruktur
 - [x] Repo GitHub: https://github.com/MattYudha/Nexus-Saga (branch `main`)
@@ -108,7 +108,7 @@
 | Audio | Fase 2–3 | |
 
 ### 4.3 Riset tertunda
-- [ ] **AyoDance wardrobe** (struktur slot kostum, `SCRIPT/`, `DATA/`, arsip `.acv`) — dijadwalkan **setelah core combat** (keputusan 2026-10-24)
+- [x] **AyoDance (statis) — selesai 2026-10-24**: wardrobe → `docs/research/ayodance-avatar-wardrobe.md`; sosial/lobi/rhythm/live-ops → `docs/research/ayodance-social-lobby-rhythm.md`. Data modern terenkripsi = UNKNOWN; lanjutan hanya via observasi gameplay akun sendiri
 - [ ] **Observasi video LostSaga** (rekam match di LSRebirth): perilaku jatuh ke jurang, guard, gear — untuk validasi, bukan penentu
 - [ ] Format arsip `.iop` LostSaga (opsional; jangan bongkar proteksi)
 
@@ -217,3 +217,5 @@ Claude akan memakai dokumen ini sebagai sumber kebenaran.
 ## 9. Kontak & kepemilikan
 - Pemilik proyek / solo architect: pemilik repo `MattYudha/Nexus-Saga`
 - Keputusan desain hanya sah bila tercatat di `docs/90-decision-log.md`
+
+
