@@ -1,4 +1,4 @@
-# 07 — Readiness Checklist (cek 2026-10-24)
+﻿# 07 — Readiness Checklist (cek 2026-10-24)
 
 ## A. Bahan riset
 | Item | Path | Status |
@@ -6,7 +6,7 @@
 | Ikemen GO v1.0.0 | `C:\Users\US3R\Nexus_Lab\Ikemen_Go-v1.0.0` | ✅ 230 file. Rilis biner + `chars/` & `data/` (file state `.cns` = yang kita butuhkan) |
 | DDNet 20.1.1 | `C:\Users\US3R\Nexus_Lab\DDNet-20.1.1-win64` | ✅ 930 file. Source C++ ada di GitHub `ddnet/ddnet` bila perlu baca netcode |
 | AyoDance | `C:\Megaxus\AyoDance` | ✅ 22 GB (statis saja, ada Xigncode) |
-| **LostSaga** | `C:\Users\US3R\Nexus_Lab\LostSaga` | ❌ **Folder tidak ada.** Tidak ditemukan juga di Downloads/Desktop/Program Files |
+| LostSaga (LSRebirth) | `C:\Program Files (x86)\LSRebirth` | ✅ 66 file, 1,6 GB. Lihat bagian E |
 
 ## B. Tooling RE
 | Item | Status | Masalah |
@@ -43,3 +43,15 @@ Arsitektur tidak bergantung pada RE. Yang masih menahan:
 | Docker Desktop (Nakama + Postgres lokal) | ❌ Belum ada (Postgres & Redis/Memurai lokal sudah jalan — bisa jadi alternatif) |
 | Go | ✅ Terinstal (berguna jika pakai Nakama — runtime module Go) |
 | Izin user untuk mulai coding | ❌ Belum diberikan (ground rule) |
+
+## E. Temuan awal LostSaga (LSRebirth) — cek ulang 2026-10-24
+Observasi statis (tidak menjalankan game):
+| File | Temuan | Dampak |
+|---|---|---|
+| `lostsaga.exe` (17 MB, x86 32-bit) | Nama section acak (`usesrdol`, `dhreteyn`, kosong), entropi 7,77–7,99 → **ter-pack/terproteksi** | Ghidra hanya melihat data acak. **Tidak akan di-unpack** (membongkar proteksi = di luar batas riset kita) |
+| `io3dengine.dll` | Section normal (`.text` entropi 6,5) → **tidak ter-pack** | Bisa didekompilasi: engine render/fisika/animasi |
+| `iopac.dll` | Pembaca arsip `.iop` | Kunci untuk memahami format arsip |
+| `rs.iop` (458 MB), `map.iop` (1,1 GB) | Header `PK` (ZIP) dengan folder `config/`, tapi **struktur ZIP dimodifikasi** — ditolak oleh Python `zipfile` dan REA `inspect_artifact` | Perlu parser khusus untuk membaca daftar/isi `config/` (tabel skill, gear, state) |
+| Anti-cheat | Folder `EasyAntiCheat` + `GameGuard`, `start_protected_game.exe` | Analisis statis saja; jangan jalankan di bawah debugger/Frida |
+
+Rencana: (1) baca `config/` dari `rs.iop` lewat analisis format arsip (`iopac.dll` di Ghidra jika perlu), (2) `io3dengine.dll` untuk struktur animasi/hitbox, (3) observasi video untuk timing state.
