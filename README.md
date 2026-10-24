@@ -133,7 +133,62 @@ flowchart TB
 | Konten | Addressables + CDN ber-hash | Balancing tanpa update store |
 | Cadangan | Photon Quantum | Dipakai bila spike netcode custom gagal |
 
-Detail: [`docs/08`](docs/08-arsitektur-core-combat.md) (combat) · [`docs/09`](docs/09-arsitektur-sistem.md) (sistem) · [`docs/10`](docs/10-review-kritis-v3.md) (review kritis)
+Detail: [`docs/08`](docs/08-arsitektur-core-combat.md) (combat) · [`docs/09`](docs/09-arsitektur-sistem.md) (sistem) · [`docs/13`](docs/13-spesifikasi-data-combat.md) (data combat) · [`docs/14`](docs/14-backend-meta-systems.md) (backend) · [`docs/18`](docs/18-arsitektur-teknis-lengkap.md) (arsitektur teknis lengkap)
+
+### Pembagian Frontend / Backend
+| Lapisan | Teknologi | Scope singkat |
+|---|---|---|
+| **Frontend** | Unity + URP (PC → mobile) | Render, animasi (tanpa root motion), VFX, UI/HUD, input (keyboard/gamepad/**touch**), prediksi combat, Plaza/room client. **Tidak** memutuskan damage/KO/ekonomi/MMR |
+| **Combat Core (shared)** | C# murni, fixed-point, data-oriented | Simulasi deterministik; **kode sama** di client (prediksi) & server (otoritas); tanpa `UnityEngine` |
+| **Game Server** | .NET 8 headless + UDP | Otoritas combat 60 Hz, snapshot/lag-comp, lapor hasil ke Nakama; stateless, scale horizontal |
+| **Meta Backend** | Nakama (Go) + PostgreSQL | Auth, matchmaking, MMR (OpenSkill), lobby/room, leaderboard, wallet/inventory/shop/gacha/quest, friends/chat/party, squad/war, Plaza |
+| **Konten** | Addressables + CDN ber-hash | Balancing & konten tanpa update store |
+
+### Aset: 3D, Animasi, VFX (ringkas — detail `docs/18`)
+- **3D:** shared humanoid rig, 2 base body (M/F), 13 slot kosmetik + 4 slot gear via socket; LOD wajib; `itemId` numerik + `assetKey`; material color-mask untuk Dye. **Hurtbox satu standar** (anti-P2W).
+- **Animasi:** klip per (animId, frame) di-sample dari state Core; **tanpa root motion**; frame data & hitbox ada di data combat, bukan di clip; retarget dari rig bersama.
+- **VFX:** **selalu kosmetik** (tidak pernah ubah sim/hitbox); pooling + LOD; hit spark via predicted event.
+- **World:** Plaza modular (distrik berubah karena Squad War) + arena instance (collider diekspor ke Core). Dunia kecil-tapi-hidup → ringan untuk mobile.
+
+### Scaling ke mobile (tanpa rombak kode)
+Unity satu codebase PC+mobile · Core fixed-point jalan identik lintas perangkat · abstraksi input touch-ready sejak awal · UI resolution-independent · budget performa mobile dari awal · Addressables/CDN · payment abstraction (web top-up → IAP Play Store/App Store). Build mobile = port presentasi, bukan tulis ulang logika. Detail `docs/18 §8`.
+
+### Flowchart: alur pemain
+```mermaid
+flowchart TD
+    L[Login / Auth] --> CB{Hash konten cocok?}
+    CB -- tidak --> UPD[Unduh bundle CDN] --> P[Plaza]
+    CB -- ya --> P
+    P --> WR[Wardrobe / Toko]
+    P --> RR[Rest Room / Minigame]
+    P --> BG[Battle Gate]
+    BG --> MM[Matchmaking / Custom Room]
+    MM --> LO[Loadout 3 hero]
+    LO --> TK[Tiket join bertanda tangan]
+    TK --> GS[Game Server - match 60Hz]
+    GS --> RES[Hasil -> MMR, Gold, statistik]
+    RES --> P
+```
+
+### Flowchart: tick combat (server & client identik)
+```mermaid
+flowchart LR
+    I[Input] --> CMD[Command buffer] --> ST[State machine]
+    ST --> PH[Physics + collision] --> PU[Push] --> HIT[Hit detection 3D + lag-comp]
+    HIT --> R[Damage Gate / Break Stock] --> LD[Gear Drop / Hero Swap]
+    LD --> T[Timer + animasi + quantize] --> SN[Snapshot delta]
+```
+
+### Flowchart: sistem nyawa
+```mermaid
+flowchart LR
+    HP[HP>0] -->|Damage Gate| C0[HP=0 Critical / 3 Break Stock]
+    C0 -->|stock pecah + gear rontok| C0
+    C0 -->|stock ke-3| KO[KO]
+    KO --> M{Mode}
+    M -- TDM --> RS[Respawn by match-time]
+    M -- Survival --> EL[Eliminasi ronde]
+```
 
 ---
 

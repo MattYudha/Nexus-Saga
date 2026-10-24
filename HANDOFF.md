@@ -158,13 +158,27 @@
 ---
 
 ## 6. Jadwal setelah spike (gerbang keputusan)
-| Fase | Isi | Gerbang masuk |
-|---|---|---|
-| **Fase 2 — Vertical slice (MVP)** | Login + role; Plaza 1 distrik + chat + emote; wardrobe 5 slot + toko Gold (sewa/permanen); arena 1v1 & 2v2 dengan 2 hero; Critical, Gear Drop, DropZone, Hero Swap; MMR + tier + profil; panel developer + audit log; **hitbox editor Unity** (sebelum hero kedua) | Spike lulus |
-| **Fase 3 — Konten & sosial** | Squad + Squad War; Relic; Rest Room minigame (Chase/Tag, Brawl Ball, Target, Fashion Contest, Fishing, Photo Booth, Arcade non-judi); gacha + pity; battle pass; hero ke-3 (Support); 5v5 penuh | MVP playtest lulus |
-| **Fase 4 — Live-ops & kosmetik lanjutan** | Season, event mingguan, content bundle CDN, mobile; **backlog kosmetik** (bawah); Mount Racing | Siap rilis |
+Kolom "Dokumen acuan" = spesifikasi yang dibaca sebelum mengerjakan tiap fitur.
+
+| Fase | Isi | Dokumen acuan | Gerbang masuk |
+|---|---|---|---|
+| **Fase 1 — Spike netcode** | Combat Core minimal + netcode (lihat §5, S-00..S-14) | `08`, `13`, `research/netcode-ddnet.md`, `research/state-machine-ikemen.md` | — |
+| **Fase 2 — Vertical slice (MVP)** | Login + role; Plaza 1 distrik + chat + emote; wardrobe (13 slot, MVP subset) + toko Gold (sewa/permanen); arena 1v1 & 2v2, 2 hero; Critical/Gear Drop/DropZone/Hero Swap; MMR + tier + profil; panel developer + audit log; **hitbox editor Unity**; **abstraksi input (touch-ready)** | `13` combat · `14` auth/matchmaking/MMR/lobby · `15` player/hero/gear/shop · `17` hero/training · `18` FE/BE/3D/anim/VFX | Spike lulus |
+| **Fase 3 — Konten & sosial** | Squad + Squad War + Top Squad + Community Lobby; Relic; Rest Room minigame (Chase/Tag, Brawl Ball, Target, Fashion Contest, Fishing, Photo Booth, Arcade non-judi); gacha + pity; battle pass; quest; hero ke-3 (Support); 5v5 penuh; chat/friends/messenger penuh | `16` squad/komunitas · `14 §5–7` leaderboard/sosial/chat · `15 §9–10` gacha/quest · `12` rest room · `17` bot | MVP playtest lulus |
+| **Fase 4 — Live-ops, mobile & kosmetik lanjutan** | Season, event mingguan, content bundle CDN; **build mobile (Android/iOS, IAP)**; **backlog kosmetik** (bawah); Mount Racing | `18 §8` scaling mobile · `14` · `15` | Siap rilis |
 
 Durasi Fase 2+ **belum ditetapkan** — diestimasi dari data hasil spike.
+
+### Peta dokumen → sistem (untuk yang melanjutkan)
+| Sistem | Dokumen |
+|---|---|
+| Arsitektur besar, FE/BE scope, 3D/animasi/VFX, world, scaling mobile, flowchart | **`18`** |
+| Combat core & data combat | `08`, `13` |
+| Backend meta (Nakama): auth, matchmaking, MMR, lobby/room, leaderboard, sosial, chat | `14` |
+| Player/profile/hero/gear/shop/gacha/quest | `15` |
+| Squad/guild/war/top-squad/community/couple | `16` |
+| Hero roster/training/bot | `17` |
+| Rest Room (tanpa dance) | `12` |
 
 ### Backlog kosmetik "pamer avatar" (dikerjakan BERTAHAP di akhir, setelah fungsi inti jalan)
 Semua **nol stat** (keputusan 2026-10-24). Tidak menghalangi jalur utama; dikerjakan setelah combat + wardrobe dasar + sosial inti terbukti.

@@ -54,4 +54,6 @@
 | 2026-10-24 | Trigger combat = **enum-condition** (bukan bahasa ekspresi); hitbox 3D capsule/OBB; authoring JSON→biner (13) | Usulan — menunggu konfirmasi |
 | 2026-10-24 | Rating = **OpenSkill (Plackett-Luce)**; hidden mu/sigma + RP terlihat; update hanya dari game server (idempoten) (14) | Usulan — menunggu konfirmasi |
 | 2026-10-24 | Custom room = Nakama authoritative match + label queryable (listMatches); Plaza = authoritative match; combat tetap di game server .NET (14) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Arsitektur teknis lengkap (18): FE/BE scope, skema 3D/anim/VFX, world building, scaling mobile tanpa rombak, pemakaian REA, flowchart. README diperbarui + flowchart | Disepakati (dokumen) |
+| 2026-10-24 | Mobile-ready sejak awal: abstraksi input touch, UI resolution-independent, budget mobile, payment abstraction (18 §8) | Usulan — menunggu konfirmasi |
 
