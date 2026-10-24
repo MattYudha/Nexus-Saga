@@ -1,4 +1,4 @@
-# 12 — Rest Room Tanpa Dance (2026-10-24)
+﻿# 12 — Rest Room Tanpa Dance (2026-10-24)
 
 ## Keputusan
 **Nexus Saga TIDAK memakai mode dance/ritme.** Dihapus dari desain.
@@ -41,3 +41,35 @@ Rest Room tetap: chat lokal, hangout, couple room 18+ (verifikasi umur, block/re
 - Riset ritme AyoDance (`ayodance-social-lobby-rhythm.md §C`) = **arsip**, bukan fitur.
 - `4-key/8-key` dan "level = panjang urutan panah" **dibatalkan** sebagai fitur kita.
 - Kapasitas room 6+30 penonton tetap berguna untuk **Fashion Contest** (6 tampil / 30 nonton & vote).
+
+---
+
+## Brainstorm v2 — referensi hub sosial (2026-10-24)
+
+Insight pengarah: **ruang berkumpul = panggung pamer terbaik**. Di game komunitas (Splatoon, Tower Unite, Deep Rock, Monster Hunter), kosmetik dinilai organik saat pemain nongkrong/antre, bukan di panggung formal. Jadi Plaza + titik kumpul sudah separuh pekerjaan; Fashion Contest adalah versi aktif/berhadiahnya.
+
+### Filter keputusan
+| Fitur | Referensi | Status | Alasan |
+|---|---|---|---|
+| **Hub pasif** (api unggun, air mancur, titik kumpul, emote duduk) | Sky, LifeAfter, Tower Unite | ✅ Adopsi | Pamer avatar organik; murah; pamer Back/Wing saat duduk |
+| **Lobby Chase / Tag / Petak umpet** (parkour vertikal) | Garry's Mod Prophunt, Roblox | ✅ Adopsi (prioritas) | **Reuse gerak+collision Core**; kostum/sayap menonjol saat lari/panjat |
+| **Brawl Ball / Giga Ball** di tengah Plaza | Rocket League, lobby Destiny | ✅ Adopsi | **Reuse physics Core**; seru, netral |
+| **Arcade Lounge** (biliar, dart, basket, arcade cabinet skill) | Tower Unite | ✅ Adopsi — **TANPA judi** | Avatar terlihat dekat saat main bareng; interaksi intens |
+| **Casino / slot / poker / meja taruhan** | GTA Diamond Casino | ❌ **TOLAK** | Simulated gambling menaikkan rating toko (sering 17+) walau pakai Gold; risiko regulasi; langgar target 13+ & pilar non-judi |
+| **Campfire + masak buff EXP** | LifeAfter | ⚠️ Adopsi bersyarat | Buff hanya **XP profil (non-kompetitif)**; dilarang menyentuh combat/Gold kompetitif/MMR |
+| **Mount Racing** (hoverboard/skateboard kosmetik) | MapleStory 2, Tower Unite | ⏳ Tunda Fase 3+ | Scope besar (kategori mount + physics kendaraan). Mount **wajib nol stat**; balapan dinilai skill, reward kosmetik |
+
+### Prioritas build (termurah dulu, reuse Core)
+1. Hub pasif + emote (Fase 2, bareng Plaza)
+2. Lobby Chase/Tag, Brawl Ball, Target Range (Fase 2–3, reuse Core)
+3. Fashion Contest, Fishing, Photo Booth (Fase 3)
+4. Arcade Lounge non-judi (Fase 3)
+5. Mount Racing (Fase 3+)
+
+### Catatan tone
+Tujuan tone: **netral/universal**, tidak terkesan satu gender. Aktivitas berbasis gerak 3D (chase, ball, race, arcade) memenuhi ini sekaligus memaksa avatar bergerak di layar depan → pamer kostom maksimal.
+
+### Kategori kosmetik baru yang dikonfirmasi dari brainstorm ini
+- **Mount/kendaraan ringan** (nol stat) — kategori wardrobe baru, Fase 3+.
+- **Emote duduk / animasi hangout** (nol stat) — jual via MiCash.
+- **Efek pijakan (footstep/aura)** — pengganti "Platform/DJ Booth" AyoDance.
