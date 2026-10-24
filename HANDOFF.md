@@ -161,10 +161,20 @@
 | Fase | Isi | Gerbang masuk |
 |---|---|---|
 | **Fase 2 — Vertical slice (MVP)** | Login + role; Plaza 1 distrik + chat + emote; wardrobe 5 slot + toko Gold (sewa/permanen); arena 1v1 & 2v2 dengan 2 hero; Critical, Gear Drop, DropZone, Hero Swap; MMR + tier + profil; panel developer + audit log; **hitbox editor Unity** (sebelum hero kedua) | Spike lulus |
-| **Fase 3 — Konten & sosial** | Squad + Squad War; Relic; Rest Room + minigame; gacha + pity; battle pass; hero ke-3 (Support); 5v5 penuh; riset wardrobe AyoDance | MVP playtest lulus |
-| **Fase 4 — Live-ops** | Season, event mingguan, content bundle CDN, mobile | Siap rilis |
+| **Fase 3 — Konten & sosial** | Squad + Squad War; Relic; Rest Room minigame (Chase/Tag, Brawl Ball, Target, Fashion Contest, Fishing, Photo Booth, Arcade non-judi); gacha + pity; battle pass; hero ke-3 (Support); 5v5 penuh | MVP playtest lulus |
+| **Fase 4 — Live-ops & kosmetik lanjutan** | Season, event mingguan, content bundle CDN, mobile; **backlog kosmetik** (bawah); Mount Racing | Siap rilis |
 
 Durasi Fase 2+ **belum ditetapkan** — diestimasi dari data hasil spike.
+
+### Backlog kosmetik "pamer avatar" (dikerjakan BERTAHAP di akhir, setelah fungsi inti jalan)
+Semua **nol stat** (keputusan 2026-10-24). Tidak menghalangi jalur utama; dikerjakan setelah combat + wardrobe dasar + sosial inti terbukti.
+| Kategori | Isi | Prasyarat | Fase |
+|---|---|---|---|
+| Emote duduk / hangout | Variasi gaya nongkrong untuk campfire/arcade | Hub pasif + sistem emote | akhir Fase 3 |
+| Efek pijakan / aura langkah | Jejak visual saat lari/lompat (pengganti DJ Booth) | Rest Room Chase/Brawl Ball jalan | akhir Fase 3 |
+| Mount / kendaraan ringan | Skateboard/hoverboard/rollerblade (nol stat); + Mount Racing | Kategori wardrobe mount + kontrol kendaraan | Fase 4 |
+
+Catatan: MVP (Fase 2) cukup **hub pasif + emote dasar**. Sisa Rest Room & backlog kosmetik menyusul.
 
 ---
 

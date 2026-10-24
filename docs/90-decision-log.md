@@ -49,5 +49,4 @@
 | 2026-10-24 | **Account Level** dari bermain = kosmetik/profil saja, **nol efek kompetitif**; XP tidak bisa dibeli | Disepakati |
 | 2026-10-24 | Couple ring berlevel = nol stat, hanya kosmetik + akses sosial (Love Party, efek room) | Disepakati |
 | 2026-10-24 | Rest Room v2: hub pasif + Lobby Chase/Tag + Brawl Ball + Arcade **tanpa judi** + Fashion Contest. **Casino/slot/poker ditolak** (rating + regulasi). Masak buff hanya XP non-kompetitif. Mount Racing (nol stat) tunda Fase 3+. Lihat 12 | Disepakati |
-| 2026-10-24 | Kategori kosmetik baru: mount/kendaraan (nol stat), emote duduk, efek pijakan — semua nol stat | Usulan — menunggu konfirmasi |
-
+| 2026-10-24 | Kategori kosmetik baru **dikonfirmasi** (nol stat): mount/kendaraan, emote duduk/hangout, efek pijakan/aura langkah. Dikerjakan **bertahap di akhir** setelah fungsi inti jalan | Disepakati |
