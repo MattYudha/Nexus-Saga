@@ -20,10 +20,14 @@
 | 2026-10-24 | Guard **busur depan 180°**; serangan dari belakang menembus | Disepakati |
 | 2026-10-24 | Pickup gear lawan: **Helm/Armor/Trinket boleh** (siapa cepat dia dapat), **senjata tidak** | Disepakati |
 | 2026-10-24 | **3 hero per match** (MVP aset 2 hero); cooldown swap **3 s** netral/combo, **12 s** defensive cancel | Disepakati |
-| 2026-10-24 | HP 0 → **Critical**: pukulan berat merontokkan Helm → Trinket → Armor, lalu KO; DropZone = KO langsung; **senjata tidak rontok sebelum KO** | Disepakati |
+| 2026-10-24 | HP 0 → **Critical**: pukulan berat merontokkan Helm → Trinket → Armor, lalu KO; ~~DropZone = KO langsung~~ (direvisi, lihat baris DropZone); **senjata tidak rontok sebelum KO** | Disepakati |
 | 2026-10-24 | Patch: G1 **Lock Facing saat guard** + Pivot; G2 guard gauge; S1–S4; C1 3 Break Stock; C2 Break Meter; C4 **penalti gerak/dash + indikator posisi** (tanpa bleed-out); P1–P3 shared humanoid rig | Disepakati |
 | 2026-10-24 | Stack: **Unity** + **Core C# murni deterministik** (tanpa UnityEngine, tanpa root motion) + **game server .NET UDP** + **Nakama**; content bundle ber-hash | Disepakati |
 | 2026-10-24 | Tim: **solo architect + AI**; strategi spike berlapis (Core decoupled dari transport; Quantum sebagai cadangan) | Disepakati |
 | 2026-10-24 | Hurtbox satu standar untuk semua pemain; tanpa HP dasar per hero | Koreksi konsistensi (lihat 10 B3/B4) |
-| 2026-10-24 | Review v3: S5, B1, B2, B5, B6, A1, A2, A4 (lihat 10 §D) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | B1 aim-assist ±22,5° saat startup + auto-face guard 6 m; B5 heal → shield, tanpa revive; B6 KO pemecah stock ke-3, assist 10 s, jatuh → musuh terakhir; S5 swap 3 s hanya netral/hit-confirm, whiff hanya bisa Burst 12 s; A1 Core data-oriented + uji Quantum; A2 predicted hit reaction = kriteria spike; A4 2 base body + hurtbox kapsul tunggal | Disepakati |
+| 2026-10-24 | **DropZone bukan KO**: fall damage + kembali ke zona spawn tim + i-frame; HP di-clamp ke 0; saat Critical jatuh = pecah 1 stock. Satu-satunya jalan KO = 3 Break Stock | Disepakati (koreksi user) |
+| 2026-10-24 | Aim-assist/auto-face dihitung client, `aimYaw` dikirim di input, divalidasi server (10 §E3) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Respawn TDM berbasis waktu match, bukan escalating per pemain (10 §E2) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Kriteria spike terukur (10 §E5) | Usulan — menunggu konfirmasi |
 

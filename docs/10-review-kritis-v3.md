@@ -1,4 +1,4 @@
-# 10 — Review Kritis v3: Celah yang Tersisa Sebelum Arsitektur Dikunci (2026-10-24)
+﻿# 10 — Review Kritis v3: Celah yang Tersisa Sebelum Arsitektur Dikunci (2026-10-24)
 
 Tujuan: menemukan hal yang, bila tidak diputuskan **sekarang**, akan memaksa perombakan Combat Core, format input/snapshot, atau pipeline aset nanti.
 
@@ -101,7 +101,7 @@ Usulan:
 
 ### B6. 🟡 Atribusi KO & assist (untuk KDA, MMR, reward)
 Critical menambah tahap: siapa yang mendapat KO? Usulan:
-- **KO** = yang memecahkan Break Stock terakhir (atau yang terakhir memukul sebelum DropZone, jendela 5 detik).
+- **KO** = yang memecahkan Break Stock terakhir (termasuk lewat jatuh: musuh terakhir yang memukul dalam 10 detik).
 - **Assist** = siapa pun yang memberi damage/break dalam 10 detik terakhir.
 - Dicatat oleh game server dalam laporan akhir.
 
@@ -138,3 +138,66 @@ Disebutkan "akses skill sampai durasinya habis atau rontok lagi". Durasi gear pu
 | 6 | A2 Kriteria spike | Wajib mengukur predicted hit reaction pada korban remote |
 | 7 | A1 | Uji sampel Quantum 2–3 hari selama spike |
 | 8 | A4 | 2 base body (L/P) + bone scale/blendshape |
+
+---
+
+## E. Hasil review babak 4 (2026-10-24)
+
+### E1. Koreksi user: DropZone bukan KO langsung — ✅ diterima
+- Jatuh = **fall damage + kembali ke zona spawn tim + i-frame**. Saat Critical, jatuh = pecah 1 Break Stock.
+- **Semua damage HP di-clamp di 0.** Tidak ada "overkill". Satu-satunya jalan KO = 3 Break Stock pecah.
+- Detail di 08 §7.6.
+- Catatan: perilaku asli LostSaga soal jatuh **belum diverifikasi**. Cek dengan observasi (rekam match di LSRebirth). Aturan ini tetap berdiri sendiri sebagai keputusan desain kita.
+
+Celah yang harus ditutup dari aturan ini:
+| Risiko | Penutup |
+|---|---|
+| Jatuh dipakai sebagai **teleport kabur** (mis. sedang dikepung) | Titik kembali = zona spawn tim (jauh dari pertarungan) + biaya HP/stock. Mundur paksa yang mahal |
+| Jatuh untuk menghindari pemberian KO ke lawan | Atribusi tetap ke musuh terakhir yang memukul dalam 10 detik |
+| Edge-guard jadi tidak bernilai | Tetap bernilai: damage + lawan tersingkir dari area ±beberapa detik + stock pecah saat Critical |
+
+### E2. Mode MVP
+| Mode | Aturan |
+|---|---|
+| **Survival / Elimination** (1v1, 3v3, ronde) | KO (setelah 3 stock pecah) = tereliminasi untuk ronde itu. **Tidak ada lagi KO instan dari jurang** |
+| **Team Deathmatch** | Respawn; skor tim |
+
+🔴 **Bantahan untuk escalating respawn timer per pemain** (5 → 7 → 9 → 12 detik):
+- Pemain/tim yang sedang kalah lebih sering mati → respawn makin lama → makin kalah. Ini **snowball**, padahal alasan C4 dan aturan gear sebelumnya justru untuk mencegah snowball.
+- Usulan: respawn naik berdasarkan **waktu match** (mis. 5 detik di awal → 10 detik di menit akhir), sama untuk semua pemain.
+- Hukuman untuk mati tetap terasa lewat **skor lawan bertambah + kehilangan posisi**.
+
+Pertanyaan terbuka: keberatan user di bagian Survival hanya soal jurang, atau juga konsep eliminasi per ronde itu sendiri?
+
+### E3. 🔴 Bug determinisme pada aim-assist & auto-face
+Keputusan B1: aim-assist ±22,5° dan auto-face guard ke musuh terdekat.
+- **Masalah:** client melihat musuh di posisi **interpolasi (masa lalu)**, server di posisi **sekarang**. Keduanya bisa memilih target atau sudut berbeda. Client memprediksi serangan ke arah A, server mengeksekusi ke arah B → misprediksi, serangan "berbelok" sendiri.
+- **Solusi:** client yang menghitung yaw akhir (aim-assist/auto-face) dan **mengirim yaw terkuantisasi di struct input**. Server **memvalidasi**: yaw harus berada dalam cone ±22,5° dari arah input mentah (atau, tanpa input arah, dalam radius 6 m ke musuh mana pun pada posisi ter-rewind).
+- Pola yang sama dengan game tembak: aim dipercaya dalam batas, hasil hit tetap server.
+- Dampak ke Core: struct input berisi `moveDir (8 arah + netral)`, `buttons`, **`aimYaw (uint16)`**.
+
+### E4. Swap/Burst — definisi diperjelas
+Keputusan B7: whiff recovery hanya bisa dibatalkan Burst 12 detik. Akibatnya Burst berubah dari "Defensive Cancel saat hitstun" menjadi **Burst Swap universal**:
+- Boleh dipakai saat hitstun **atau** saat recovery serangan sendiri.
+- Tidak boleh saat Critical (S4).
+- Cooldown 12 detik di timer bersama (S2).
+
+Neutral/Hit-Confirm Swap (3 detik): dari Idle/Run/Jump, atau setelah `movecontact` (kena/di-guard).
+
+### E5. Kriteria spike harus terukur
+"Rasa pukulan masih lengket" terlalu subjektif untuk keputusan go/no-go. Kriteria usulan pada simulasi RTT 150 ms + jitter 20 ms + packet loss 2%:
+1. Penyerang melihat reaksi korban (hitstun/knockback) **≤ 1 frame** setelah hit-confirm lokal.
+2. Misprediksi hit (diprediksi kena, server bilang tidak) **< 5%** dalam skenario combo standar.
+3. Koreksi posisi korban setelah rollback **< 0,5 m** pada 95% kasus, dan dihaluskan ≤ 6 frame.
+4. Server 1 proses menjalankan **≥ 20 match** 10 pemain di 60 Hz pada 1 vCPU (target biaya).
+5. Bandwidth per client **< 64 kbps** turun.
+
+Gagal di 1–3 → evaluasi Quantum. Gagal di 4–5 → optimasi, bukan ganti stack.
+
+### E6. Sisanya — divalidasi
+| Keputusan | Status |
+|---|---|
+| Heal → shield/buff saat Critical, tanpa revive | ✅ Konsisten dengan clamp HP & stock |
+| KO = pemecah stock ke-3; assist 10 detik; jatuh → musuh terakhir | ✅ |
+| Core data-oriented (struct + fungsi statis murni) | ✅ |
+| 2 base body + hurtbox kapsul tunggal; beda hero lewat defense & weight | ✅ Catatan: weight membuat combo berbeda per hero korban (seperti Smash) — wajib diuji per hero |

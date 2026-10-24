@@ -1,4 +1,4 @@
-# 08 — Arsitektur Core Combat (DRAFT v0.1, 2026-10-24)
+﻿# 08 — Arsitektur Core Combat (DRAFT v0.1, 2026-10-24)
 
 Dasar riset: `research/state-machine-ikemen.md` (model state) + `research/netcode-ddnet.md` (tick/snapshot).
 Keputusan pengikat: arena 3D free-roam + kamera quarter-view terkunci; 5v5; server-authoritative; Opsi B + aturan siluet (06).
@@ -80,7 +80,7 @@ Controller: `{ trigger, persistent, ignoreHitPause, actions[] }`. Contoh action:
 | 1100 | Faint / Stun | Stand / Hurt | Durasi dari HitDef; mashing mempercepat |
 | 1110 | Frozen | Stand / Hurt | Animasi beku, hit berikut memecah es |
 | 1120 | Bound (dipegang/diikat) | Stand / Hurt | Dikendalikan state penyerang (setara `p2stateno`) |
-| 1500 | Drop-zone fall | Air / Hurt | Jatuh dari arena → 1900 |
+| 1500 / 1510 | Jatuh ke DropZone / Kembali ke arena | Air / Hurt → Stand / Idle | **Bukan KO.** Fall damage + kembali ke titik aman + i-frame (§7.6) |
 | 1800 / 1810 | Hero Swap out / in | Stand / Idle | §6 |
 | 1900 | KO | Down / Hurt | Semua gear jatuh |
 | 1910 | Respawn | Stand / Idle | i-frame spawn |
@@ -96,9 +96,9 @@ Kena hit (antrian T7 → T3 tick berikut):
   ground, fall=1 / launcher → 1010 → 1020 → (recover? 1060) → land 1030 → 1040 → 1050 → Idle
   air                       → 1010 (juggle budget berkurang)
   stun / freeze / bind      → 1100 / 1110 / 1120 → Idle
-  keluar arena              → 1500 → 1900
+  keluar arena              → 1500 → fall damage → 1510 Return → Idle
   HP 0                      → masuk Critical (§7.2) — bukan KO
-  Break Stock habis / DropZone → 1900 KO → 1910 Respawn (aturan respawn per mode, lihat 10 §B2)
+  Break Stock ke-3 pecah (oleh pukulan ATAU jatuh) → 1900 KO → 1910 Respawn / eliminasi (aturan per mode, lihat 10 §E)
 ```
 Reaksi ditentukan oleh **HitDef penyerang**, bukan kode korban (prinsip Ikemen).
 
@@ -174,7 +174,7 @@ Gear Drop **bukan state badan**. Ia perubahan komponen loadout yang diproses di 
 - **HP 0 → state Critical (Zero HP Vulnerability).** Pemain belum KO.
   - Pukulan berat/knockdown merontokkan 1 gear, urutan **Helm → Trinket → Armor**.
   - Pukulan berat saat ketiganya sudah lepas → **KO**.
-  - DropZone → KO langsung.
+  - **DropZone tidak pernah KO langsung** (revisi 2026-10-24, lihat §7.6). Saat Critical, jatuh = memecahkan 1 Break Stock.
 - **Senjata tidak pernah rontok sebelum KO.** Saat KO hanya terpental secara visual, tidak bisa dipungut. Tidak ada state unarmed.
 - Slot yang rontok: skill slot itu hilang dan visual gear hilang. **Kostum avatar tetap tampil.**
 
@@ -199,6 +199,17 @@ Gear Drop **bukan state badan**. Ia perubahan komponen loadout yang diproses di 
   - (b) Gear pungutan hanya memberi efek pasif.
 - **P2 — Mesh gear harus pas di semua hero.** Konsekuensi (a): proporsi tubuh hero dibatasi beberapa body type standar.
 - **P3 — Satu slot hanya satu gear.** Memungut helm saat helm sendiri masih terpasang = ditolak atau menukar (helm lama jatuh). Usulan: menukar.
+
+### 7.6 DropZone (revisi 2026-10-24)
+Prinsip: **pemain tidak pernah mati langsung karena satu kejadian.** Satu-satunya jalan KO adalah melalui Critical → 3 Break Stock pecah.
+| Kondisi saat jatuh | Efek |
+|---|---|
+| HP > 0 | Fall damage (data, mis. 15% max HP). **HP di-clamp ke 0** bila damage melebihi sisa HP → masuk Critical, tidak mati |
+| Critical | Memecahkan **1 Break Stock** (+ gear berikutnya rontok). Jika itu stock terakhir → KO |
+Alur: `1500` jatuh melewati kill-plane → damage/stock diterapkan → teleport ke **titik kembali** → `1510 Return` (i-frame mis. 60 tick, belum bisa menyerang 20 tick).
+- **Titik kembali = zona spawn tim sendiri**, bukan tepi terdekat. Jatuh = mundur paksa yang mahal, bukan teleport taktis ke dekat pertarungan.
+- Atribusi: damage jatuh dihitung milik musuh terakhir yang memukul dalam 10 detik (assist/KO).
+- Aturan umum: **semua damage HP di-clamp di 0**. Pukulan yang membawa HP ke 0 tidak memecahkan stock; stock baru mulai pecah sesudahnya.
 
 ## 8. Avatar di arena (render)
 Urutan lapisan: tubuh avatar → kostum (wardrobe) → gear tempur (bisa rontok) → efek skin gear. Lapisan gameplay (hurtbox, hitbox, siluet hero) **tidak bergantung** pada kostum atau skin.
@@ -239,3 +250,4 @@ Di build/server ada validasi data: referensi state valid, box tidak kosong saat 
 | 5 | Snapshot 30 Hz atau 60 Hz | ⏳ Uji bandwidth di prototipe |
 | 6 | Format data hero | → `09-arsitektur-sistem.md` |
 | 7 | Engine & backend | → `09-arsitektur-sistem.md` |
+
