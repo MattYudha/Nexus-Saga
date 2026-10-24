@@ -560,7 +560,7 @@ def on_cover(c, doc):
     c.drawString(MARGIN_X, PAGE_H - 217 * mm, "Avatar sosial ala AyoDance  •  Brawler ala LostSaga  •  Ekonomi kosmetik non-P2W")
     c.setFillColor(colors.HexColor("#9AA0C8"))
     c.setFont("UI", 9.5)
-    meta = [("Versi", "1.0 — Base Model Terkunci"), ("Tanggal", "24 Oktober 2026"),
+    meta = [("Versi", "1.1 — Base Model + Arsitektur Lengkap (Locked)"), ("Tanggal", "24 Oktober 2026"),
             ("Status", "Siap untuk persetujuan Fase 1 (Spike)"), ("Klasifikasi", "Rahasia — internal")]
     y = 40 * mm
     for k, v in meta:
@@ -585,7 +585,7 @@ def on_page(c, doc):
     c.drawString(MARGIN_X, PAGE_H - 7.6 * mm, "NEXUS SAGA: CHRONICLES")
     c.setFont("UI", 8.5)
     c.setFillColor(colors.HexColor("#B9BEE0"))
-    c.drawRightString(PAGE_W - MARGIN_X, PAGE_H - 7.6 * mm, "Proposal Game v1.0")
+    c.drawRightString(PAGE_W - MARGIN_X, PAGE_H - 7.6 * mm, "Proposal Game v1.1")
     c.setStrokeColor(LINE)
     c.setLineWidth(0.6)
     c.line(MARGIN_X, 14 * mm, PAGE_W - MARGIN_X, 14 * mm)
@@ -670,7 +670,7 @@ story.append(figure(fig_core_loop(), "Gambar 1 — Core loop: avatar menjadi pus
 story.append(h2("Target pemain"))
 story.append(table([
     ["Segmen", "Motivasi", "Fitur yang melayani"],
-    ["Sosial / kreatif", "Tampil, berteman, nongkrong", "Wardrobe, Plaza, Rest Room, Dance Duel, couple room 18+"],
+    ["Sosial / kreatif", "Tampil, berteman, nongkrong", "Wardrobe, Plaza, Rest Room, Fashion Contest, couple room 18+"],
     ["Kompetitif", "Rank, gengsi, statistik", "Ranked 1v1–5v5, tier Bronze–Mythic, profil KDA, Leader Duel"],
     ["Komunitas / squad", "Kebersamaan, wilayah", "Squad HQ, Squad War mingguan, mentor"],
     ["Kolektor", "Mengoleksi item langka", "Relic, gacha transparan, kosmetik musiman"],
@@ -687,7 +687,7 @@ story.append(table([
     ["Area", "Fungsi", "Catatan desain"],
     ["Battle Gate", "Ranked, Quick Match, Custom Room ala LostSaga", "Party solo/duo/trio/5; room bisa dibuat dan diatur sendiri"],
     ["Relic Gate", "Dungeon PvE 1–4 pemain untuk farming", "Masuk dengan Gold (hadiah standar) atau Ticket (peti spesial + pity)"],
-    ["Rest Room", "Ngobrol, kenalan, minigame", "Dance Duel ritme 60 detik, mancing, kuis; Gold kecil"],
+    ["Rest Room", "Ngobrol, kenalan, minigame", "Fashion Contest, Brawl Ball, Chase/Tag, mancing, kuis (tanpa dance); Gold kecil"],
     ["Couple room", "Social matching / kenalan", "Khusus 18+ terverifikasi; block, report, mute, filter chat"],
     ["Shop / Gacha / Wardrobe", "Belanja dan dandan", "Kosmetik nol stat; sewa dan permanen"],
     ["Squad HQ", "Markas squad", "Dekorasi furnitur (world building oleh pemain)"],
@@ -827,10 +827,11 @@ story.append(table([
     ["Squad War mingguan", "Perebutan distrik di Plaza", "Dunia berubah karena komunitas"],
     ["Leader Duel", "Ketua squad duel 1v1, tayang di layar Plaza", "Momen tontonan & gengsi"],
     ["Mentor", "Pemain Diamond+ membimbing pemula; hadiah bersama", "Onboarding & komunitas sehat"],
-    ["Dance Duel", "Minigame ritme 60 detik", "Jembatan sosial–kompetitif (DNA AyoDance)"],
-    ["Rest Room", "Ruang santai, mancing, kuis", "Istirahat dari mode kompetitif"],
+    ["Fashion Contest", "Pamer outfit di panggung, penonton voting", "Pengganti dance; mendorong ekonomi kosmetik tanpa musik berlisensi"],
+    ["Rest Room", "Hangout + minigame (Brawl Ball, Chase/Tag, fishing, kuis, arcade non-judi)", "Istirahat dari mode kompetitif"],
 ], [1.3, 2.4, 1.8], first_col_bold=True))
-story.append(Spacer(1, 8))
+story.append(Spacer(1, 6))
+story.append(callout("<b>Tanpa mode dance/ritme.</b> Untuk menghindari biaya & risiko lisensi musik, Nexus Saga tidak memakai mode menari. Fungsi \"pamer avatar\" digantikan Fashion Contest dan hub sosial — tetap mendorong pembelian kosmetik, tanpa katalog lagu berlisensi.", "ok"))
 story.append(h2("Keselamatan pemain (wajib sejak awal)"))
 story += bullets([
     "Rating 13+; couple/dating room <b>hanya 18+</b> dengan verifikasi umur.",
@@ -860,6 +861,18 @@ story.append(table([
     ["Gacha transparan", "Rate dipublikasikan, pity terlihat, duplikat menjadi shard"],
     ["Sewa habis di tengah match", "Tetap berlaku sampai match selesai (dicek saat kunci loadout)"],
 ], [1.5, 4.0], first_col_bold=True))
+story.append(Spacer(1, 8))
+story.append(h2("Kategori kosmetik (semua nol stat)"))
+story.append(table([
+    ["Kategori", "Contoh", "Catatan"],
+    ["Avatar & wardrobe", "13 slot: rambut, wajah, atasan, bawahan, sepatu, set, aksesori, sayap, pet, dll", "Inti monetisasi; sewa/permanen; sistem Dye"],
+    ["Skin & efek gear", "Warna/efek senjata & skill", "Tidak mengubah siluet/hitbox"],
+    ["Mount / kendaraan", "Skateboard, hoverboard (nol stat)", "Flexing mobilitas di Plaza (fase lanjut)"],
+    ["Emote duduk / hangout", "Gaya nongkrong", "Mendorong pembelian di ruang santai"],
+    ["Efek pijakan / aura", "Jejak langkah saat lari/lompat", "Pengganti panggung dance"],
+], [1.3, 2.3, 1.9], first_col_bold=True))
+story.append(Spacer(1, 6))
+story.append(callout("<b>Gifting & anti-abuse:</b> item premium (MiCash) bisa dihadiahkan ke pemain lain; item Gold tidak (mencegah transfer kekayaan antar-akun). Tidak ada perdagangan bebas antar pemain pada MVP. Booster progres berbayar <b>ditolak</b> — uang asli tidak mempercepat kemenangan.", "info"))
 story.append(PageBreak())
 
 # 10 Liveops & dev
@@ -924,6 +937,29 @@ story.append(table([
     ["Reliable", "KO, Hero Swap, Gear Drop/pickup, akhir match disimpan sebagai state persisten"],
 ], [1.0, 4.4], first_col_bold=True))
 story.append(PageBreak())
+story.append(h2("Pipeline aset & world building (Claude + Blender headless)"))
+story.append(P("Untuk mempercepat produksi dan meminimalkan pekerjaan manual, aset teknis dibuat lewat Blender yang dikendalikan skrip: "
+               "arena + ekspor collider, rigging, LOD, material Dye, retarget animasi, dan ekspor glTF. Mesh karakter organik "
+               "berasal dari marketplace/AI cloud/artist, lalu diproses otomatis."))
+story.append(table([
+    ["Aspek", "Keputusan"],
+    ["Pipeline aset", "Blender headless (bpy) + MPFB2 (base body); arena & collider proxy diekspor ke data Core"],
+    ["Collider arena", "Hanya primitif (box/cylinder/ramp/dropzone) fixed-point — bukan mesh mentah (performa + determinisme)"],
+    ["Render karakter", "Kostum di-bake jadi 1 mesh (hemat draw call); gear tempur di socket agar bisa rontok instan"],
+    ["Mesh organik", "Sumber eksternal (cloud/marketplace/artist); GPU dev lokal tidak cukup untuk AI-gen"],
+    ["Engine client", "Unity vs Godot 4 .NET — diputuskan via bake-off awal Fase 2 (fokus: export mobile). Core/server tidak terpengaruh"],
+], [1.1, 4.1], first_col_bold=True))
+story.append(Spacer(1, 8))
+story.append(h2("Siap mobile sejak awal (tanpa rombak)"))
+story += bullets([
+    "Unity/engine satu codebase PC + mobile; Combat Core fixed-point jalan identik lintas perangkat.",
+    "Abstraksi input (keyboard/gamepad/<b>touch</b>) → satu struct input Core; tombol virtual ringkas (chorded).",
+    "UI resolution-independent; budget performa mobile ditetapkan sejak awal; aset via Addressables/CDN.",
+    "Pembayaran abstraksi (web top-up → IAP Play Store/App Store). Build mobile = port presentasi, bukan tulis ulang logika.",
+])
+story.append(Spacer(1, 6))
+story.append(callout("<b>Pengaman keamanan tambahan:</b> game server mendaftar ke matchmaker lewat endpoint terautentikasi (warm-pool); paket UDP mobile membawa session token + MAC dengan anti-replay, sehingga koneksi berpindah jaringan (Wi-Fi↔seluler) tanpa putus dan tanpa bisa dibajak.", "info"))
+story.append(PageBreak())
 
 # 12 Flow & security
 story += chapter(12, "Alur Lobi → Match & Keamanan", "Dari kota ke arena dan kembali")
@@ -944,7 +980,7 @@ story.append(PageBreak())
 story += chapter(13, "Rencana Produksi", "Bertahap dengan gerbang keputusan")
 story.append(figure(fig_roadmap(), "Gambar 10 — Fase produksi dan gerbang keputusan. Durasi Fase 2 ke atas ditetapkan setelah hasil spike."))
 story.append(h2("Fase 1 — Spike netcode: kriteria lulus"))
-story.append(P("Diuji pada kondisi jaringan buatan: <b>ping 150 ms, jitter 20 ms, packet loss 2%</b>. Selama spike, Photon Quantum juga diuji 2–3 hari sebagai pembanding."))
+story.append(P("Diuji pada kondisi jaringan buatan: <b>ping 150 ms, jitter 20 ms, packet loss 2%</b>. Selama spike, Photon Quantum juga diuji 2–3 hari sebagai pembanding. Rencana eksekusi rinci (struktur .NET, kontrak data, 14 langkah) sudah disusun. Spike berjalan <b>tanpa engine 3D</b> (pure .NET headless) + penampil debug 2D opsional."))
 story.append(table([
     ["#", "Metrik", "Target", "Jika gagal"],
     ["1", "Reaksi korban terlihat di layar penyerang", "≤ 1 frame setelah hit-confirm lokal", "Evaluasi Photon Quantum"],
@@ -1011,9 +1047,11 @@ story.append(table([
     ["DropZone", "Bukan KO; fall damage/pecah stock; gear ejection; Sky-Drop + stagger"],
     ["Hero", "3 hero per match, HP bersama; swap 3 s / Burst 12 s, terkunci saat Critical"],
     ["Mode", "Survival (ronde 90–120 s) dan TDM (respawn berbasis waktu match)"],
-    ["Ekonomi", "Gold/Ticket/MiCash, nol stat, sewa + rent-to-own, gacha transparan"],
-    ["Teknologi", "Unity + Core C# + .NET server + Nakama; content bundle ber-hash"],
-    ["Aset", "Shared humanoid rig, 2 base body, hurtbox kapsul tunggal"],
+    ["Rest Room", "Tanpa dance; Fashion Contest + minigame (Brawl Ball, Chase, fishing, kuis)"],
+    ["Ekonomi", "Gold/Ticket/MiCash, nol stat, sewa + rent-to-own, gacha transparan + pity; booster berbayar ditolak"],
+    ["Teknologi", "Combat Core C# + .NET server + Nakama; MMR OpenSkill; content bundle ber-hash; siap mobile"],
+    ["Aset", "Shared humanoid rig, 2 base body, hurtbox kapsul tunggal; pipeline Claude+Blender"],
+    ["Engine client", "Unity vs Godot 4 .NET — bake-off awal Fase 2 (Core/server tidak terpengaruh)"],
 ], [1.2, 4.3], first_col_bold=True))
 story.append(Spacer(1, 10))
 story.append(h2("Yang dimohonkan"))
@@ -1021,7 +1059,7 @@ story.append(table([
     ["#", "Permohonan", "Keterangan"],
     ["1", "Persetujuan base model desain", "Seluruh keputusan pada dokumen ini"],
     ["2", "Persetujuan Fase 1 — Spike netcode", "2–3 minggu; hasil berupa laporan metrik lulus/gagal"],
-    ["3", "Sumber daya Fase 1", "Lisensi Unity sesuai ketentuan, 1 VPS uji (region Asia Tenggara), akses asset store/animasi"],
+    ["3", "Sumber daya Fase 1", ".NET 8 SDK (gratis), 1 VPS uji (region Asia Tenggara); Unity/Godot & aset menyusul di Fase 2"],
     ["4", "Review hasil spike", "Gerbang keputusan: lanjut custom netcode atau Photon Quantum"],
 ], [0.3, 2.0, 3.2], first_col_bold=True))
 story.append(Spacer(1, 10))
