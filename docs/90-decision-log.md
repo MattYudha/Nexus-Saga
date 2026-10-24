@@ -56,4 +56,5 @@
 | 2026-10-24 | Custom room = Nakama authoritative match + label queryable (listMatches); Plaza = authoritative match; combat tetap di game server .NET (14) | Usulan — menunggu konfirmasi |
 | 2026-10-24 | Arsitektur teknis lengkap (18): FE/BE scope, skema 3D/anim/VFX, world building, scaling mobile tanpa rombak, pemakaian REA, flowchart. README diperbarui + flowchart | Disepakati (dokumen) |
 | 2026-10-24 | Mobile-ready sejak awal: abstraksi input touch, UI resolution-independent, budget mobile, payment abstraction (18 §8) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Koreksi arsitektur v2 (19): mesh-combine kostum + socket gear; collider Core **primitif proxy saja**; Warm-Pool Registry (+heartbeat/auth/alokasi atomik); UDP session token + migrasi **terverifikasi MAC**; input per-platform→1 struct Core; Relic di game server; snapshot tanpa kosmetik; AoI Plaza | Disepakati |
 
