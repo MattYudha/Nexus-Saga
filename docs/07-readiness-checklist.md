@@ -12,9 +12,10 @@
 | Item | Status | Masalah |
 |---|---|---|
 | REA MCP 6.7.0 | ✅ Terhubung | — |
-| JDK 21.0.12 (Temurin) | ✅ Terinstal `C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot` | ❌ Tidak ada di PATH, `JAVA_HOME` kosong |
-| JDK 25.0.4 (Temurin) | ✅ Terinstal | Hanya dibutuhkan Ghidra 12.2 |
-| Ghidra 12.2 | ✅ Terekstrak | ❌ **REA 6.7.0 hanya menerima Ghidra 12.1.x** (verified 12.1.4, `GhidraReleasePolicy.js`). 12.2 berstatus *unsupported*. 12.2 juga mewajibkan Java ≥ 25 |
+| JDK 21.0.12 (Temurin) | ✅ Terinstal | Cadangan bila JDK 25 bermasalah |
+| JDK 25.0.4 (Temurin) | ✅ Dipakai REA (`JAVA_HOME` di config MCP REA) | — |
+| Ghidra 12.1.4 | ✅ **Available di REA** (`...\ghidra_12.4_PUBLIC\ghidra_12.1.4_PUBLIC`, env di config MCP REA). Uji `iopac.dll` sukses | — |
+| Ghidra 12.2 | Terekstrak, untuk GUI manual saja | REA 6.7.0 hanya menerima 12.1.x |
 | `GHIDRA_INSTALL_DIR` | ⚠️ | Menunjuk ke `...\Nexus_Lab\ghidra_12.1.2_PUBLIC` yang **tidak ada** |
 | Disk C: | ⚠️ 55 GB kosong | Cukup untuk sekarang; tidak cukup bila LostSaga + ekstrak arsip besar |
 
@@ -50,8 +51,9 @@ Observasi statis (tidak menjalankan game):
 |---|---|---|
 | `lostsaga.exe` (17 MB, x86 32-bit) | Nama section acak (`usesrdol`, `dhreteyn`, kosong), entropi 7,77–7,99 → **ter-pack/terproteksi** | Ghidra hanya melihat data acak. **Tidak akan di-unpack** (membongkar proteksi = di luar batas riset kita) |
 | `io3dengine.dll` | Section normal (`.text` entropi 6,5) → **tidak ter-pack** | Bisa didekompilasi: engine render/fisika/animasi |
-| `iopac.dll` | Pembaca arsip `.iop` | Kunci untuk memahami format arsip |
+| `iopac.dll` | Pembaca arsip `.iop`. Ghidra: hanya 63 fungsi, `.text` 264 KB tapi section data bernama aneh (`.data_.t` 864 KB, `.data__` 652 KB) → **indikasi terproteksi/ter-pack sebagian** | Perlu dicek lebih lanjut sebelum dijadikan dasar parser |
 | `rs.iop` (458 MB), `map.iop` (1,1 GB) | Header `PK` (ZIP) dengan folder `config/`, tapi **struktur ZIP dimodifikasi** — ditolak oleh Python `zipfile` dan REA `inspect_artifact` | Perlu parser khusus untuk membaca daftar/isi `config/` (tabel skill, gear, state) |
 | Anti-cheat | Folder `EasyAntiCheat` + `GameGuard`, `start_protected_game.exe` | Analisis statis saja; jangan jalankan di bawah debugger/Frida |
 
 Rencana: (1) baca `config/` dari `rs.iop` lewat analisis format arsip (`iopac.dll` di Ghidra jika perlu), (2) `io3dengine.dll` untuk struktur animasi/hitbox, (3) observasi video untuk timing state.
+
