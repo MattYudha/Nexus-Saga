@@ -17,4 +17,10 @@
 | 2026-10-24 | MVP: **2 hero** (Melee Grappler + Ranged Zoner), mode 1v1 & 2v2 | Disepakati |
 | 2026-10-24 | Tidak membongkar proteksi/packer client LostSaga (`lostsaga.exe`, `iopac.dll`); riset LostSaga ditunda | Disepakati |
 | 2026-10-24 | Urutan kerja: **(a) state machine Ikemen GO → (d) arsitektur core combat** (+ tick/snapshot DDNet); AyoDance wardrobe setelah core combat | Disepakati |
+| 2026-10-24 | Guard **busur depan 180°**; serangan dari belakang menembus | Disepakati |
+| 2026-10-24 | Pickup gear lawan: **Helm/Armor/Trinket boleh** (siapa cepat dia dapat), **senjata tidak** | Disepakati |
+| 2026-10-24 | **3 hero per match** (MVP aset 2 hero); cooldown swap **3 s** netral/combo, **12 s** defensive cancel | Disepakati |
+| 2026-10-24 | HP 0 → **Critical**: pukulan berat merontokkan Helm → Trinket → Armor, lalu KO; DropZone = KO langsung; **senjata tidak rontok sebelum KO** | Disepakati |
+| 2026-10-24 | Patch G1–G2, S1–S5, C1–C4, P1–P3 (lihat 08) | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Arsitektur sistem: Unity + Core C# murni + game server .NET + Nakama (lihat 09) | Usulan — menunggu konfirmasi |
 

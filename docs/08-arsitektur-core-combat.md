@@ -67,7 +67,7 @@ Controller: `{ trigger, persistent, ignoreHitPause, actions[] }`. Contoh action:
 | 10 | Run (8 arah) | Stand / Idle | |
 | 20 | Dash | Stand / Idle | i-frame awal opsional per hero |
 | 30 / 31 / 32 | Jump start / Airborne (kontrol) / Land | Air / Idle | |
-| 40 / 41 / 42 | Guard / Guard-hit / Guard break | Stand / Idle→Hurt | Guard **busur depan** (mis. 120°); serangan dari belakang tembus |
+| 40 / 41 / 42 | Guard / Guard-hit / Guard break | Stand / Idle→Hurt | Guard **busur depan 180°**; serangan dari belakang tembus (§5.3) |
 | 100–499 | Serangan & skill hero | — / Attack | Dari data hero + gear |
 | 500 / 501 | Grab start / Grab hold | Stand / Attack | |
 | 1000 / 1001 | Hit stand (shake → slide) | Stand / Hurt | `hittime`, `slidetime` |
@@ -129,17 +129,32 @@ Reaksi ditentukan oleh **HitDef penyerang**, bukan kode korban (prinsip Ikemen).
 1. Kumpulkan semua pasangan (hitbox aktif × hurtbox lawan, tim berbeda), tolak yang `invuln`.
 2. Cek juggle budget target.
 3. Trade/prioritas: prioritas lebih tinggi menang; sama → Hit-vs-Hit trade; seri throw → RNG match.
-4. Guard: target dalam state Guard **dan** sudut serangan dalam busur depan → guard-hit; selain itu → hit.
+4. Guard: target dalam state Guard **dan** sudut serangan dalam busur depan **180°** → guard-hit; selain itu → hit.
+   - Sudut dihitung dari yaw korban ke **posisi penyerang** (melee) atau ke **kebalikan arah velocity proyektil** (proyektil).
+   - **Patch usulan G1:** selama Guard, kecepatan putar yaw dibatasi (mis. 45° per 6 tick). Tanpa ini, pemain bisa berputar instan menghadap setiap penyerang dan busur 180° efektif menjadi 360°.
+   - **Patch usulan G2:** Guard gauge. Setiap guard-hit mengurangi gauge; habis → 42 Guard break → 1100 Faint. Gauge pulih saat tidak guard. Menahan turtling dari depan.
 5. Kumpulkan hasil → terapkan bersamaan (T7).
 
 ## 6. Hero Swap
-Desain usulan (aturan detail masih bisa diubah):
-- Pemain membawa **2–3 hero** dalam satu match (loadout dipilih di lobi).
-- Swap hanya dari state dengan `ctrl=1`, di tanah, bukan Hurt. Cooldown mis. 10 detik.
-- `1800 SwapOut` (mis. 12 tick, rentan) → ganti hero → `1810 SwapIn` (mis. 8 tick; serangan masuk opsional per hero).
-- **HP milik pemain, bukan per hero.** Mencegah swap untuk "menyembunyikan" hero yang sekarat.
-- Setiap hero punya set gear sendiri. Gear yang sudah rontok tetap rontok sampai respawn.
-- Di jaringan: Hero Swap = **state snapshot persisten** (heroId aktif + timer), bukan event transien.
+### 6.1 Disepakati (2026-10-24)
+- Sistem mendukung **3 hero per match (squad)**. Produksi aset MVP tetap 2 hero.
+- **HP milik pemain**, bukan per hero.
+- Dua jenis swap:
+  | Jenis | Kapan | Cooldown |
+  |---|---|---|
+  | Neutral/Combo Swap | Idle atau sedang menyerang (combo extension) | **3 detik** |
+  | Defensive Cancel | Saat Hurt/hitstun | **12 detik** |
+- Hero Swap = **state snapshot persisten** (heroId aktif + timer), bukan event transien.
+- Semua angka cooldown dan durasi disimpan di data (bisa di-tuning tanpa build ulang).
+
+### 6.2 Patch usulan (menunggu konfirmasi)
+- **S1 — Juggle budget milik korban, bukan milik hero penyerang.** Budget tidak di-reset saat penyerang swap. Tanpa ini, swap tiap 3 detik bisa memperpanjang combo tanpa batas.
+- **S2 — Satu cooldown bersama.** Neutral swap memasang cooldown 3 detik, defensive swap memasang 12 detik, pada timer yang sama. Tanpa ini, pemain bisa swap defensif lalu langsung swap netral.
+- **S3 — Defensive Cancel harus berdaya.** Mendapat pushback ke lawan terdekat + i-frame SwapIn singkat (mis. 10 tick). Tanpa itu, ia hanya menukar hero yang tetap terkena combo.
+- **S4 — Swap dikunci saat Critical** (lihat §7). Tanpa ini, pemain di HP 0 bisa swap ke hero lain untuk mendapat set gear utuh = "nyawa" tambahan.
+- **S5 — Swap-cancel dari serangan hanya pada frame tertentu** (mis. setelah hit/guard terjadi, `movecontact`). Tidak dari startup, supaya swap tidak menjadi pembatal animasi universal.
+- State: `1800 SwapOut` (rentan) → `1810 SwapIn`. Hero masuk di posisi yang sama dengan arah hadap yang sama.
+- Keterbacaan 5v5: 10 pemain × 3 hero = 30 kit. HUD menampilkan squad tiap lawan, dan swap diberi VFX/sfx khas.
 
 ## 7. Gear Drop (Opsi B)
 ### 7.1 Model loadout (terpisah dari state badan)
@@ -153,16 +168,36 @@ Player
 ```
 Gear Drop **bukan state badan**. Ia perubahan komponen loadout yang diproses di T8, bersamaan dengan reaksi hit biasa. Korban tetap masuk 1000/1010/… sesuai HitDef, ditambah animasi overlay "gear terlepas".
 
-### 7.2 Aturan rontok
-- **HP 0 (KO):** semua gear yang terpasang jatuh ke lantai.
-- **Kondisi kritis** (mis. HP ≤ 25%): HitDef dengan `gearKnock ≥ 1` merontokkan gear. Urutan slot: Helmet → Trinket → Armor → Weapon. Weapon tidak bisa dirontokkan selain saat KO.
+### 7.2 Aturan rontok — Disepakati (2026-10-24)
+- Gear **tidak** rontok selama HP > 0.
+- **HP 0 → state Critical (Zero HP Vulnerability).** Pemain belum KO.
+  - Pukulan berat/knockdown merontokkan 1 gear, urutan **Helm → Trinket → Armor**.
+  - Pukulan berat saat ketiganya sudah lepas → **KO**.
+  - DropZone → KO langsung.
+- **Senjata tidak pernah rontok sebelum KO.** Saat KO hanya terpental secara visual, tidak bisa dipungut. Tidak ada state unarmed.
 - Slot yang rontok: skill slot itu hilang dan visual gear hilang. **Kostum avatar tetap tampil.**
 
-### 7.3 Gear di lantai
+### 7.3 Patch usulan untuk Critical (menunggu konfirmasi)
+- **C1 — Pisahkan "lapisan nyawa" dari gear fisik.** Critical memberi **3 Break Stock tetap** per nyawa. Setiap stock yang pecah menjatuhkan gear berikutnya jika masih ada.
+  - Masalahnya bila jumlah gear = jumlah nyawa: pemain yang memungut gear lawan saat Critical **menambah nyawa sendiri**. Sebaliknya, pemain yang gear-nya sudah dicuri sebelum Critical langsung KO.
+  - Dengan C1, gear hanya memberi skill, sedangkan daya tahan Critical selalu adil (3).
+- **C2 — Pukulan ringan juga berarti di Critical.** Pukulan ringan mengisi Break meter; penuh = 1 stock pecah. Pukulan berat memecahkan 1 stock langsung.
+  - Masalahnya bila hanya pukulan berat yang dihitung: hero zoner yang serangannya ringan tidak bisa menuntaskan lawan, dan pemain Critical kebal terhadap pukulan ringan.
+- **C3 — Critical sangat terlihat** (aura, ikon, suara) dan **tidak bisa swap** (S4). Tidak ada regenerasi HP di Critical.
+- **C4 — Batas waktu Critical** (mis. 15 detik tanpa terkena pukulan → kembali ke HP kecil, mis. 10%). Opsional; mencegah pemain Critical bersembunyi di 5v5. Perlu diuji.
+
+### 7.4 Gear di lantai — Disepakati (2026-10-24)
 - Entity `DroppedGear` di snapshot (persisten): pemilik, heroId, slot, posisi, sisa umur (mis. 10 detik).
-- Pemilik bisa memungut kembali (interaksi singkat, rentan).
-- **Lawan memungut gear: belum diputuskan.** Jika diaktifkan, gear tampil versi default, bukan skin pemilik.
-- Pickup = pesan input "interact", diputuskan server.
+- **Siapa cepat dia dapat**, termasuk lawan, untuk **Helm, Armor, Trinket**. Senjata tidak bisa dipungut.
+- Gear pungutan tampil versi default (tanpa skin pemilik), atau aura/ikon saja di fase MVP.
+- Pickup = input "interact", diputuskan server.
+
+### 7.5 Patch usulan untuk pickup (menunggu konfirmasi)
+- **P1 — Skill gear harus "generik".** Alasan Anda menolak pickup senjata (moveset terikat rangka hero) **berlaku juga untuk Helm/Armor/Trinket** jika skill-nya memakai animasi khusus hero tertentu. Pilihan:
+  - (a) Semua hero memakai **satu rangka humanoid bersama** dan skill gear dianimasikan untuk rangka itu. Usulan, karena sejalan dengan wardrobe avatar yang juga butuh rangka bersama.
+  - (b) Gear pungutan hanya memberi efek pasif.
+- **P2 — Mesh gear harus pas di semua hero.** Konsekuensi (a): proporsi tubuh hero dibatasi beberapa body type standar.
+- **P3 — Satu slot hanya satu gear.** Memungut helm saat helm sendiri masih terpasang = ditolak atau menukar (helm lama jatuh). Usulan: menukar.
 
 ## 8. Avatar di arena (render)
 Urutan lapisan: tubuh avatar → kostum (wardrobe) → gear tempur (bisa rontok) → efek skin gear. Lapisan gameplay (hurtbox, hitbox, siluet hero) **tidak bergantung** pada kostum atau skin.
@@ -193,11 +228,13 @@ Satu paket data per hero:
 
 Di build/server ada validasi data: referensi state valid, box tidak kosong saat attack aktif, siluet dalam batas.
 
-## 11. Keputusan terbuka (untuk sesi berikutnya)
-1. Guard: busur depan 120°, atau omni seperti LostSaga? (perlu verifikasi LostSaga lewat observasi video)
-2. Lawan boleh memungut gear?
-3. Jumlah hero per loadout (2 atau 3) dan cooldown swap.
-4. Batas kritis Gear Drop (25%?) dan apakah weapon bisa rontok sebelum KO.
-5. Snapshot 30 Hz atau 60 Hz (uji bandwidth nanti).
-6. Format file data hero (JSON / YAML / ScriptableObject) — tergantung pilihan engine.
-7. Engine client & backend (Unity/Godot, Nakama/custom) — sesi arsitektur sistem berikutnya.
+## 11. Status keputusan
+| # | Topik | Status |
+|---|---|---|
+| 1 | Guard busur depan 180° | ✅ Disepakati; patch G1 (batas putar) & G2 (guard gauge) menunggu |
+| 2 | Pickup gear lawan (kecuali senjata) | ✅ Disepakati; patch P1–P3 menunggu |
+| 3 | 3 hero/match, cooldown 3 s / 12 s | ✅ Disepakati; patch S1–S5 menunggu |
+| 4 | Critical di HP 0, senjata tidak rontok | ✅ Disepakati; patch C1–C4 menunggu |
+| 5 | Snapshot 30 Hz atau 60 Hz | ⏳ Uji bandwidth di prototipe |
+| 6 | Format data hero | → `09-arsitektur-sistem.md` |
+| 7 | Engine & backend | → `09-arsitektur-sistem.md` |
