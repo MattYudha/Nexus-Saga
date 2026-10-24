@@ -82,6 +82,13 @@ Keyboard/gamepad/touch/chorded → semua menghasilkan **struct input Core yang i
 
 ---
 
+## Pengaman tambahan (dikunci 2026-10-24)
+- **A. Anti-replay pada migrasi endpoint (#4).** HMAC/AEAD tiap paket **menyertakan `PacketSequenceNumber`**. Server mengizinkan pindah IP:Port **hanya** bila paket lolos MAC **dan** `SequenceNumber > HighestAuthenticatedSequence`. Mencegah serangan replay membajak sesi di Wi-Fi publik.
+- **B. Non-blocking cosmetic fallback (#1, G4).** Gagal/lambat unduh bundle kosmetik dari CDN **tidak pernah** menahan masuk Arena. Kostum pemain lain yang belum siap di cache → render **Base Body default** dulu; swap ke kostum asli saat bundle tiba. Pertarungan selalu mulai tepat waktu. (Hurtbox tetap standar, jadi fallback tidak memengaruhi gameplay.)
+
+## STATUS: Desain arsitektur **LOCKED** (2026-10-24)
+Stress-test desain cukup. Tidak menambah sistem baru di atas kertas. Fokus berikutnya = eksekusi Spike Fase 1 (`20`) + pipeline aset (`21`).
+
 ## Ringkasan keputusan (untuk decision log)
 1. Kostum = mesh combine (1 renderer+atlas, dye di-bake saat combine); gear = socket terpisah (eject instan). Combat tanpa rebake.
 2. Crowd LOD + AoI untuk Plaza; GPU instancing bila bisa.

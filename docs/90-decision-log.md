@@ -57,4 +57,9 @@
 | 2026-10-24 | Arsitektur teknis lengkap (18): FE/BE scope, skema 3D/anim/VFX, world building, scaling mobile tanpa rombak, pemakaian REA, flowchart. README diperbarui + flowchart | Disepakati (dokumen) |
 | 2026-10-24 | Mobile-ready sejak awal: abstraksi input touch, UI resolution-independent, budget mobile, payment abstraction (18 §8) | Usulan — menunggu konfirmasi |
 | 2026-10-24 | Koreksi arsitektur v2 (19): mesh-combine kostum + socket gear; collider Core **primitif proxy saja**; Warm-Pool Registry (+heartbeat/auth/alokasi atomik); UDP session token + migrasi **terverifikasi MAC**; input per-platform→1 struct Core; Relic di game server; snapshot tanpa kosmetik; AoI Plaza | Disepakati |
-
+| 2026-10-24 | Pengaman: anti-replay (seq number di MAC) pada migrasi endpoint; non-blocking cosmetic fallback ke base body (19 A/B) | Disepakati |
+| 2026-10-24 | **Desain arsitektur LOCKED** — stress-test cukup, tidak tambah sistem baru di atas kertas | Disepakati |
+| 2026-10-24 | Spike Fase 1 = **pure .NET headless** (tanpa engine 3D); rencana detail S-00..S-14 di doc 20 | Disepakati |
+| 2026-10-24 | Pipeline aset: **Claude + Blender headless (bpy)** untuk arena/collider/rig/LOD/retarget/export; MPFB2 untuk base body | Disepakati |
+| 2026-10-24 | **AI-mesh-gen lokal (TRELLIS/Hunyuan) TIDAK layak di GTX 1650 4GB** → mesh organik dari cloud/marketplace/artist; Claude pasca-proses | Disepakati (koreksi realita) |
+| 2026-10-24 | Engine client (Unity vs Godot 4 .NET) **ditunda**; bake-off awal Fase 2 fokus export mobile; Core/server tidak terpengaruh | Usulan — menunggu konfirmasi |
