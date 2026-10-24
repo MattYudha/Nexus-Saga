@@ -27,6 +27,8 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 | `12-rest-room-tanpa-dance.md` | Kenapa tanpa dance + pengganti Rest Room (Fashion Contest, dll) |
 | `11-konsep-game-bahasa-sederhana.md` | **Mulai baca di sini**: seluruh konsep game dengan bahasa sederhana |
 | `research/state-machine-ikemen.md`, `research/netcode-ddnet.md` | Hasil bedah Ikemen GO & DDNet |
+| `13-spesifikasi-data-combat.md` | Spec implementasi combat: skema state, trigger enum, hitbox 3D, frame data, JSON hero |
+| `14-backend-meta-systems.md` | Nakama: auth, matchmaking, MMR (OpenSkill), lobby/room, leaderboard, sosial, chat |
 | `15-skema-data-pemain-ekonomi.md` | Player, wallet, profil, hero, gear, kosmetik, shop, gacha, quest, match record |
 | `16-skema-squad-guild-komunitas.md` | Squad, HQ, Squad War, Top Squad, community lobby, mentor, couple |
 | `17-hero-roster-training-bot.md` | Roster hero, training mode, bot/CPU, onboarding |
@@ -40,6 +42,7 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 - 2026-10-24: `rea setup --client claude_code --yes` → registrasi Claude Code **aligned** di `~/.claude.json` (`cmd /d /c npx -y rea-agents@6.7.0 mcp`), skill v42 aligned. Butuh restart Claude Code. Provider analisis: **belum ada** (Ghidra/IDA/JADX/Kuna tidak dikonfigurasi) → dekompilasi .exe/.dll native belum bisa; untuk itu perlu Ghidra 12.1.x + `GHIDRA_INSTALL_DIR`.
 - 2026-10-24: ✅ **REA TERHUBUNG** ke Claude Code (rea-agents 6.7.0, 207 tools, client claude-code 2.1.310). Tersedia tanpa engine: `inspect_pe_resources`, `inspect_managed_artifact` (.NET), `inspect_sqlite_database`, `open_binary` (inventaris arsip), compare_*, Frida. Masih menunggu Ghidra: dekompilasi native (`analyze_function`, `batch_decompile`, pseudo code, xrefs).
   Langkah aktivasi: `npx -y rea-agents@6.7.0 doctor --client claude_code --json` → `setup --client claude_code --dry-run --json` → `setup --client claude_code --yes` → restart Claude Code.
+
 
 
 
