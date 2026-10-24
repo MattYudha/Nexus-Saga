@@ -1,4 +1,4 @@
-# 11 — Nexus Saga: Chronicles, Dijelaskan dengan Bahasa Sederhana (2026-10-24)
+﻿# 11 — Nexus Saga: Chronicles, Dijelaskan dengan Bahasa Sederhana (2026-10-24)
 
 > Versi "bahasa bayi" dari semua keputusan di dokumen 01–10. Kalau ada yang bertentangan, dokumen teknis (08/09/10) dan `90-decision-log.md` yang berlaku.
 
@@ -43,9 +43,12 @@ Contoh: kamu pakai jaket merah dan sepatu putih. Di kota, di rest room, dan di a
 ## 4. Rest Room & Minigame (tempat santai)
 - Kalau capek berkelahi, kamu bisa ke **Rest Room**: ngobrol, kenalan, berteman.
 - Ada minigame untuk mendapat Gold kecil-kecilan:
-  - **Dance Duel**: adu ritme 60 detik ala AyoDance.
+  - **Fashion Contest**: pamer kostum di panggung, pemain lain memberi vote, pemenang dapat Gold.
+  - **Photo Booth**: berpose dengan avatar untuk disimpan/dibagikan.
   - **Mancing**.
   - **Kuis**.
+> Catatan: **tidak ada mode dance/menari** di Nexus Saga (menghindari copyright musik). Lihat `12-rest-room-tanpa-dance.md`.
+
 - **Couple room** (kenalan/dating) hanya untuk umur **18+** yang sudah verifikasi. Ada tombol block, report, dan mute. Game ini sendiri untuk umur 13+.
 
 ---
@@ -279,3 +282,4 @@ Aturan emas:
    - Battle pass
    - Hero ke-3
    - 5v5 penuh
+

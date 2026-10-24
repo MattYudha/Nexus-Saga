@@ -1,4 +1,4 @@
-# Riset: Sistem Sosial, Lobi/Room, Rhythm & Live-ops AyoDance (2026-10-24)
+﻿# Riset: Sistem Sosial, Lobi/Room, Rhythm & Live-ops AyoDance (2026-10-24)
 
 Sumber: client AyoDance di `C:\Megaxus\AyoDance`, **analisis statis saja** (Xigncode). Tidak menjalankan game, tidak membongkar enkripsi/packer, tidak menyalin data mentah.
 
@@ -91,8 +91,8 @@ Aktivitas update UI: 26 file diubah 2024, 17 di 2025, 22 di 2026 — live-ops be
 | Kerangka event generik + modul per event | **ADOPSI** | Event = data + modul UI kecil; cocok dengan live-ops berbasis data |
 | Pola "Renewal" (versi lama tetap ada) | **UBAH** | Kita pakai feature flag server, lalu hapus versi lama setelah migrasi — mencegah utang teknis 20 tahun |
 | Tabel desain spreadsheet bertipe, dibagi client–server | **ADOPSI** | Sejalan dengan content bundle ber-hash (09 §5); authoring JSON/Sheets + baris tipe/skema |
-| Room 6 pemain + ready → load → main → hasil | **ADOPSI untuk Rest Room/Dance Duel**; arena tetap ≤ 10 (5v5) | |
-| **Level = panjang urutan panah**, konfirmasi di beat | **ADOPSI untuk Dance Duel** | Mekanik sederhana, mudah dipahami, skala kesulitan jelas; kita pakai 4 arah dulu, 8 arah sebagai mode lanjut |
+| Room 6 pemain + ready → load → main → hasil | **ADOPSI untuk Rest Room/Fashion Contest** (6 tampil + 30 nonton); arena ≤ 10 (5v5) | |
+| **Level = panjang urutan panah**, konfirmasi di beat | **DIBATALKAN** — tanpa mode dance (lihat 12, copyright musik + biaya) | Arsip, bukan fitur |
 | Voice chat grup per room + mute per pemain | **ADOPSI (Fase 3)** | Wajib ada mute/report; 13+ → voice default off untuk akun di bawah umur dewasa |
 | Quick-chat makro & tabel kata kasar | **ADOPSI** | Filter di **server**, bukan hanya client |
 | Blokir per pemain di room | **ADOPSI** | Sudah ada di aturan keselamatan |
@@ -110,3 +110,4 @@ Aktivitas update UI: 26 file diubah 2024, 17 di 2025, 22 di 2026 — live-ops be
 
 ## G. Belum diketahui (tidak akan dibongkar)
 Opsi room, penonton, password, batas channel, isi AudiPass, mekanik Lumi, isi broadcast, data lagu modern. Jalur sah bila dibutuhkan: **observasi gameplay** dengan akun sendiri atau dokumentasi publik.
+

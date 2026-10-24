@@ -39,9 +39,13 @@
 | 2026-10-24 | **Riset AyoDance dimajukan**: diselesaikan menyeluruh **sebelum implementasi apa pun** (menggantikan jadwal 'setelah core combat'). Prinsip: riset tuntas dulu, baru implementasi | Disepakati (permintaan user) |
 | 2026-10-24 | Riset AyoDance statis **selesai** (2 dokumen di `docs/research/`) | Selesai |
 | 2026-10-24 | Wardrobe: item mendaftar **set slot yang ditempati**; sistem **Dye** (color mask) menggantikan 'warna = item'; `itemId` numerik + `assetKey`; harga Gold & MiCash per item; skala per item; slot aksesori kepala terpisah | Usulan — menunggu konfirmasi |
-| 2026-10-24 | Sosial/live-ops: event shell generik + modul per event; Dance Duel = 'level = panjang urutan panah'; room sosial 6 pemain; gifting + outfit tersimpan + deal harian; **tanpa slot machine, tanpa upgrade berbayar, tanpa mata uang ke-4** | Usulan — menunggu konfirmasi |
+| 2026-10-24 | Sosial/live-ops: event shell generik + modul per event; room sosial 6+30; outfit tersimpan + deal harian; tanpa slot machine/upgrade berbayar/mata uang ke-4 | Disepakati |
 | 2026-10-24 | Observasi AyoDance manual selesai (`docs/research/ayodance-observasi.md`) | Selesai |
-| 2026-10-24 | **Tetap 3 mata uang** (tolak mata uang ke-4 relasional); konten couple pakai token non-tradable, bukan mata uang inti | Usulan — menunggu konfirmasi |
-| 2026-10-24 | **Tolak booster EXP/progres berbayar** (anti-P2W); MiCash hanya kosmetik + kenyamanan non-kompetitif | Usulan — menunggu konfirmasi |
-| 2026-10-24 | Pet/Badge/Platform = kosmetik **nol stat**; Nexus Saga punya **rent-to-own** (AyoDance tidak) sebagai pembeda | Usulan — menunggu konfirmasi |
+| 2026-10-24 | **Tetap 3 mata uang**; konten couple pakai token non-tradable, bukan mata uang inti | Disepakati |
+| 2026-10-24 | **Tolak booster EXP/progres berbayar** (anti-P2W); MiCash hanya kosmetik + kenyamanan non-kompetitif | Disepakati |
+| 2026-10-24 | Pet/Badge/Platform = kosmetik **nol stat**; Nexus Saga punya **rent-to-own** (AyoDance tidak) | Disepakati |
+| 2026-10-24 | **TANPA mode dance/ritme** (copyright musik + biaya). Rest Room: **Fashion Contest** (pamer+vote), Photo Booth, fishing, kuis, Training/Target (reuse Core). Lihat 12 | Disepakati (permintaan user) |
+| 2026-10-24 | Kosmetik **untradeable** antar pemain (MVP); **gifting** hanya item MiCash (anti-farming) | Disepakati |
+| 2026-10-24 | **Account Level** dari bermain = kosmetik/profil saja, **nol efek kompetitif**; XP tidak bisa dibeli | Disepakati |
+| 2026-10-24 | Couple ring berlevel = nol stat, hanya kosmetik + akses sosial (Love Party, efek room) | Disepakati |
 

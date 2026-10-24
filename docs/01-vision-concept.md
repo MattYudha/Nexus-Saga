@@ -1,4 +1,4 @@
-# 01 — Visi & Konsep (DRAFT v0.1, 2026-10-24)
+﻿# 01 — Visi & Konsep (DRAFT v0.1, 2026-10-24)
 
 ## Genre
 Social-Competitive Action RPG Hybrid. "Avatar = diri player" (Audition/AyoDance, GTA RP) + brawler skill-based (LostSaga) + kompetitif MMR/Tier + live-ops kosmetik non-P2W (Roblox/Fortnite).
@@ -61,7 +61,7 @@ Social-Competitive Action RPG Hybrid. "Avatar = diri player" (Audition/AyoDance,
 - Developer-only area (mis. "Dev Lounge") di Plaza hanya bisa dimasuki akun dengan role tersebut.
 
 ## Rest Room & Komunitas
-- Room publik/privat, emote/dance (homage Audition: minigame ritme singkat), fishing, kuis, "couple room" / social matching.
+- Room publik/privat, emote/pose, **Fashion Contest** (pamer outfit + voting penonton), Photo Booth, fishing, kuis, "couple room" / social matching. **Tanpa mode dance/ritme** (lihat 12).
 - **Keselamatan wajib** untuk fitur kenalan/dating: verifikasi umur & age-gating, block/report/mute, filter chat, moderator. Ini bukan opsional — tanpa ini store bisa menolak game.
 - Komunitas: squad (guild) dengan HQ, papan pengumuman, event dibuat komunitas, leaderboard squad.
 
@@ -69,3 +69,4 @@ Social-Competitive Action RPG Hybrid. "Avatar = diri player" (Audition/AyoDance,
 - Season 8–10 minggu: reset soft MMR, battle pass kosmetik, hero/skin baru.
 - Event mingguan rotasi (double Gold, Relic khusus, Leader Duel cup).
 - Semua angka (harga, drop rate, stat hero, jadwal event) di **tabel data server** → bisa diubah tanpa update client.
+

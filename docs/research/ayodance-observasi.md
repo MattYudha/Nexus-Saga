@@ -1,4 +1,4 @@
-# Observasi Manual AyoDance (dari gameplay akun sendiri, 2026-10-24)
+﻿# Observasi Manual AyoDance (dari gameplay akun sendiri, 2026-10-24)
 
 Sumber: observasi langsung oleh pemilik proyek di dalam game (legal; melengkapi bagian yang terenkripsi pada riset statis). Melengkapi `ayodance-avatar-wardrobe.md` dan `ayodance-social-lobby-rhythm.md`.
 
@@ -78,8 +78,8 @@ Item umumnya dijual **satu** mata uang (DEN **atau** Mi-Cash), bukan keduanya.
 | Sewa 7/30 hari/permanen nyata ada | **Pertahankan.** Struktur harga kita bisa meniru pola: sewa murah, permanen mahal |
 | Permanen didominasi hard currency | **Pertahankan + perbaiki**: hero/kosmetik permanen kita tetap ada jalur Gold (anti-P2W), beda dari AyoDance |
 | Item cosmetic nol stat (kostum) | **Pertahankan** |
-| Room ritme 6 pemain + spectator | **Adopsi** untuk Rest Room/Dance Duel; spectator → sejalan dengan "spectate di layar Plaza" |
-| 4-key / 8-key | **Adopsi** untuk Dance Duel (4-key dasar, 8-key lanjutan) |
+| Room 6 pemain + 30 spectator | **Adopsi** untuk **Fashion Contest** (6 tampil, 30 nonton+vote) & spectate Plaza; **bukan** untuk dance |
+| 4-key / 8-key | **DIBATALKAN** — tanpa mode dance (12) |
 | Set mengunci Top+Bottom | **Adopsi** (model "item menempati set slot") |
 
 ### B. Yang kita BEDAKAN secara sengaja (keunggulan Nexus Saga)
@@ -105,3 +105,17 @@ Kalau sempat saat main lagi, catat:
 5. **Couple ring berlevel** memberi apa selain akses Couple Shop? (pastikan tidak ada stat)
 
 Jika tidak diisi pun, desain bisa lanjut dengan asumsi yang dicatat di C.
+
+---
+
+## Jawaban celah D (observasi lanjutan, 2026-10-24)
+| # | Temuan AyoDance | Keputusan Nexus Saga |
+|---|---|---|
+| 1 | **Tidak ada trading antar pemain.** `DenItemReSell` = jual balik ke sistem (refund DEN kecil), bukan pasar pemain | **Kosmetik untradeable** antar pemain untuk MVP. Market/Auction House = keputusan terpisah bila nanti diinginkan (bukan sekarang) |
+| 2 | **Gifting aktif.** Beli untuk diri / kirim ke nickname → masuk PresentBox. Item DEN umumnya **tidak** bisa di-gift (cegah transfer kekayaan antar akun farming); gift mayoritas Mi-Cash | **Adopsi gifting**, dengan aturan: hanya item **MiCash** bisa di-gift; item Gold tidak (anti-farming). Semua gift tercatat di ledger |
+| 3 | **Level akun, mata uang, rank terpisah.** Level akun murni dari EXP bermain (ikon pangkat Lv.1–100+); saldo tak terikat level; rank = leaderboard dinamis | **Adopsi struktur 3 lapis**: Account Level (dari bermain, **kosmetik/profil saja, nol efek kompetitif**), Wallet, dan MMR/Rank. XP **tidak** bisa dibeli |
+| 4 | **Attendance:** mayoritas hadiah **sewa 7–30 hari** + tiket EXP; sesekali **avatar permanen** di hari terakhir event besar | **Adopsi**: login harian beri item sewa + Gold; hadiah permanen hanya di event besar sebagai insentif retensi |
+| 5 | **Couple ring = NOL STAT** (murni kosmetik/sosial). Level naik (Sugar→Honey→Orchid) → ikon cincin makin mewah, syarat Love Party, efek room romantis | **Adopsi penuh**: couple ring nol stat, progres relasional memberi **kosmetik & akses sosial saja**. Mengonfirmasi prinsip anti-P2W |
+
+### Catatan penting dari #3: Account Level harus nol efek kompetitif
+AyoDance menjual **tiket EXP X2** dengan Mi-Cash. Karena kita menolak booster berbayar (decision log 2026-10-24), **Account Level di Nexus Saga tidak boleh memberi keuntungan tempur apa pun** — hanya membuka kosmetik, gelar, dan slot profil. Dengan begitu, meng-grind atau top-up tidak memengaruhi arena.

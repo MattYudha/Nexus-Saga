@@ -1,4 +1,4 @@
-# 04 — Brainstorm v2: Peta Seluruh Sistem (2026-10-24)
+﻿# 04 — Brainstorm v2: Peta Seluruh Sistem (2026-10-24)
 
 Tujuan dokumen: memastikan **semua** ide dari brief awal punya tempat, punya rencana riset, dan jelas kendalanya.
 
@@ -24,7 +24,7 @@ Legenda status: 🟢 desain cukup jelas · 🟡 butuh riset/keputusan · 🔴 te
 | 1 | Akun & Role | Player / Mentor / Moderator / GM / Developer; role di server | Desain sendiri | 🟢 |
 | 2 | Avatar & Wardrobe | Slot: hair, face, top, bottom, shoes, hat, glasses, back, pet, aura, emote. Avatar ≠ Hero | **AyoDance** (`SCRIPT/`, `DATA/`, `.acv`) | 🟡 REA siap |
 | 3 | Plaza Hub | Kota kecil 30–60 player/instance, channel otomatis, layar besar menayangkan Leader Duel | AyoDance lobby/room, LostSaga plaza | 🟡 |
-| 4 | Rest Room & Minigame | Room publik/privat, **Dance Duel** (ritme 60 detik, homage Audition), fishing, kuis, couple room | AyoDance (pola ritme/notes) | 🟡 REA siap |
+| 4 | Rest Room & Minigame | **Fashion Contest** (pamer+vote), Photo Booth, fishing, kuis, Training/Target (reuse Core), couple room. **Tanpa dance** (12) | AyoDance (sosial, bukan ritme) | 🟡 |
 | 5 | Party & Matchmaking | Solo/Duo/Trio/Full 5; party besar hanya lawan party ≥3 | OpenSkill (publik) | 🟢 |
 | 6 | MMR & Tier | Hidden MMR + Rank Points; Bronze→Silver→Gold→Platinum→Diamond→Mythic (+Top 100); soft reset per season | Publik | 🟢 |
 | 7 | Combat & State Machine | Idle/Run/Dash/Jump/Attack/Skill/Guard/Airborne/Down/Faint/Bound/Frozen/GetUp-invincible; gear/hero swap | **LostSaga** | 🔴 client belum ada |
@@ -39,7 +39,7 @@ Legenda status: 🟢 desain cukup jelas · 🟡 butuh riset/keputusan · 🔴 te
 ## C. Ide Baru (v2)
 
 1. **Plaza yang berubah karena komunitas** — hasil Squad War mengganti bendera/warna distrik selama seminggu; patung avatar Mythic #1 muncul di alun-alun. Dunia terasa hidup tanpa open-world berat.
-2. **Dance Duel** — DNA Audition: tantangan ritme singkat di Plaza antar-avatar, hadiah Gold kecil + emote. Jembatan antara sisi sosial dan kompetitif.
+2. **Fashion Contest / Catwalk** — pengganti dance: pemain pamer outfit, penonton voting, pemenang dapat Gold + badge. Mendorong ekonomi kosmetik tanpa musik berlisensi (lihat 12).
 3. **Rent-to-own** — setiap kali menyewa item (7/30 hari), sebagian harga jadi kredit untuk versi permanen. Player merasa sewa tidak "hangus" → konversi ke MiCash lebih sehat.
 4. **Mastery = kosmetik** — main hero berkali-kali membuka border, emote, warna skin; gengsi tanpa stat.
 5. **Squad HQ dekorasi** — "Roblox-lite": furnitur dari toko/Relic untuk menghias markas squad. World building digerakkan player.
@@ -63,3 +63,4 @@ Sisanya (Squad War, Relic, Rest Room minigame, gacha, battle pass) di fase 2–3
 | LostSaga client tidak ada | Bahan riset | User menyediakan folder/installer; sementara pakai wiki + video |
 | Ghidra belum terpasang | Tooling | JDK 21 + Ghidra 12.1.x + `GHIDRA_INSTALL_DIR` (hanya jika data tabel tidak cukup) |
 | Keputusan desain inti | Keputusan user | Lihat `91-open-questions.md` #2–#6 |
+
