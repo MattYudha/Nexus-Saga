@@ -18,6 +18,7 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 | `04-brainstorm-v2-system-map.md` | Readiness check, peta 14 sistem, ide v2, scope MVP, kendala |
 | `05-kekurangan-dan-target-riset.md` | Checklist tool/bahan yang kurang + daftar game target riset per sistem |
 | `06-camera-dan-avatar-arena.md` | Koreksi kamera (free-roam 3D), lapisan kostum vs gear, gold sink, 2 hero MVP |
+| `07-readiness-checklist.md` | Status bahan riset, tooling RE, kesiapan arsitektur & implementasi |
 | `90-decision-log.md` | Keputusan yang sudah disepakati |
 | `91-open-questions.md` | Pertanyaan terbuka untuk sesi berikutnya |
 | `research/` | Hasil bedah per sistem/game (diisi bertahap) |
