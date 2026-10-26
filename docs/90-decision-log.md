@@ -95,3 +95,13 @@
 | 2026-10-26 | ✅ **MILESTONE: Netcode Quantum JALAN** — editor + build standalone connect via Photon Cloud, 2 pemain + dummy saling main deterministik (NexusGame, tanpa backend/auth). Spike netcode terbukti berfungsi. Bug render build (magenta, built-in RP strip Standard) diperbaiki: Unlit/Color + Always Included Shaders | Selesai |
 | 2026-10-26 | 🎉 **SPIKE NETCODE SUKSES** — multiplayer Quantum 3 jalan penuh tanpa error (editor + build, Photon region asia). Brawler deterministik (gerak/jump/dash/guard/critical/geardrop) main bareng via jaringan. Quantum 3 TERBUKTI layak untuk Nexus Saga | Selesai |
 | 2026-10-26 | 🏁 **SPIKE LULUS (GO)** — Quantum 3 stabil di 176ms ping (gerak instan, pukul nyambung, tanpa freeze/desync). **Keputusan FINAL: adopsi Photon Quantum 3; custom UDP DIBATALKAN.** Laporan: doc 22 | Disepakati |
+
+## 2026-10-26 — 🚀 FASE 2 dimulai: 2 hero nyata (TITAN-01 vs PULSE-X)
+Langkah pertama Vertical Slice di atas Quantum (kode di `photon-backend`, terpisah dari Pong):
+- **NxDamage.cs** — refactor: logika Guard 180 / Damage Gate / Critical 3 Break Stock / Gear Drop / KO jadi satu helper bersama, dipakai melee DAN projectile (satu sumber kebenaran).
+- **NxProjectileSystem.cs** + component **NxProjectile** — projectile deterministik (gerak lurus, sphere-hit XZ, hancur saat kena/habis Life).
+- **NxCombat** + `HeroId`, `SkillCd`, `ShotCd`.
+- **TITAN-01** (grappler): J melee · K lunge gap-closer. **PULSE-X** (zoner): J tembak cepat · K charged shot. Ganti hero: **H**.
+- Dummy sekarang PULSE-X → menembaki pemain (menguji projectile + dodge).
+Keputusan desain: kedua hero berbagi satu pipeline damage → tidak ada divergence aturan combat antar-hero/antar-jenis-serangan. Konsisten untuk anti-cheat replay nanti.
+Berikutnya: hitbox dari animasi (OBB baked) → uji 10 pemain → backend meta.
