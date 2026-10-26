@@ -247,3 +247,28 @@ Claude akan memakai dokumen ini sebagai sumber kebenaran.
 
 
 
+
+---
+
+## 🔖 CATATAN KONTINUASI (2026-10-26) — Spike LULUS, masuk Fase 2
+
+**Di mana kode berada sekarang:** proyek Quantum ada di **`C:\Users\US3R\photon-backend`** (bukan NyxCreats). NyxCreats = dokumen desain. Nexus terpisah penuh dari demo Pong.
+```
+photon-backend/game/Assets/QuantumUser/Simulation/Nexus/  Nexus.qtn, NxCombatSystem, NxHitSystem (+ nanti NxProjectile)
+photon-backend/game/Assets/QuantumUser/View/Nexus/        NexusInput, NexusView, NexusGame
+photon-backend/game/Assets/Editor/NexusSetup.cs           menu "Nexus → Create Local/Online Scene"
+```
+Scene: `NexusLocal.unity` (local play), `NexusOnline.unity` (networked, Photon region "asia").
+
+**Cara lanjut di Unity (tiap kali):**
+1. Buka `photon-backend/game` di Unity 2022.3.x.
+2. Kalau `Nexus.qtn` berubah → **Tools → Quantum → CodeGen → Run Qtn CodeGen**.
+3. Kalau sistem baru ditambah → re-run **Nexus → Create Local/Online Scene** (regenerasi SystemsConfig).
+4. Play (local) atau build .exe + editor (online, 2 instance).
+
+**Status:** Spike LULUS (doc 22) — Quantum 3 stabil 176ms. Combat: gerak8/jump/dash/guard180/critical/geardrop/KO. Netcode rollback OK.
+**Kontrol:** WASD gerak · J pukul · Space lompat · Shift dash · L guard · (Fase 2: K ganti hero).
+
+**Fase 2 (urutan garap):** lihat `docs/22-laporan-spike.md` bagian "Langkah berikutnya". Sedang dimulai: **2 hero nyata (TITAN-01 melee vs PULSE-X ranged/projectile)**.
+
+**Lanjut dengan Claude:** buka sesi di NyxCreats, bilang "baca HANDOFF + docs/22, lanjut Fase 2". Kode Quantum diedit di photon-backend.
