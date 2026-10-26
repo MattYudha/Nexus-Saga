@@ -1,4 +1,4 @@
-# Riset: io3dengine.dll (LostSaga / LSRebirth) — engine 3D
+﻿# Riset: io3dengine.dll (LostSaga / LSRebirth) — engine 3D
 
 Sumber: `C:\Program Files (x86)\LSRebirth\io3dengine.dll` (PE32 x86, SHA-256 `cb4ba828…9764`). Dibedah dengan REA + Ghidra 12.1.4. **Clean-room:** pelajari struktur/desain, tulis spesifikasi sendiri; tidak menyalin kode/aset, tidak membongkar proteksi.
 
@@ -112,3 +112,49 @@ File: **`.skl`** (skeleton). Definisi entity berbasis **teks** (`ioEntityGroupBu
 - Dekompilasi `CacheBipedMatrices` untuk urutan transform bone (jika perlu detail).
 - Cek `ioEntityGroup` loader untuk format socket/attachment detail.
 Semua opsional — arsitektur inti sudah cukup untuk referensi desain.
+
+---
+
+# DEEP-DIVE 5 SUBSISTEM (dekompilasi, 2026-10-26)
+Dibedah dari fungsi nyata (alamat virtual; RVA = alamat − 0x10000000). OBSERVED kecuali ditandai.
+
+## A. Perakitan karakter, equipment, anti-clipping rambut, socket
+**Hierarki:** `ioEntityGroup` (karakter utuh) → `ioEntity` (part: badan/wajah/rambut/helm/armor/senjata) → `ioSubEntity` (batch per material, 0x40 byte). **Semua part skin ke SATU `ioSkeleton` bersama** (ptr @0x98). Builder `ioEntityGroupBuilder` mem-parse file grup: `ParsingMesh/Skeleton/Animation/CollisionMesh/AABox/Sphere/Effect`.
+
+**Anti-clipping rambut-vs-helm = HIDE FLAG per-mesh** (bukan bone scaling, bukan swap mesh):
+- Event animasi/equip `OnHideMesh` → `ioEntityGroup::SetEntityVisible(meshHash, false)`; `OnShowMesh` kebalikannya.
+- Ada **whitelist** (`HideMeshExceptionCheck`) untuk mesh yang wajib tetap tampil.
+- Instan & reversibel (boolean per entity).
+
+**Socket/attach:** `AttachEffect(node, pos vec3, rot quat, localOrWorld)` → parent ke bone (`GetBiped(name)`) + offset. **Detach instan (gear drop):** `DetachEffect`/`SetEntityVisible(false)` — O(1), tanpa rebuild.
+
+✅ **Adaptasi (dikunci):** gear = entity skin ke shared rig; **anti-clipping rambut via visibility flag** yang di-toggle event equip (lebih murah & deterministik dari swap mesh) + whitelist; senjata/trinket di **bone socket + offset+quat**; gear-drop = flip visibility + detach. Memvalidasi doc 19.
+
+## B. Collision box, SAT, binding ke bone
+**`ioOrientBox`:** center@0x00, 3 axis@0x0c/0x18/0x24, half-extent@0x30/34/38, **disable flag@0x40** (nonzero → skip). **`ioSphere`:** center@0x00, radius@0x0c.
+- **OBB–Sphere** (`@0x10136c10`): transform ke box-local, closest-point, `Σ excess² ≤ r²` (squared, tanpa divide).
+- **OBB–OBB** (`@0x10135d60`): **SAT 15-sumbu** (3 face A, 3 face B, 9 edge×edge), early-out sumbu pemisah pertama; out-param = **kedalaman penetrasi** (min overlap face-axis) → berguna untuk pushback.
+- **Hitbox TIDAK di-bake per keyframe.** Box menempel ke **bone**; `CacheBipedMatrices` menghitung ulang matriks bone **sekali per frame** (guard anti-dobel), box ikut pose. Aktif/nonaktif per frame-window = **toggle flag@0x40** via event animasi.
+
+✅ **Adaptasi (dikunci):** OBB+Sphere + SAT 15-sumbu + out-param penetrasi; **hitbox terikat bone + enable-flag per frame-window** (bukan bake per frame) — ini menyederhanakan Hitbox Editor kita (pasang box ke bone tangan/senjata, aktifkan di jendela aktif). Reimplementasi **fixed-point** (dot/abs/compare, squared).
+
+## C. Event animasi + blending partial-body
+**Event track:** `UpdateAniEvent` — tiap record `AniEventTime` 0x24 byte (waktu@0, string-param@0x14, gate@0x1c). Event memicu saat cursor melewati **`[prevTime, curTime)`** (model crossed-interval, ada penanganan loop-wrap), menyala **tepat sekali**, frame-rate independent. Satu handler ber-tipe meng-rute: `OnAutoSound`, `OnTrailStart/End`, `OnShow/HideMesh`, `OnAnimationEnd/Clear` (dan via mekanisme sama: hitbox-enable, dust).
+**Partial-body (atas/bawah):** `BlendSkeleton` iterasi `ioAniTrack` (bone index@0x0c, **track weight@0x10**); sample `GetInterpolatedFrame(time)` → (pos, quat) → `BlendBiped(idx, globalWeight×trackWeight, pos, rot)`. **Tidak ada layer-mask terpisah** — mask = himpunan bone yang disentuh klip + bobotnya. Split atas/bawah **emergent** (klip kaki + klip badan atas dengan bobot per-bone).
+
+✅ **Adaptasi (dikunci):** model event crossed-interval (`prev ≤ t < cur` + loop-wrap), satu event handler ber-tipe untuk sound/VFX/dust/**hitbox-on-off**; **upper/lower split via track weight per-bone** (untuk PULSE-X lari sambil menembak), bukan sistem layer. Blend = quaternion nlerp + lerp; fixed-point jika timing hit bergantung, client-side jika hanya visual.
+
+## D. Kamera — quarter-view follow + spring (TANPA shake di engine)
+`ioTargetLookAtCameraController` (`UpdatePos @0x101180d0`): camPos, lookAt, restDist, min/maxDist, **distSpringK/Damp**, **moveSpringK/Damp**, rotateSpeed, yaw, pitch. **Tidak ada simbol `Shake`** → screen shake/hit-zoom = **tanggung jawab client**, bukan engine.
+Alur: lookAt track objek (tinggi di-blend → karakter melompat/terlempar tetap ter-follow mulus) → `curDist` spring-damp + clamp → yaw/pitch dari input (sens **0.1**/**0.07**, `ArrangeHead`/`LimitPitch`) → `camPos = lookAt + quat(yaw,pitch)·back(dist)` via spring → **occlusion pull-in** (ray vs sphere; jika terhalang, pindah ke titik kontak). Konstanta: spring ×2, snap threshold 1.0, colinear 0.99, frameDt 1/60.
+
+✅ **Adaptasi (dikunci):** template kamera quarter-view kita = **3 spring** (jarak + posisi + yaw/pitch) + occlusion pull-in agar target terlempar tetap ter-frame. **Screen shake + hit-zoom di layer client** (offset/FOV pulse additif skala "berat" hit) — **jangan di Core deterministik** (murni presentasi). Semua frame-dt scaled → aman client-only.
+
+## E. Physics sekunder (rope/spring pada bone)
+`AddRopeSpringCurve(name, RopeSpringParam*)`: ambil root bone, **telusuri anak bone** (≥2) jadi rantai; solver 100 byte. `RopeSpringParam` = 5 scalar (INFERRED: stiffness, damping, gravity/force, angle limit, drag/mass) + sub-struct@0x14 (config rantai).
+**Integrasi:** `UpdateRopeSpringCurve(dt)` → **substep tetap 1/60 s** (`substeps = max(1, dt/0.01667)`), spring-damper/Verlet per-node, **frame-rate independent**. Forcing eksternal via `AddWorldForce(vec3)` (angin, knockback). Collide vs `ioOrientBox`.
+
+✅ **Adaptasi (dikunci):** jiggle hoodie/jaket/trinket (tema hypebeast) = rantai (root bone + anak ≥2), param {stiffness, damping, gravity, angle limit, drag}, **integrator substep tetap 1/60 s**, inject world force per tick (angin + knockback hit berat), clamp vs pushbox/OBB. **Client-only**, tidak menyentuh Core.
+
+## Lintas-subsistem (pola kunci)
+**"Pose sekali per tick, semua baca matriks bone yang di-cache"** — animasi (C), collision (B), socket (A), jiggle (E) semua membaca pose yang sama. Engine memisahkan **deterministik** (OBB/Sphere/SAT, pose blend → fixed-point Core) dari **presentasi** (kamera spring, rope jiggle, shake → client float). **Persis pemisahan visual/sim kita.** Tidak ada `Shake`/`AttackBox` di engine — shake & gating hitbox via flag+event di client/gameplay.
