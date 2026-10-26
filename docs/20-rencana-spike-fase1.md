@@ -1,4 +1,38 @@
-# 20 — Rencana Eksekusi Spike Fase 1 (detail, 2026-10-24)
+# 20 — Rencana Eksekusi Spike Fase 1 (detail)
+
+> ## 🔄 REVISI v2 (2026-10-26): **QUANTUM-FIRST** (keputusan user)
+> Urutan dibalik. **Jalur utama spike = Photon Quantum 3** (fondasi `photon-backend` milik user sudah jadi: Quantum 3 + ASP.NET + Docker + Unity Android CI). Rencana custom UDP dari nol **DIBATALKAN sebagai langkah pertama** (hanya fallback bila Quantum gagal di 10 pemain).
+> - **Unity DIKUNCI** sebagai engine client (bake-off Godot dibatalkan — Quantum berjalan di Unity + CI sudah siap).
+> - Pipeline **Blender headless (bpy)** tetap untuk arena + aset `.glb` (doc 21).
+> - **S-00 (izin coding) = DIBERIKAN** 2026-10-26.
+>
+> ### 3 Aturan Arsitektur Quantum (WAJIB)
+> **a. Bone-Attached OBB + Offline Pose Baking.** Di Editor: pasang OBB ke bone + atur enable frame-window (kemudahan io3dengine). **Saat simpan aset: BAKE transform lokal OBB pada frame aktif → array `FPVector3`/`FPQuaternion` di dalam Quantum Asset.** Simulasi Quantum **dan** headless replay re-sim di backend 100% deterministik, **tanpa bergantung Unity Animator**.
+> **b. Mitigasi CCU — Split-Session Routing.** Photon **hanya** konek saat pemain masuk **Arena (Match Instance)**. Di Plaza / Wardrobe / Squad HQ / Relic Excavation Zone → **putus Photon**, murni **Nakama/WebSocket self-hosted**. Hemat CCU hingga ~70%.
+> **c. Anti-cheat — Deterministic Checksum + Backend Replay Re-Sim.** `Frame.CalculateChecksum()` berkala + validasi hasil (loot Relic Rift, MMR Solo 1v1) dengan **menjalankan ulang input replay headless** di backend ASP.NET/Nakama (sim DLL sama).
+>
+> ### Target uji spike (revisi)
+> Simulasi **10 kapsul/pemain** brawler di Quantum dengan: **OBB + Sphere** collision, **Guard 180°**, **Critical 3 Break Stock + Gear Drop**, **lag simulasi 150 ms**, + **verifikasi headless replay** di backend. Kriteria lulus (metrik 1–5) tetap dari `10 §E5`, ditambah: **10 pemain stabil** (rollback tidak meledak).
+>
+> ### Langkah teknis (revisi, Quantum)
+> | ID | Langkah | Selesai bila |
+> |---|---|---|
+> | Q-00 | ✅ Izin coding (diberikan) | — |
+> | Q-01 | Tentukan lokasi proyek spike (extend `photon-backend` vs repo baru) + pasang Unity 2022.3.62f1 + Quantum SDK 3.0.14 (sudah di photon-backend) + .NET 8 | Proyek Quantum build |
+> | Q-02 | **Data contract `.qtn`**: komponen `NxCombat` per pemain (pos, yaw, stateId, stateTime, hp, breakStock, gearMask, hitstun), `input` (moveDir8, buttons, aimYaw) | CodeGen jalan, kompilasi |
+> | Q-03 | Sistem Quantum: tick pipeline (input→state→physics→push→hit OBB→Damage Gate/BreakStock→gear drop→timer) untuk 2 kapsul | 2 kapsul bergerak + saling pukul deterministik |
+> | Q-04 | Bone-Attached OBB baking: format `FPVector3/Quat` per frame aktif di Quantum Asset (aturan a) | Hitbox aktif per frame-window dari data baked |
+> | Q-05 | Guard 180° + Critical 3 Break Stock + Gear Drop di sistem | Mekanik inti jalan |
+> | Q-06 | Client Unity minimal: render 2 kapsul + input (reuse view photon-backend) | Terlihat di layar |
+> | Q-07 | Scale 2 → 10 pemain; ukur rollback cost + bandwidth pada lag 150 ms | Metrik #1–5 + 10-pemain terukur |
+> | Q-08 | Backend headless replay re-sim (aturan c): jalankan ulang input → cek checksum/hasil | Hasil tervalidasi tanpa percaya client |
+> | Q-09 | Split-session routing stub (aturan b): Photon hanya di Arena | Transisi Plaza(Nakama)↔Arena(Photon) |
+> | Q-10 | **Laporan spike + Go/No-Go** (`docs/22-laporan-spike.md`) | Keputusan adopsi Quantum |
+>
+> Gagal di 10 pemain (rollback meledak) → evaluasi custom UDP (rencana lama di bawah sebagai referensi). Debug Viewer (S-12b lama) opsional tetap berlaku.
+>
+> ---
+> *Di bawah ini = rencana custom-UDP lama (REFERENSI/fallback, bukan jalur utama lagi).*
 
 Rencana teknis langkah demi langkah untuk Spike Netcode. **Belum dieksekusi** (butuh izin coding, S-00). Mengacu `08`, `13`, `19`, `research/netcode-ddnet.md`.
 

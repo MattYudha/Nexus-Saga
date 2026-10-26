@@ -1,0 +1,75 @@
+// Nexus Saga — Quantum 3 data contract (spike).
+// Brawler deterministik: kapsul pemain, gerak 8 arah + lompat, OBB hit, Critical/Break Stock, Gear Drop.
+// Semua FP (fixed-point), tanpa float, tanpa RNG non-seeded. (Blueprint; drop ke proyek Quantum.)
+
+#pragma max_players 10
+
+// ---- Input per tick (1 struct lintas platform; doc 13/19) ----
+input
+{
+    // Arah gerak 8 (0=netral,1=N,2=NE,3=E,4=SE,5=S,6=SW,7=W,8=NW)
+    byte MoveDir;
+    // Bitmask tombol: 1=Attack 2=Skill 4=Jump 8=Dash 16=Guard 32=Interact 64=SwapNext 128=Burst
+    byte Buttons;
+    // Yaw bidik (0..65535 = 360°); aim-assist/auto-face dihitung client, divalidasi server (10 §E3)
+    ushort AimYaw;
+}
+
+// ---- Posture & move type (Ikemen-derived; doc 13) ----
+enum Posture   { Stand, Air, Down }
+enum MoveType  { Idle, Attack, Hurt }
+
+// ---- Komponen combat per pemain (ECS; 10 entity) ----
+component NxCombat
+{
+    PlayerRef Player;
+    byte      Team;          // 0 / 1
+
+    // Transform (fixed-point)
+    FPVector3 Pos;           // X/Z lantai, Y tinggi
+    FPVector3 Vel;
+    ushort    Yaw;           // arah hadap
+
+    // State machine
+    ushort    StateId;       // nomor state (data hero)
+    ushort    StateTime;     // tick dalam state
+    byte      Posture;       // enum Posture
+    byte      MoveType;      // enum MoveType
+
+    // Nyawa (doc 08): Damage Gate → Critical → 3 Break Stock
+    FP        Hp;            // berhenti di 0 (Damage Gate)
+    byte      Critical;      // 0/1 (HP==0)
+    byte      BreakStock;    // mulai 3 saat Critical
+    FP        BreakMeter;    // isi dari pukulan ringan
+
+    // Combat timers
+    ushort    HitStun;
+    ushort    HitPause;
+    byte      JuggleBudget;  // milik korban (S1)
+    byte      GuardGauge;    // habis → Guard Crush → Faint
+
+    // Loadout
+    byte      HeroId;        // hero aktif (dari 3; swap)
+    byte      GearMask;      // bit: Weapon1 Helm2 Armor4 Trinket8 (0=rontok)
+    ushort    SwapCooldown;  // timer swap bersama (S2)
+
+    // Guard (doc 08 §5.3): lock facing saat guard
+    byte      Guarding;      // 0/1
+    ushort    GuardYaw;      // yaw terkunci saat guard
+}
+
+// ---- State pertandingan (global) ----
+global
+{
+    byte   State;            // 0=Waiting 1=Playing 2=Over
+    int    CountdownTicks;
+    int    JoinedMask;       // bit per slot
+    byte   Mode;             // 0=Solo1v1 1=TeamSurvival 2=TDM (doc 24)
+    ushort RoundNo;          // Survival: race-to-6
+    byte   ScoreA;
+    byte   ScoreB;
+}
+
+// Sinyal gameplay (di-handle sistem)
+signal OnPlayerKO(EntityRef victim, PlayerRef killer);
+signal OnGearDrop(EntityRef victim, byte slotBit, FPVector3 atPos);
