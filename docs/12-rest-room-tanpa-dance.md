@@ -62,7 +62,7 @@ Insight pengarah: **ruang berkumpul = panggung pamer terbaik**. Di game komunita
 ### Prioritas build (termurah dulu, reuse Core)
 1. Hub pasif + emote (Fase 2, bareng Plaza)
 2. Lobby Chase/Tag, Brawl Ball, Target Range (Fase 2–3, reuse Core)
-3. Fashion Contest, Fishing, Photo Booth (Fase 3)
+3. Fishing, Photo Booth (Fase 3) — Fashion Contest DIHAPUS (doc 24)
 4. Arcade Lounge non-judi (Fase 3)
 5. Mount Racing (Fase 3+)
 
@@ -73,3 +73,4 @@ Tujuan tone: **netral/universal**, tidak terkesan satu gender. Aktivitas berbasi
 - **Mount/kendaraan ringan** (nol stat) — kategori wardrobe baru, Fase 3+.
 - **Emote duduk / animasi hangout** (nol stat) — jual via MiCash.
 - **Efek pijakan (footstep/aura)** — pengganti "Platform/DJ Booth" AyoDance.
+

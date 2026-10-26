@@ -64,4 +64,13 @@
 | 2026-10-24 | **AI-mesh-gen lokal (TRELLIS/Hunyuan) TIDAK layak di GTX 1650 4GB** → mesh organik dari cloud/marketplace/artist; Claude pasca-proses | Disepakati (koreksi realita) |
 | 2026-10-24 | Engine client (Unity vs Godot 4 .NET) **ditunda**; bake-off awal Fase 2 fokus export mobile; Core/server tidak terpengaruh | Usulan — menunggu konfirmasi |
 | 2026-10-24 | Spike S-12b: **Lightweight Debug Viewer** 2D (HTML5 Canvas/WebSocket) — kapsul, hitbox/hurtbox, prediksi vs snapshot; read-only, opsional (doc 20) | Disepakati |
-
+| 2026-10-26 | **Tema: Hypebeast + Combat Exo-Gear**; cerita Nexus City; faksi Orde vs Legion; streetwear=kostum, exo-gear=gear; VFX neon-tech (doc 23) | Disepakati |
+| 2026-10-26 | **Leader Duel DIHAPUS**; 1v1 jadi **Solo MMR Ladder** pribadi (rating **Glicko-2**, revisi dari OpenSkill) | Disepakati |
+| 2026-10-26 | Alokasi poin per mode: Solo 1v1→MMR pribadi; F-War→Faction Board; Guild War→Guild Board; Custom Room→EXP+Gold (tanpa MMR) (doc 24) | Disepakati |
+| 2026-10-26 | **Faction War (Orde vs Legion)** = sistem besar, **Fase 3+**; faksi orthogonal dgn guild; mode queue menentukan tujuan poin | Disepakati |
+| 2026-10-26 | Survival = **first-to-6 (best of 10)**; pemain KO bisa spectate | Disepakati |
+| 2026-10-26 | Relic diperluas jadi **zona co-op cap 8–12 pemain** (tetap game server+Core); loot server-authoritative; anti bot-farm | Disepakati |
+| 2026-10-26 | Squad HQ + **Squad Shop** (furnitur + kosmetik emblem, Contribution Points, nol stat, anti transfer kekayaan) | Disepakati |
+| 2026-10-26 | Chat: slash-command /all /f(squad) /w /b(broadcast cooldown+biaya) /faction; via hook moderasi | Disepakati |
+| 2026-10-26 | **Fashion Contest DIHAPUS** (tidak sesuai tema); flex bergeser ke street cred + status cosmetic | Disepakati |
+| 2026-10-26 | ⚠️ Scope: Faction War/Relic ramai/Squad Shop menambah beban → MVP tetap 1v1+2v2, 2 hero; kolektif menyusul Fase 3+ | Disepakati |
