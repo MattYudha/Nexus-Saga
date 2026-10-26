@@ -26,8 +26,15 @@ Produksi: `docker compose up -d --build` (Postgres + API), isi `.env` (JWT_SECRE
 ## Klien Unity
 `game/Assets/QuantumUser/View/Nexus/NexusBackend.cs` — REST client (HttpClient async): `GuestLoginAsync`, `JoinQueueAsync`, `QueueStatusAsync`, `ReportResultAsync`, `RefreshMeAsync`.
 
-## Belum tersambung (langkah berikut — butuh uji live Unity+backend)
-- **Flow UI ranked** di Unity: login → antre → poll status → connect room `gameId` (reuse `NexusGame`) → main → lapor hasil.
-- **Win-condition 1v1** di sim: mode TeamSize=1 + cap KO (`WinScore`) → `State=2 Over`, lalu klien baca ScoreA/ScoreB → report.
-- **Slot report = identitas in-game** (Quantum PlayerRef 0/1 = team0/1), bukan slot matchmaking, agar pemenang benar.
-- Nanti-cheat lanjut: backend replay re-sim (vs "kedua lapor cocok" yang sudah ada).
+## Flow ranked di Unity — ✅ TERSAMBUNG (pending uji live)
+`NexusGame` kini punya tombol **Ranked Match (MMR)**: login tamu (device-id per-install via PlayerPrefs → editor & build = 2 akun) → `JoinQueue("asia")` → poll status → connect room Photon = `gameId` → main → saat `State=2` (match selesai) klien lapor skor + slot ke backend → Glicko-2 → tampilkan rating.
+- **Win-condition** di sim: tim pertama capai `KoTarget` (=backend `WinScore`=5) KO → `State=2 Over`. Hanya aktif bila ≥2 manusia (practice 1 pemain tetap tak berujung).
+- **Tim**: tiap tim diisi 4 bot + 1 slot human → 2 human (1 per tim) = 5v5.
+- **Slot report = PlayerRef in-game** (0=BIRU/team0, 1=ORANYE/team1) → pemenang benar di Glicko-2.
+- Skor di-clamp ke hasil legal (pemenang=target, kalah<target) sebelum lapor.
+
+**Uji**: jalankan backend (`dotnet run ... --urls http://localhost:5080`), buka **editor + 1 build**, klik Ranked di keduanya. (Kode Unity ini ditulis tanpa bisa di-compile dari sisi asisten → mungkin ada iterasi kecil.)
+
+## Berikutnya
+- Uji live flow ranked (editor+build) → perbaiki bila ada error compile/runtime.
+- Nanti: true 1v1 (tanpa bot), profil/ekonomi kosmetik, anti-cheat backend replay re-sim.
