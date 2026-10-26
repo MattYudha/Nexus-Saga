@@ -26,6 +26,7 @@ Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil an
 | `10-review-kritis-v3.md` | Celah tersisa sebelum spike: Quantum, predicted hit reaction, konten, facing, mode, heal, KO |
 | `12-rest-room-tanpa-dance.md` | Kenapa tanpa dance + pengganti Rest Room (Fashion Contest, dll) |
 | `11-konsep-game-bahasa-sederhana.md` | **Mulai baca di sini**: seluruh konsep game dengan bahasa sederhana |
+| `research/photon-backend-analysis.md`, `research/io3dengine-lostsaga.md` | Analisis Quantum 3 scaffold user; RE engine 3D LostSaga |
 | `research/state-machine-ikemen.md`, `research/netcode-ddnet.md` | Hasil bedah Ikemen GO & DDNet |
 | `13-spesifikasi-data-combat.md` | Spec implementasi combat: skema state, trigger enum, hitbox 3D, frame data, JSON hero |
 | `14-backend-meta-systems.md` | Nakama: auth, matchmaking, MMR (OpenSkill), lobby/room, leaderboard, sosial, chat |
