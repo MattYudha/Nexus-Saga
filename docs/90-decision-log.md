@@ -105,3 +105,12 @@ Langkah pertama Vertical Slice di atas Quantum (kode di `photon-backend`, terpis
 - Dummy sekarang PULSE-X → menembaki pemain (menguji projectile + dodge).
 Keputusan desain: kedua hero berbagi satu pipeline damage → tidak ada divergence aturan combat antar-hero/antar-jenis-serangan. Konsisten untuk anti-cheat replay nanti.
 Berikutnya: hitbox dari animasi (OBB baked) → uji 10 pemain → backend meta.
+
+## 2026-10-26 — ✅ Uji skala 5v5 LULUS + team brawler
+Fase 2 item "uji 10 pemain" (versi bot, di `photon-backend`):
+- **5v5 = 10 fighter** (1 human + 9 bot, campuran TITAN/PULSE) berjalan **stabil 60 FPS, tanpa freeze**, skor per-tim jalan. Skala rollback + O(n²) hit/separation aman untuk 10 entity.
+- Tambah **hero select screen** (State 0, pilihan via input `PickHero` — deterministik), **skor per-tim** (ScoreA/ScoreB by attacker team).
+- Fix **respawn**: bleed-out timer (`CritTimer`) → nyangkut di Critical 4 dtk auto-KO/respawn (dulu human bisa stuck di Critical selamanya). Respawn disebar anti-numpuk.
+- Tambah **NxSeparationSystem** (pushbox ringan XZ) → fighter tak menumpuk.
+Catatan: netcode scale 10 pemain NYATA (10 koneksi) belum diuji — ini uji skala simulasi+rollback via bot. Cukup untuk de-risk sebelum investasi aset/hero besar.
+Berikutnya: backend meta (auth→matchmaking→MMR) ATAU hitbox dari animasi (OBB baked).
