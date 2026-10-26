@@ -1,4 +1,4 @@
-# 17 — Hero Roster, Training Mode & Bot (DRAFT v0.1, 2026-10-24)
+﻿# 17 — Hero Roster, Training Mode & Bot (DRAFT v0.1, 2026-10-24)
 
 Disusun dari keputusan terkunci (`08`, `90`) + riset LostSaga (hero/gear) + Ikemen (state). **Desain, bukan kode.**
 
@@ -13,8 +13,8 @@ Disusun dari keputusan terkunci (`08`, `90`) + riset LostSaga (hero/gear) + Ikem
 ## 2. Daftar hero (roadmap, bukan final)
 | Fase | Hero | Arketipe | Peran | Status |
 |---|---|---|---|---|
-| **MVP (Fase 2)** | **Grappler** | Melee/Grappler | Opener, grab/throw, buka guard | Dibuat |
-| **MVP (Fase 2)** | **Zoner** | Ranged | Kontrol area, proyektil, anti-rush | Dibuat |
+| **MVP (Fase 2)** | **TITAN-01** | Grappler/Brawler | Hydraulic Gauntlets + Jet-Thruster; grab/slam | Dibuat |
+| **MVP (Fase 2)** | **PULSE-X** | Zoner/Gunner | Dual Rail-Pistols + Tactical Drone; kontrol area | Dibuat |
 | Fase 3 | **Support** | Pelindung | Shield, buff gerak (bukan heal saat Critical) | Direncanakan |
 | Fase 3+ | Bruiser/Tank | Melee tahan | Garda depan, weight tinggi | Konsep |
 | Fase 3+ | Assassin | Flanker | Mobilitas, burst, backstab (guard 180) | Konsep |
@@ -83,3 +83,4 @@ Prinsip: **bot mengeluarkan INPUT** ke Combat Core yang sama (bukan jalur stat k
 2. Bot untuk mengisi slot matchmaking saat sepi — ya/tidak? (risiko: pemain merasa "dibohongi" jika tak diberi tahu)
 3. Jumlah difficulty bot & apakah Nightmare perlu "membaca input" (reaksi 0-tick) — hindari agar tetap adil/manusiawi.
 4. Combo Trial reward: kosmetik saja (jaga non-P2W).
+

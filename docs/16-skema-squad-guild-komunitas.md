@@ -1,4 +1,4 @@
-# 16 — Squad / Guild, Guild War & Komunitas (DRAFT v0.1, 2026-10-24)
+﻿# 16 — Squad / Guild, Guild War & Komunitas (DRAFT v0.1, 2026-10-24)
 
 Disusun dari keputusan terkunci + riset AyoDance (guild "Fam" mendalam) + LostSaga (guild/war). **Desain data, bukan kode.** Storage menyesuaikan Nakama groups (lihat `14`).
 
@@ -42,7 +42,7 @@ SquadHQ {
 - Furnitur dibeli pakai Gold/kas squad; kosmetik murni.
 - Absensi (roll book, pelajaran AyoDance): check-in harian anggota → contribution points + Gold kecil.
 
-## 3. Squad War (mingguan)
+## 3. Squad War = District Conquest (mingguan)
 Tujuan: memperebutkan distrik di Plaza; pemenang mengubah tampilan distrik + bonus komunitas (`01`, `04`).
 ```
 WarSeason { warId, weekOf, state: enum{ Signup, Active, Settled } }
@@ -125,3 +125,4 @@ RelationLink {
 2. Berapa distrik di Plaza & berapa lama kontrol (1 minggu?).
 3. Boss raid squad (PvE) — masuk Fase 3 atau 4?
 4. Kas squad: aktif atau dihapus (hindari penyalahgunaan)?
+

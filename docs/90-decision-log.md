@@ -74,3 +74,11 @@
 | 2026-10-26 | Chat: slash-command /all /f(squad) /w /b(broadcast cooldown+biaya) /faction; via hook moderasi | Disepakati |
 | 2026-10-26 | **Fashion Contest DIHAPUS** (tidak sesuai tema); flex bergeser ke street cred + status cosmetic | Disepakati |
 | 2026-10-26 | ⚠️ Scope: Faction War/Relic ramai/Squad Shop menambah beban → MVP tetap 1v1+2v2, 2 hero; kolektif menyusul Fase 3+ | Disepakati |
+| 2026-10-26 | FINAL 4 jalur: Solo 1v1→Solo Ladder (Glicko-2, tier Rookie→Nexus Legend); **Squad War = District Conquest** (TIDAK dihapus, satu squad, perebutan distrik Plaza); Faction War (Orde/Legion); Street Room (Custom→EXP+Gold). Faksi ⊥ squad; antrean menentukan papan (doc 24) | Disepakati |
+| 2026-10-26 | MVP = **Solo 1v1 Ladder + Street Room** saja; Squad War/Faction War/Relic → Fase 3 | Disepakati |
+| 2026-10-26 | **Relic 2-lapis**: Excavation Zone 20–50 pemain di **Nakama** (ringan, tanpa combat 60Hz); Relic Rift boss **maks 8** di game server 60Hz. Rate-limit spawn Rift | Disepakati |
+| 2026-10-26 | Survival = **Race-to-6 (Best of 10)**, 90s/ronde, transisi 3s, Ronde 11 sudden death bila 5-5, spectate rekan | Disepakati |
+| 2026-10-26 | Squad HQ + Squad Shop pakai **Squad Cred** (dari Squad War+absen squad; tak bisa ditarik jadi Gold) | Disepakati |
+| 2026-10-26 | Chat: lokal, /f (squad dari mana saja), /w (whisper), /b (broadcast cooldown + auto saat drop langka Relic/Gacha) | Disepakati |
+| 2026-10-26 | Tema FINAL: **Neo-Veridia / The Exo-Drop**; ORDE=**Aegis Directorate** (Putih/Emas/Cyan), LEGION=**Vanguard Syndicate** (Hitam/Crimson/Neon Volt); hero MVP **TITAN-01** & **PULSE-X**; Exo-Gear magnetis lepas saat Critical | Disepakati |
+| 2026-10-26 | VFX: Stylized Cyber-Street; **ground-ring merah=musuh/biru=kawan** untuk AoE/skill; asap dilarang tutup siluet >0,2s (baca startup + lihat gear rontok) | Disepakati |

@@ -1,4 +1,4 @@
-# 15 — Skema Data Pemain & Ekonomi (DRAFT v0.1, 2026-10-24)
+﻿# 15 — Skema Data Pemain & Ekonomi (DRAFT v0.1, 2026-10-24)
 
 Disusun dari keputusan terkunci (`90-decision-log.md`) + riset AyoDance/LostSaga. **Desain data, bukan kode.** Skema ditulis konseptual (field + tipe); storage final menyesuaikan Nakama (lihat `14`).
 
@@ -46,9 +46,9 @@ LedgerEntry {           // setiap perubahan saldo tercatat (audit + anti-dobel)
 ```
 PlayerProfile {
   playerId
-  mmr            : { [mode]: float }      // hidden, per mode (lihat 14)
-  rankPoints     : { [mode]: int }        // terlihat
-  tier           : enum { Bronze..Mythic } + division
+  soloMmr        : float  // Glicko-2, HANYA 1v1 (satu-satunya MMR sejati)
+  accountRankExp : int    // Trainee..Colonel, nol efek kompetitif
+  tier           : enum { Rookie, Contender, Rival, Gladiator, Conqueror, NexusLegend }  // solo 1v1 ladder (tema)
   peakTier       : { [season]: tier }
   stats          : {
      wins, losses, winRate,
@@ -222,3 +222,4 @@ MatchRecord {
 3. Mastery hero kosmetik — daftar reward per level.
 4. Apakah avatar kosmetik bisa tradable suatu saat (butuh market, `14`).
 5. Format `dataHash` & versioning hero/gear vs content bundle.
+

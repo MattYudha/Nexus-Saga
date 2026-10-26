@@ -18,12 +18,14 @@ Kenapa tema ini kuat & cocok arsitektur kita:
 
 Tone: **netral/maskulin, stylish, urban, sporty** — bukan feminin (sejalan dengan penghapusan dance & Fashion Contest).
 
-## 2. Baseline story (ringkas, bisa diperluas)
-Kota **Nexus City**, near-future. Setelah sistem lama runtuh, kekuasaan jalanan dipegang dua faksi:
-- **ORDE** — disiplin, teknologi rapi, "order through strength". Estetika: clean, geometric, putih/biru-neon.
-- **LEGION** — liar, improvisasi, "freedom through chaos". Estetika: grungy, tribal-tech, merah/oranye-neon.
+## 2. Baseline story — Neo-Veridia & The Exo-Drop
+Kota masa depan **Neo-Veridia**, berdiri di atas patahan energi tempat jatuhnya artefak berenergi tinggi: **Relic** (peristiwa "The Exo-Drop"). Warga merakit Relic jadi **Combat Exo-Gear** — perangkat tempur modular (Helm/Visor, Chest Rig, Thruster/Trinket, Weapon) yang **mengunci magnetis di luar streetwear**. Saat pengguna kena benturan melampaui batas (Critical / HP 0), kunci magnetik **overload dan Exo-Gear terpental lepas satu per satu** — ini kanon dari mekanik Gear Drop kita.
 
-Keduanya berebut dominasi lewat **Nexus Brawl** (arena resmi) dan perang wilayah. Pemain = seorang **Runner** yang membangun reputasi: street cred (fashion) + combat prowess (exo-gear). Tidak ada "chosen one" — ini dunia kompetitif sosial, bukan RPG naratif berat (sesuai pilar "dunia ringan").
+Dua kubu berebut dominasi:
+- **ORDE — Aegis Directorate.** Korporasi militer taktis; ingin memonopoli & menertibkan Relic demi stabilitas kota. Estetika: **techwear bersih, Putih / Emas / Cyan**, VFX presisi geometris.
+- **LEGION — Vanguard Syndicate.** Sindikat kru jalanan; meng-overclock Exo-Gear demi kebebasan distrik. Estetika: **hypebeast jalanan, Hitam Matte / Crimson / Neon Volt**, VFX listrik/grafiti/glitch.
+
+Pemain = **Runner** yang membangun reputasi: street cred (fashion) + combat prowess (exo-gear). Cerita = pembungkus, bukan RPG naratif berat.
 
 > Cerita hanya **pembungkus**, bukan mode story berat. Side-content naratif (quest/event) opsional di live-ops.
 
@@ -45,17 +47,27 @@ Kategori item bernuansa hypebeast: hoodie/jaket, kaos grafis, cargo/techwear pan
 | Armor | Chest exo-rig | 1 skill |
 | Trinket | Drone/pack/aura core | 1 skill |
 
-Arketipe hero dibungkus tema: **Grappler** = "Bruiser rig" (exo-gauntlet berat), **Zoner** = "Tech-blaster rig" (drone + proyektil), **Support** (Fase 3) = "Medic/field rig".
+### 3.3b Dua hero MVP (nama & rig)
+| Hero | Arketipe | Exo-Rig | Weapon | Armor | Helm | Trinket |
+|---|---|---|---|---|---|---|
+| **TITAN-01** | Grappler/Brawler | berat, mekanis | Hydraulic Gauntlets (dua tangan) | Pelindung bahu mekanis | Tactical Holo-Visor | Jet-Thruster (grab/slam) |
+| **PULSE-X** | Zoner/Gunner | ramping, taktis | Dual Rail-Pistols | Mantel taktis berpelindung energi | Target-Lock Headset | Floating Drone (ranjau/tembak) |
+
+Support (Fase 3) = "Field/Medic rig".
 
 ### 3.4 Faksi & kosmetik
 Tiap faksi punya **colorway & emblem** khas; kosmetik ber-tema faksi (badge, aura) didapat dari Faction War (kosmetik, nol stat).
 
-## 4. Arah VFX skill
-Prinsip (terkunci): **VFX selalu kosmetik**, tidak pernah ubah hitbox/timing/keterbacaan.
-- Gaya: **neon-tech + street graffiti energy** (glitch, hologram, spray-burst), bukan fantasi sihir.
-- Warna faksi: Orde biru/putih, Legion merah/oranye — tapi **readability gameplay tetap** (hit spark, hurt flash pakai warna standar, bukan warna skin).
-- **Skin skill** (MiCash) mengganti tampilan VFX, bukan gameplay. Hit confirm/hitpause tetap identik.
-- Budget partikel per layar (mobile) — LOD + pooling (doc 19).
+## 4. Arah VFX skill — Stylized Cyber-Street FX
+Gaya: garis neon tajam & bersih (ala Zenless Zone Zero / Valorant), hologram, spray-burst, shockwave bersih — bukan fantasi sihir. Prinsip terkunci: **VFX selalu kosmetik**, tidak pernah ubah hitbox/timing/keterbacaan.
+
+**Aturan emas VFX (wajib, untuk keterbacaan 3v3/5v5):**
+1. **Ground-ring indikator ancaman.** Serangan **AoE / ter-telegraph / skill** musuh wajib punya **ring/outline di lantai**: **merah = musuh**, **biru/aman = kawan**. (Pukulan dasar cepat tidak perlu ring — dibaca dari animasi, agar tidak clutter.)
+2. **Zero-clutter sumbu vertikal.** Asap/ledakan **dilarang menutup siluet tubuh > 0,2 detik**. Pemain harus selalu bisa membaca animasi startup pukulan **dan** melihat saat Exo-Gear lawan rontok.
+3. Hit spark / hurt flash pakai **warna standar** (bukan warna skin/faksi) — konfirmasi hit tetap jelas.
+4. **Skin skill** (MiCash) mengganti tampilan VFX, bukan gameplay; hit confirm/hitpause identik.
+5. Warna faksi (Orde cyan/emas, Legion crimson/volt) untuk flair, **bukan** untuk indikator gameplay.
+6. Budget partikel per layar (mobile) — LOD + pooling (doc 19).
 
 ## 5. Dampak ke dokumen lain
 - `01`, `11`, `README`: tambahkan tema; ganti "avatar generik" → streetwear, "gear" → exo-gear.
