@@ -152,3 +152,14 @@ Pipeline: JSON → validator build (referensi state valid, attack frame tak koso
 4. Berapa attack MVP butuh **OBB** vs capsule (membatasi kode collision).
 5. **Payload rewind minimal** untuk lag comp (`08 §9`): cukup transform + anim-frame untuk rekonstruksi volume (tak perlu clone seluruh state).
 
+---
+
+## 8. AMANDEMEN collider (2026-10-26, dari RE io3dengine.dll)
+Pisahkan 3 peran collider — **jangan satu bentuk untuk semua**:
+| Peran | Bentuk | Alasan |
+|---|---|---|
+| **Hitbox (serang)** | **OBB + Sphere** | Ayunan senjata = OBB; ledakan/proyektil = Sphere. Fixed-point bersih; sesuai io3dengine (OBB+Sphere, tanpa capsule) |
+| **Hurtbox (badan kena)** | **OBB + Sphere** | Sama; **drop capsule** (jarak segmen 3D rawan overflow di fixed-point) |
+| **Pushbox (gerak lantai/dinding antar-pemain)** | **Upright Cylinder (lingkaran X-Z + tinggi Y)** atau Sphere | Lingkaran X-Z **tidak terpengaruh yaw** → tidak nyangkut di sudut saat berputar di tepi dinding/tangga. OBB sudutnya melebar saat berputar = nyangkut |
+
+Collision Core final: **OBB + Sphere** (hit/hurt) + **Upright Cylinder** (pushbox/arena). Capsule dibuang.

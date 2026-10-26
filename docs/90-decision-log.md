@@ -83,4 +83,4 @@
 | 2026-10-26 | Tema FINAL: **Neo-Veridia / The Exo-Drop**; ORDE=**Aegis Directorate** (Putih/Emas/Cyan), LEGION=**Vanguard Syndicate** (Hitam/Crimson/Neon Volt); hero MVP **TITAN-01** & **PULSE-X**; Exo-Gear magnetis lepas saat Critical | Disepakati |
 | 2026-10-26 | VFX: Stylized Cyber-Street; **ground-ring merah=musuh/biru=kawan** untuk AoE/skill; asap dilarang tutup siluet >0,2s (baca startup + lihat gear rontok) | Disepakati |
 | 2026-10-26 | RE **io3dengine.dll** selesai (research/io3dengine-lostsaga.md): simbol C++ lengkap. Memvalidasi shared-rig(RcSkeleton)+instance, bone=(pos,quat), **gear attach via LinkedSkeleton butuh bone-count sama** (= shared rig wajib), collision **OBB+Sphere TANPA capsule** | Selesai |
-| 2026-10-26 | Usul: pertimbangkan hitbox Core **OBB+Sphere saja (drop capsule)** seperti LostSaga — sederhanakan collision | Usulan — menunggu konfirmasi |
+| 2026-10-26 | Collider FINAL: **hit/hurt = OBB+Sphere** (drop capsule); **pushbox = Upright Cylinder** (X-Z + tinggi Y, tak terpengaruh yaw, anti-nyangkut). Amandemen doc 13 §8 | Disepakati |
