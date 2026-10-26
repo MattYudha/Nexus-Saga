@@ -114,3 +114,14 @@ Fase 2 item "uji 10 pemain" (versi bot, di `photon-backend`):
 - Tambah **NxSeparationSystem** (pushbox ringan XZ) → fighter tak menumpuk.
 Catatan: netcode scale 10 pemain NYATA (10 koneksi) belum diuji — ini uji skala simulasi+rollback via bot. Cukup untuk de-risk sebelum investasi aset/hero besar.
 Berikutnya: backend meta (auth→matchmaking→MMR) ATAU hitbox dari animasi (OBB baked).
+
+## 2026-10-26 — ✅ Backend Meta Slice: Solo 1v1 Ranked (Glicko-2 + MMR) TERVERIFIKASI
+Fase 2 "backend meta" slice pertama (di `photon-backend/backend`, ASP.NET Core 8):
+- **.NET 8 SDK** dipasang lokal (user-scope) → bisa build + `dotnet test` (DB in-memory, tanpa Docker).
+- **Glicko-2** gantikan Elo (RD+Volatility, EF migration), divalidasi contoh resmi Glickman.
+- **Matchmaking MMR** (singleton in-memory): join/status/leave, pasangkan rating terdekat dalam window + region.
+- **Dev DB in-memory** → API jalan cukup `dotnet run`.
+- **25/25 test lolos** + smoke-test runtime end-to-end (login→antre→matched→report→Glicko-2 1500→1662/1338→leaderboard).
+- Klien Unity `NexusBackend.cs` (REST) ditulis.
+Keputusan: reuse model 2-pemain "kedua lapor cocok" (semi anti-cheat) untuk ranked; Glicko-2 jadi algoritma rating resmi (doc 24). Lihat doc 25.
+Belum: flow UI ranked di Unity + win-condition 1v1 di sim + slot-report = PlayerRef (butuh uji live).
