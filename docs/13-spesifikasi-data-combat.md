@@ -1,4 +1,4 @@
-# 13 — Spesifikasi Data Combat (implementation-ready, 2026-10-24)
+﻿# 13 — Spesifikasi Data Combat (implementation-ready, 2026-10-24)
 
 Hasil bedah mendalam source Ikemen GO v1.0.0 untuk menutup 5 celah implementasi (`state-machine-ikemen.md` = level desain; dokumen ini = level implementasi). Melengkapi `08`. **Spesifikasi data, bukan kode.**
 
@@ -58,6 +58,8 @@ PROPOSED (rekomendasi **(b)**): tiru VM = berminggu-minggu + risiko determinisme
 
 ## 3. Hitbox: 2D Clsn → 3D
 OBSERVED: `.air` menyimpan persegi AABB per frame: `Clsn1`=attack, `Clsn2`=hurt, `x1,y1,x2,y2` lokal (Y ke bawah negatif). Contoh stand `Clsn2[0]=-13,0,16,-79` (`kfm.air:8-10`). `clsnOverlap` (`system.go:2092-2156`): mirror X bila `facing<0`, skala, **OBB path** bila `angle` di-set (`:2138-2143`). Z **terpisah** sebagai interval kedalaman `zAxisOverlap` (`system.go:2082-2091`).
+
+> **Validasi dari RE LostSaga `io3dengine.dll`** (`research/io3dengine-lostsaga.md`): engine LostSaga pakai **OBB + Sphere, TANPA capsule**, transform OBB via (pos, quat) — persis pola di bawah. Pertimbangkan drop capsule → OBB+Sphere saja untuk sederhana.
 
 PROPOSED format 3D:
 ```
@@ -149,3 +151,4 @@ Pipeline: JSON → validator build (referensi state valid, attack frame tak koso
 3. Lingkup **escape hatch** ekspresi: trigger mana yang benar-benar butuh aritmetika sebelum enum dikunci.
 4. Berapa attack MVP butuh **OBB** vs capsule (membatasi kode collision).
 5. **Payload rewind minimal** untuk lag comp (`08 §9`): cukup transform + anim-frame untuk rekonstruksi volume (tak perlu clone seluruh state).
+
