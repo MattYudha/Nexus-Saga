@@ -61,6 +61,15 @@ Detail teknis ada di `docs/` (00–25) dan `docs/90-decision-log.md`.
 - [x] ✅ **UI Leaderboard** di menu (ambil `/api/leaderboard` → top rating + W/L)
 - [x] ✅ **Uji live editor+build LULUS** — loop ranked penuh jalan tanpa bug
 
+### 2e. Sistem Akun & Profil (✅ backend terverifikasi — 30/30 test)
+- [x] ✅ Register & Login (username + password, hash ASP.NET PasswordHasher)
+- [x] ✅ Profil `/me`: username, faction, rating, **rank tier** (Rookie→Nexus Legend), W/L, matches, **win-rate**
+- [x] ✅ Pilih **Faction** (ORDE/LEGION) via endpoint
+- [x] ✅ Guest login tetap ada (device per-launch) untuk quick play
+- [x] ✅ UI Unity: layar **Login/Register/Guest** + panel profil di menu + leaderboard
+- [x] ✅ Repo BE di-update ke `github.com/MattYudha/be-Nexus-saga-`
+- [ ] ⬜ Uji live UI akun di Unity (recompile + rebuild .exe)
+
 ## Fase 2 — Sisa (🔜 berikutnya)
 - [ ] 🔜 Profil & ekonomi kosmetik (faction, currency, wardrobe/inventory, unlock hero) — backend, bisa dites
 - [ ] ⬜ Hitbox dari animasi (bone-attached OBB baked) — butuh aset 3D + animasi

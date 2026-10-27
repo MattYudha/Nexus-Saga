@@ -131,3 +131,13 @@ Belum: flow UI ranked di Unity + win-condition 1v1 di sim + slot-report = Player
 - Perbaikan matang: device-id unik per-launch (2 instance = akun beda), matchmaking retry bersih + Cancel, UX Pilih Hero (feedback hijau + "menunggu pemain lain X/Y siap"), arena dibersihkan saat selesai.
 - **Leaderboard UI** ditambah di menu (konsumsi `/api/leaderboard`).
 Berikutnya: Profil & ekonomi kosmetik (backend, bisa dites) ATAU true 1v1 / aset 3D.
+
+## 2026-10-27 — ✅ Sistem Akun & Profil (backend 30/30 test + UI Unity)
+Fondasi akun sebelum ekonomi/kosmetik (atas permintaan user, mumpung build ranked):
+- Register/Login username+password (hash PasswordHasher), Player += Username/PasswordHash/Faction (migration AddUserAccounts).
+- `/me` diperluas: username, faction, rating, **rank tier** (Rookie→Nexus Legend), W/L, matches, win-rate. Endpoint set-faction (ORDE/LEGION).
+- Guest login tetap (device per-launch) untuk quick play.
+- **30/30 test lolos** + smoke-test runtime (register→me rank Silver→faction ORDE).
+- UI Unity: layar Login/Register/Guest, panel profil di menu (rank/rating/W-L/win-rate/faction + picker), leaderboard. Ranked kini pakai akun login (bukan device hack) → rating permanen.
+- Repo BE diperbarui di github.com/MattYudha/be-Nexus-saga-.
+Berikutnya: uji live UI akun → lalu ekonomi kosmetik (currency/shop/inventory) di atas fondasi ini.
