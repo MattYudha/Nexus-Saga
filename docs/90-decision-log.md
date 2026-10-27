@@ -159,3 +159,16 @@ Berikutnya: uji live → lalu ekonomi kosmetik di atas fondasi akun/profil ini.
 - **Persistensi terbukti**: register akun → `docker compose down && up` → login akun lama tetap sukses.
 - Catatan: networkingMode=mirrored GAGAL di mesin ini (0x8007054f → fallback no-network, sudah di-revert). NAT + settle 15-30s cukup. Unity BackendUrl tetap localhost:5080.
 Berikutnya: uji live UI akun+profil di Unity → lalu ekonomi kosmetik.
+
+## 2026-10-27 — 📋 RINGKASAN HARIAN (yang diimplementasi & terverifikasi)
+1. **Ranked flow LULUS uji live** (login→MMR→pilih hero→5v5→hasil→Glicko-2→rating) + fixes: device-id unik per-launch, matchmaking retry bersih + Cancel, UX pilih-hero (feedback hijau + "menunggu pemain lain X/Y"), arena dibersihkan saat selesai.
+2. **Leaderboard UI** (menu).
+3. **Sistem Akun**: register/login (username+password, hash PasswordHasher) + guest.
+4. **Profil & Statistik** (schema dari riset doc 15 §3 + doc 24 §2.3, bukan karang): 3 lapis — Account Rank (Trainee→Colonel), Solo tier (Rookie→Contender→Rival→Gladiator→Conqueror→Nexus Legend), Faction (ORDE/LEGION) + K/D/A/KDA/win-rate/XP. **Halaman Profil sendiri** di Unity.
+5. **Sim**: lacak Kills per-pemain (kredit killer) + deaths (termasuk bleed-out).
+6. **Backend: 31/31 test lolos.**
+7. **DB + Docker (doc 26)**: PostgreSQL **persisten** via Docker-in-WSL2, migration auto-apply, reachable dari Windows `localhost:5080`, **persistensi terbukti** (data bertahan lintas recreate).
+8. **Auto-start (systemd service)**: ✅ **TERVERIFIKASI — buka terminal Ubuntu → Docker + Postgres langsung running sendiri** (tanpa `docker compose up` manual, ~10-15 dtk sampai healthy). Login/register/profil diuji live ke DB persisten (2+ akun tersimpan).
+9. **Push**: docs → Nexus-Saga; backend + unit auto-start → be-Nexus-saga-.
+
+TODO besok: (a) tombol Back di Profile, (b) rebuild SELURUH UI on-theme (fondasi design system) — lihat memory nexus-ui-rebuild-tasks.
