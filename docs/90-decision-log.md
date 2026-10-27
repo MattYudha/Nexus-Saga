@@ -141,3 +141,14 @@ Fondasi akun sebelum ekonomi/kosmetik (atas permintaan user, mumpung build ranke
 - UI Unity: layar Login/Register/Guest, panel profil di menu (rank/rating/W-L/win-rate/faction + picker), leaderboard. Ranked kini pakai akun login (bukan device hack) → rating permanen.
 - Repo BE diperbarui di github.com/MattYudha/be-Nexus-saga-.
 Berikutnya: uji live UI akun → lalu ekonomi kosmetik (currency/shop/inventory) di atas fondasi ini.
+
+## 2026-10-27 — ✅ Profil & Statistik sesuai schema riset (31 test)
+Dibangun DARI riset (doc 15 §3 PlayerProfile + doc 24 §2.3 progres 3 lapis), bukan karangan:
+- **Tier ladder diperbaiki** ke tema riset: Rookie→Contender→Rival→Gladiator→Conqueror→Nexus Legend (sebelumnya salah pakai Bronze/Silver).
+- **Account Rank** Trainee→Colonel dari accountXp/level (nol efek kompetitif).
+- **Statistik**: kills/deaths/assists/KDA, wins/losses/win-rate, matches. Sim melacak Kills per-pemain (kredit killer di NxDamage.Ko) + deaths (termasuk bleed-out); klien lapor saat State=Over.
+- `/me` profil penuh; match-report terima kills/deaths/assists + akumulasi + award XP (menang+100/kalah+60).
+- **UI Unity: halaman Profil sendiri** (Page.Profile) — 3 lapis rank, statistik, riwayat match, faction picker. + layar Login/Register/Guest, leaderboard.
+- 31/31 test + smoke-test (profil: tier Rival, Account Rank Trainee, KDA). BE di-push.
+Note: butuh CodeGen (field Kills di .qtn) + rebuild .exe untuk uji live.
+Berikutnya: uji live → lalu ekonomi kosmetik di atas fondasi akun/profil ini.
