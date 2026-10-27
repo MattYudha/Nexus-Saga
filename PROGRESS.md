@@ -70,6 +70,7 @@ Schema dari riset (doc 15 §3 + doc 24 §2.3), bukan karangan:
 - [x] ✅ `/me` profil penuh + match report terima kills/deaths + akumulasi + XP
 - [x] ✅ UI Unity: **halaman Profil sendiri** (3 lapis rank, statistik, riwayat match, faction picker), layar Login/Register/Guest, leaderboard
 - [x] ✅ Repo BE di-update ke `github.com/MattYudha/be-Nexus-saga-`
+- [x] ✅ **DB + Docker** (doc 26): PostgreSQL persisten via Docker-in-WSL2, migration auto-apply, `localhost:5080` dari Windows — **persistensi terbukti** (data bertahan setelah recreate container)
 - [ ] ⬜ Uji live UI akun+profil di Unity (CodeGen field Kills + recompile + rebuild .exe)
 
 ## Fase 2 — Sisa (🔜 berikutnya)

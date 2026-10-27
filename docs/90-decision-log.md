@@ -152,3 +152,10 @@ Dibangun DARI riset (doc 15 §3 PlayerProfile + doc 24 §2.3 progres 3 lapis), b
 - 31/31 test + smoke-test (profil: tier Rival, Account Rank Trainee, KDA). BE di-push.
 Note: butuh CodeGen (field Kills di .qtn) + rebuild .exe untuk uji live.
 Berikutnya: uji live → lalu ekonomi kosmetik di atas fondasi akun/profil ini.
+
+## 2026-10-27 — ✅ DB + Docker (Postgres persisten via WSL2)
+- Backend meta kini pakai **PostgreSQL persisten** (Docker-in-WSL2 Ubuntu, systemd auto-start — bukan Docker Desktop). doc 26 = runbook.
+- `.env` dibuat (secret acak, gitignored), `docker compose up -d --build` → Postgres 16 + API, migration auto-apply (4 migration), API di `localhost:5080` dari Windows (NAT forwarding, compose tetap bind 127.0.0.1 aman).
+- **Persistensi terbukti**: register akun → `docker compose down && up` → login akun lama tetap sukses.
+- Catatan: networkingMode=mirrored GAGAL di mesin ini (0x8007054f → fallback no-network, sudah di-revert). NAT + settle 15-30s cukup. Unity BackendUrl tetap localhost:5080.
+Berikutnya: uji live UI akun+profil di Unity → lalu ekonomi kosmetik.
