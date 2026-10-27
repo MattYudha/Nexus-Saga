@@ -125,3 +125,9 @@ Fase 2 "backend meta" slice pertama (di `photon-backend/backend`, ASP.NET Core 8
 - Klien Unity `NexusBackend.cs` (REST) ditulis.
 Keputusan: reuse model 2-pemain "kedua lapor cocok" (semi anti-cheat) untuk ranked; Glicko-2 jadi algoritma rating resmi (doc 24). Lihat doc 25.
 Belum: flow UI ranked di Unity + win-condition 1v1 di sim + slot-report = PlayerRef (butuh uji live).
+
+## 2026-10-27 — ✅ Ranked flow LULUS uji live + Leaderboard UI
+- Loop Solo 1v1 Ranked (login→MMR→pilih hero→5v5→hasil→Glicko-2→rating) **terverifikasi live** (editor+build).
+- Perbaikan matang: device-id unik per-launch (2 instance = akun beda), matchmaking retry bersih + Cancel, UX Pilih Hero (feedback hijau + "menunggu pemain lain X/Y siap"), arena dibersihkan saat selesai.
+- **Leaderboard UI** ditambah di menu (konsumsi `/api/leaderboard`).
+Berikutnya: Profil & ekonomi kosmetik (backend, bisa dites) ATAU true 1v1 / aset 3D.

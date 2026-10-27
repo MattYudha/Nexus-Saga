@@ -49,18 +49,22 @@ Detail teknis ada di `docs/` (00–25) dan `docs/90-decision-log.md`.
 - [x] ✅ **25/25 test lolos** + smoke-test runtime end-to-end (login→antre→matched→report→Glicko-2→leaderboard)
 - [x] ✅ Repo backend di-push → `github.com/MattYudha/be-Nexus-saga-` (tanpa SDK Quantum)
 
-### 2d. Flow Ranked di Unity (🧪 selesai, menunggu uji live)
-- [x] 🧪 `NexusBackend.cs` — REST client (auth, matchmaking, report)
-- [x] 🧪 Tombol **Ranked Match (MMR)** di `NexusGame` (login→antre→room→main→lapor→tampil rating)
-- [x] 🧪 Win-condition sim (tim pertama `KoTarget` KO → match selesai; aktif bila ≥2 manusia)
-- [x] 🧪 Slot report = PlayerRef in-game (pemenang benar di Glicko-2) + skor di-clamp legal
-- [ ] ⬜ **Uji live** editor+build (perbaiki bila ada error compile/runtime)
+### 2d. Flow Ranked di Unity (✅ terverifikasi live)
+- [x] ✅ `NexusBackend.cs` — REST client (auth, matchmaking, report)
+- [x] ✅ Tombol **Ranked Match (MMR)** di `NexusGame` (login→antre→room→main→lapor→tampil rating)
+- [x] ✅ Win-condition sim (tim pertama `KoTarget` KO → match selesai; aktif bila ≥2 manusia)
+- [x] ✅ Slot report = PlayerRef in-game (pemenang benar di Glicko-2) + skor di-clamp legal
+- [x] ✅ Device-id unik per-launch (2 instance = akun beda → matchmaking pasti jalan)
+- [x] ✅ Matchmaking retry bersih (Leave-before-Join) + Cancel menghentikan pencarian
+- [x] ✅ UX Pilih Hero: feedback hijau "terpilih" + "menunggu pemain lain (X/Y siap)"
+- [x] ✅ Arena dibersihkan saat match selesai (background hasil bersih)
+- [x] ✅ **UI Leaderboard** di menu (ambil `/api/leaderboard` → top rating + W/L)
+- [x] ✅ **Uji live editor+build LULUS** — loop ranked penuh jalan tanpa bug
 
 ## Fase 2 — Sisa (🔜 berikutnya)
-- [ ] 🔜 Uji live flow ranked → stabilkan
+- [ ] 🔜 Profil & ekonomi kosmetik (faction, currency, wardrobe/inventory, unlock hero) — backend, bisa dites
 - [ ] ⬜ Hitbox dari animasi (bone-attached OBB baked) — butuh aset 3D + animasi
 - [ ] ⬜ True 1v1 ranked (tanpa bot) / mode terpisah
-- [ ] ⬜ Profil & ekonomi kosmetik (faction, currency, wardrobe/inventory, unlock hero)
 - [ ] ⬜ Aset 3D (shared rig + streetwear/exo-gear, pipeline Blender)
 - [ ] ⬜ Split-session routing (Photon hanya Arena, Plaza=Nakama)
 - [ ] ⬜ Anti-cheat backend replay re-sim
