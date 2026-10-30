@@ -171,4 +171,16 @@ Berikutnya: uji live UI akun+profil di Unity → lalu ekonomi kosmetik.
 8. **Auto-start (systemd service)**: ✅ **TERVERIFIKASI — buka terminal Ubuntu → Docker + Postgres langsung running sendiri** (tanpa `docker compose up` manual, ~10-15 dtk sampai healthy). Login/register/profil diuji live ke DB persisten (2+ akun tersimpan).
 9. **Push**: docs → Nexus-Saga; backend + unit auto-start → be-Nexus-saga-.
 
+## 2026-10-30 — 🎨 KUNCI SEMANTIK WARNA UI (T1)
+Palet **navy gelap** dikonfirmasi (gaya lobby Mobile Legends); pengaruh Lost Saga = **struktur** (ruang ladder, alur room), bukan palet. **Satu warna = satu arti:**
+- **biru** = tim kamu/kawan · **merah** = lawan/musuh (**satu-satunya** arti merah)
+- **emas** = rank + MENANG · **abu-baja** = KALAH + delta negatif (+ art desaturate)
+- **hijau** = perolehan positif (+Poin) + status online + tombol sekunder Create Room
+- **oranye** = tombol utama · **cyan** = aktif/fokus
+- **ORDE** = badge TERANG (ivory/platinum, teks gelap) + emblem **perisai** · **LEGION** = badge GELAP (onyx, garis+teks volt) + emblem **chevron**
+- placeholder hero = **netral + ikon kelas**
+- Warna lore (ORDE putih/emas/cyan, LEGION hitam/crimson/volt) hanya utk **art karakter**, BUKAN token UI.
+
+**Token** (`NexusTokens.uss`): `--nx-team-ally/-enemy`, `--nx-result-win`(=emas)/`-loss`(abu-baja), `--nx-gain`, `--nx-online`, `--nx-hero-neutral` (+ `-dim`). **Aturan keras**: token faksi HANYA badge/emblem/layar pilih faksi/header ladder — jangan utk tim/hasil/delta/state. Diterapkan di `.nxl-ladder-row--loss`, `.nxl-hist-*--loss`, `.nxl-pts-dn` (abu-baja, bukan merah), `.nxl-dt-accent/-bar` (you=ally, opp=enemy). Lihat docs/34 (KALAH abu-baja) & docs/35 (warna+emblem faksi). **Pending**: regen sprite hero netral + ikon kelas; swatch screenshot (editor); keputusan warna ambigu (badge COMEBACK/FIRST BLOOD, garis grafik cyan, NexusMetaUI legacy).
+
 TODO besok: (a) tombol Back di Profile, (b) rebuild SELURUH UI on-theme (fondasi design system) — lihat memory nexus-ui-rebuild-tasks.

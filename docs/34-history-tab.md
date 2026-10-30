@@ -3,8 +3,8 @@
 Kartu match gaya Mobile Legends, diadaptasi NEXUS SAGA. Sumber: `/api/matches` (sama dengan Rekaman Battle lobby).
 
 ## KARTU (240×420, scroll horizontal)
-- Header MENANG (emas) / KALAH (merah) + label mode (RANKED/BATTLE/LATIHAN) + badge PARTY (partySize>1).
-- Gambar hero besar = hero dominan (`heroId`); hero lain (ganti hero) = ikon kecil. Placeholder: `Sprites/hero_titan.png` (merah/grappler), `hero_pulse.png` (cyan/zoner), `hero_unknown.png` — **ganti dengan art asli kapan saja**.
+- Header MENANG (emas) / KALAH (**abu-baja**, bukan merah — merah hanya utk lawan) + label mode (RANKED/BATTLE/LATIHAN) + badge PARTY (partySize>1).
+- Gambar hero besar = hero dominan (`heroId`); hero lain (ganti hero) = ikon kecil. Placeholder **netral + ikon kelas** (grappler/zoner) — token `--nx-hero-neutral`; `hero_titan/pulse/unknown.png` akan diregen netral (T1, sprite menyusul). **Ganti dengan art asli kapan saja.**
 - Rank (ranked saja): emblem tier sebelum→sesudah + **Poin Ladder** Δ (bukan MMR). Naik tier → "NAIK TIER!" emas; turun → redup. Pakai `ratingBefore` + `ratingDelta` → `NexusRankConfig.LadderPoints`.
 - K·D·A (assist disembunyikan di 1v1). **K/D "–" untuk non-`ranked1v1`**.
 - Badge: FLAWLESS (menang 5-0), COMEBACK (`maxDeficit≥3`), FIRST BLOOD. Tanpa MVP di 1v1.
@@ -15,7 +15,7 @@ Filter Semua/Ranked/Battle (kanan atas). Scroll horizontal + panah ‹ › di si
 (Belum: lazy-load 20+auto, drag, roda mouse — UI Toolkit ScrollView sudah dukung roda; drag/lazy menyusul.)
 
 ## DETAIL (klik kartu) — juga LAYAR HASIL pasca-match
-Header MENANG/KALAH + skor + durasi. Dua sisi: BIRU (kamu) vs ORANYE (lawan) — nama, tier, hero (+waktu/hero), K/D/A, Poin Ladder Δ. Statistik mekanik untuk `ranked1v1`: damage diberikan/diterima, guard crush, critical, dodge, serangan di-guard, akurasi skill (`skillsHit/skillsUsed`), kill streak, first blood. Data lama → "–". Match ID + Salin, tombol KEMBALI (Esc).
+Header MENANG/KALAH (KALAH=abu-baja) + skor + durasi. Dua sisi: BIRU (kamu) vs MERAH (lawan) — nama, tier, hero (+waktu/hero), K/D/A, Poin Ladder Δ. Statistik mekanik untuk `ranked1v1`: damage diberikan/diterima, guard crush, critical, dodge, serangan di-guard, akurasi skill (`skillsHit/skillsUsed`), kill streak, first blood. Data lama → "–". Match ID + Salin, tombol KEMBALI (Esc).
 
 ## KONSISTENSI
 Riwayat & Rekaman Battle pakai `/api/matches` + aturan sama (format, Poin Ladder, badge). Lihat [[docs/32]] (stats/format), [[docs/33]] (Poin Ladder).
