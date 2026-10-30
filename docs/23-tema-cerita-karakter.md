@@ -22,8 +22,8 @@ Tone: **netral/maskulin, stylish, urban, sporty** — bukan feminin (sejalan den
 Kota masa depan **Neo-Veridia**, berdiri di atas patahan energi tempat jatuhnya artefak berenergi tinggi: **Relic** (peristiwa "The Exo-Drop"). Warga merakit Relic jadi **Combat Exo-Gear** — perangkat tempur modular (Helm/Visor, Chest Rig, Thruster/Trinket, Weapon) yang **mengunci magnetis di luar streetwear**. Saat pengguna kena benturan melampaui batas (Critical / HP 0), kunci magnetik **overload dan Exo-Gear terpental lepas satu per satu** — ini kanon dari mekanik Gear Drop kita.
 
 Dua kubu berebut dominasi:
-- **ORDE — Aegis Directorate.** Korporasi militer taktis; ingin memonopoli & menertibkan Relic demi stabilitas kota. Estetika: **techwear bersih, Putih / Emas / Cyan**, VFX presisi geometris.
-- **LEGION — Vanguard Syndicate.** Sindikat kru jalanan; meng-overclock Exo-Gear demi kebebasan distrik. Estetika: **hypebeast jalanan, Hitam Matte / Crimson / Neon Volt**, VFX listrik/grafiti/glitch.
+- **ORDE — Aegis Directorate.** Korporasi militer taktis; mengamankan & menertibkan Relic demi stabilitas kota — sebelum jatuh ke tangan yang salah. Estetika: **techwear bersih, Putih / Emas / Cyan**, VFX presisi geometris. _(Keras: tega mengorbankan kebebasan distrik demi ketertiban.)_
+- **LEGION — Vanguard Syndicate.** Sindikat kru jalanan; merebut & meng-overclock Exo-Gear demi kebebasan distrik yang dilupakan kota. Estetika: **hypebeast jalanan, Hitam Matte / Crimson / Neon Volt**, VFX listrik/grafiti/glitch. _(Keras: menebar kekacauan & menjarah demi tujuannya.)_
 
 Pemain = **Runner** yang membangun reputasi: street cred (fashion) + combat prowess (exo-gear). Cerita = pembungkus, bukan RPG naratif berat.
 

@@ -2,9 +2,11 @@
 
 Dua faksi abadi. **Keputusan user (2026-10-30):** terkunci satu season · Guest ikut memilih · akun lama tanpa faksi diminta memilih saat login berikutnya.
 
-## LORE (docs/23)
-- **ORDE — Aegis Directorate.** Korporasi militer taktis; menertibkan Relic demi stabilitas kota. Techwear presisi. Emblem: **PERISAI**.
-- **LEGION — Vanguard Syndicate.** Sindikat kru jalanan; overclock Exo-Gear demi kebebasan distrik. Glitch & neon. Emblem: **CHEVRON/taring**.
+## LORE (docs/23) — dua-duanya abu-abu, sama-sama menarik
+Deskripsi kartu onboarding **tidak boleh berat sebelah** (jangan satu terdengar jahat, satu pahlawan — bila tidak, pemain condong + bonus +15% macet di satu faksi). Keduanya punya alasan mulia & cara yang keras.
+- **ORDE — Aegis Directorate.** Teks kartu: _"Pelindung Neo-Veridia — mengamankan Relic sebelum jatuh ke tangan yang salah. Techwear presisi."_ Emblem: **PERISAI**.
+- **LEGION — Vanguard Syndicate.** Teks kartu: _"Kru jalanan merdeka — merebut Exo-Gear untuk distrik yang dilupakan kota. Glitch & neon."_ Emblem: **CHEVRON/taring**.
+- Maks 2 baris, min 16px. Identitas penuh (korporasi vs sindikat) tetap di docs/23; kartu pakai pitch yang seimbang.
 
 ## MODEL
 - `Player.Faction`: 0 belum pilih · 1 ORDE · 2 LEGION. (kolom sudah ada sejak `AddUserAccounts`.)
@@ -35,7 +37,11 @@ Badge faksi di **semua layar** via helper tunggal `NexusLobbyController.SetFacti
 ## ENDPOINT
 - `POST /api/me/faction {faction:1|2}` (auth): validasi 1/2, **terkunci** bila sudah pilih (409), idempoten bila sama. → `{faction, locked}`.
 - `GET /api/factions` (publik): `{orde, legion, needsWarriors:0|1|2, bonusPercent}`.
-- `POST /api/admin/faction {playerId, faction:0|2}` (header **`X-Admin-Secret`** = `Admin:Secret`; kosong = nonaktif): set/reset faksi **lewati kunci** (0 = reset, pemain pilih lagi). Untuk akun uji / dukungan sampai sistem season ada.
+- `POST /api/admin/faction {playerId, faction:0|1|2, adminSource?}` (header **`X-Admin-Secret`** = `Admin:Secret`; kosong = nonaktif): set/reset faksi **lewati kunci** (0 = reset → pemain pilih lagi · 1 ORDE · 2 LEGION). Untuk akun uji / dukungan sampai sistem season ada.
+  - **Constant-time**: secret dibandingkan `SHA256` + `CryptographicOperations.FixedTimeEquals` (`SecretsEqual`), bukan `==`.
+  - **Audit WAJIB**: tiap perubahan menulis `FactionAdminAudit` (sumber `adminSource@ip`, `playerId`, faksi **lama→baru**, waktu) + log `AdminFaction`. Respons memuat `previous`.
+  - Reset juga **mengembalikan status pindah-gratis** begitu field `FactionSwitchUsed` ada (Tugas 3) — sekarang field belum ada (TODO di kode).
+  - ⚠️ **UTANG RILIS**: ganti `X-Admin-Secret` dengan **admin berbasis role di server + audit log resmi** (docs/90, docs/91) sebelum rilis publik.
 
 ## OPSI (`Game:*` / `Admin:*`)
 `FactionLocked=true` · `FactionMinPopulation=2` · `FactionImbalanceThreshold=0.45` · `FactionJoinBonusPercent=15` · `Admin:Secret=""` (set di env utk aktifkan endpoint admin).

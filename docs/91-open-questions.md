@@ -13,6 +13,7 @@
 | 7 | Verifikasi regulasi (IGRS, PSE, gacha) | Sebelum rilis |
 | 8 | Payment gateway MiCash | Fase akhir |
 | 9 | Nama penyusun di sampul proposal | Saat proposal dikirim |
+| 10 | **UTANG RILIS**: ganti `X-Admin-Secret` (reset faksi, docs/35) dengan **admin berbasis role di server + audit log resmi** (docs/90) | Sebelum rilis publik |
 
 ## Sudah terjawab (arsip)
 - REA MCP → terhubung (rea-agents 6.7.0 + Ghidra 12.1.4).
