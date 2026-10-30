@@ -30,6 +30,17 @@ wsl -e bash -lc "cd /mnt/c/Users/US3R/photon-backend && docker compose up -d --b
 ```
 Dari dalam Ubuntu langsung: `cd ~/.../photon-backend && docker compose ...` (tanpa prefix `wsl`).
 
+## ⚠️ ATURAN: SELALU pakai `docker compose` (plugin), JANGAN `docker-compose` (standalone)
+- Di mesin ini ada **dua CLI**: plugin **v5.1.2** (`docker compose`) dan standalone **v2.27.0** (`docker-compose`). Keduanya menulis `config-hash`/label berbeda.
+- Memakai dua-duanya pada proyek yang sama → `up` berikutnya menganggap container "beda config" lalu **recreate** (kill `signal=15` = exit 143). Itu penyebab container "mati sendiri" yang pernah terlihat — **bukan OOM, bukan WSL idle**.
+- **Selalu `docker compose` (plugin).** **JANGAN uninstall `docker-compose` 2.27** — proyek lain (`corevo-aratechnology`/hris, mysql) di daemon yang sama mungkin memakainya.
+- Diagnosis (2026-10-30): RAM lega (6.6Gi free), tanpa OOM, `Restarts=0`, daemon systemd enabled+active. Satu-satunya akar churn = campur versi compose.
+
+## Gejala & catatan (localhost forwarding WSL↔Windows)
+- **Cek cepat dari host**: `curl http://localhost:5080/health` → `Healthy`. Bila GAGAL tapi dari dalam WSL `curl localhost:5080/health` **berhasil** → itu **glitch forwarding WSL2**, bukan backend mati. Verifikasi fungsi dari dalam WSL; untuk playtest Unity (konek dari Windows) tunggu/retry.
+- Catatan kapan gagal (isi bila terjadi): tanggal · setelah aksi apa (rebuild/restart/idle) · pulih setelah (retry / `wsl --shutdown`).
+- Bila sering mengganggu playtest: pertimbangkan `.wslconfig [wsl2] vmIdleTimeout` (perlu `wsl --shutdown`) — **diputuskan/diterapkan user sendiri di akhir hari**, bukan otomatis.
+
 ## Verifikasi (sudah lulus)
 - Register akun via Windows `localhost:5080` → OK (rating 1500).
 - `docker compose down && up` (recreate container) → **login akun lama tetap sukses** → data **persisten** di volume `pgdata`.

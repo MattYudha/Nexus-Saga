@@ -8,7 +8,9 @@ Kartu match gaya Mobile Legends, diadaptasi NEXUS SAGA. Sumber: `/api/matches` (
 - Rank (ranked saja): emblem tier sebelum→sesudah + **Poin Ladder** Δ (bukan MMR). Naik tier → "NAIK TIER!" emas; turun → redup. Pakai `ratingBefore` + `ratingDelta` → `NexusRankConfig.LadderPoints`.
 - K·D·A (assist disembunyikan di 1v1). **K/D "–" untuk non-`ranked1v1`**.
 - Badge: FLAWLESS (menang 5-0), COMEBACK (`maxDeficit≥3`), FIRST BLOOD. Tanpa MVP di 1v1.
+  - **Warna (T1, docs/90)**: badge = **satu chip netral** (bidang steel-dim `--nx-badge-bg`, teks putih), dibedakan **ikon + label** — **tanpa merah** (merah=lawan) & **tanpa hijau** (hijau=perolehan). Pengecualian: **FLAWLESS** garis emas tipis (prestise menang). (Ikon per-badge menyusul.)
 - Tag "FORMAT LAMA" untuk `legacy5v5`. Footer: tanggal + durasi. TANPA baris item.
+- **Grafik rank/WR (T1)**: garis data = **biru `--nx-team-ally`** (kamu); **band tier = emas redup** (-dim); **titik fokus/sekarang = cyan** (cyan HANYA utk fokus). Placeholder hero = **netral + ikon kelas** (Grappler=kepalan, Zoner=crosshair), nama samar (TITAN/PULSE).
 
 ## INTERAKSI
 Filter Semua/Ranked/Battle (kanan atas). Scroll horizontal + panah ‹ › di sisi. Hover: kartu terangkat + glow.

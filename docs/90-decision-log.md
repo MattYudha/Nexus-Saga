@@ -181,6 +181,14 @@ Palet **navy gelap** dikonfirmasi (gaya lobby Mobile Legends); pengaruh Lost Sag
 - placeholder hero = **netral + ikon kelas**
 - Warna lore (ORDE putih/emas/cyan, LEGION hitam/crimson/volt) hanya utk **art karakter**, BUKAN token UI.
 
-**Token** (`NexusTokens.uss`): `--nx-team-ally/-enemy`, `--nx-result-win`(=emas)/`-loss`(abu-baja), `--nx-gain`, `--nx-online`, `--nx-hero-neutral` (+ `-dim`). **Aturan keras**: token faksi HANYA badge/emblem/layar pilih faksi/header ladder — jangan utk tim/hasil/delta/state. Diterapkan di `.nxl-ladder-row--loss`, `.nxl-hist-*--loss`, `.nxl-pts-dn` (abu-baja, bukan merah), `.nxl-dt-accent/-bar` (you=ally, opp=enemy). Lihat docs/34 (KALAH abu-baja) & docs/35 (warna+emblem faksi). **Pending**: regen sprite hero netral + ikon kelas; swatch screenshot (editor); keputusan warna ambigu (badge COMEBACK/FIRST BLOOD, garis grafik cyan, NexusMetaUI legacy).
+**Token** (`NexusTokens.uss`): `--nx-team-ally/-enemy`, `--nx-result-win`(=emas)/`-loss`(abu-baja), `--nx-gain`, `--nx-online`, `--nx-hero-neutral`, `--nx-badge-bg/-fg` (+ `-dim`). **Aturan keras**: token faksi HANYA badge/emblem/layar pilih faksi/header ladder — jangan utk tim/hasil/delta/state. Diterapkan di `.nxl-ladder-row--loss`, `.nxl-hist-*--loss`, `.nxl-pts-dn` (abu-baja, bukan merah), `.nxl-dt-accent/-bar` (you=ally, opp=enemy). Lihat docs/34 (KALAH abu-baja) & docs/35 (warna+emblem faksi).
+
+Keputusan warna ambigu (diputus user 2026-10-30):
+- **Badge prestasi** (FLAWLESS/COMEBACK/FIRST BLOOD) = **satu chip netral** (steel-dim + teks putih), dibedakan **ikon+label**. FIRST BLOOD **tidak** kemerahan; COMEBACK **tidak** pakai `--nx-gain`. Pengecualian: **FLAWLESS** garis emas tipis.
+- **Grafik Painter2D**: garis data = `--nx-team-ally` (biru); **cyan HANYA titik fokus/hover**; band tier = **emas redup** (-dim). Berlaku di `ProfileController` + `NexusLobbyController`.
+- **`NexusMetaUI.cs`** (legacy IMGUI): dibuat **inert** (`LegacyEnabled=false` → `OnEnable` self-disable), **dikecualikan** dari audit grep warna (komentar "legacy, dihapus di poin e"). Dihapus di **poin e**.
+- **Sprite hero placeholder**: regen **netral + ikon kelas** — `hero_titan`=Grappler (kepalan), `hero_pulse`=Zoner (crosshair), bidang `--nx-hero-neutral`, nama samar (TITAN/PULSE). `hero_unknown` = "?".
+
+**Pending (editor, user)**: tes faksi 1–9 (+teks kartu baru +KALAH abu-baja) · tampilan badge & grafik baru · screenshot swatch — dalam SATU sesi. T2 (CodeGen) **tunggu hasil tes**.
 
 TODO besok: (a) tombol Back di Profile, (b) rebuild SELURUH UI on-theme (fondasi design system) — lihat memory nexus-ui-rebuild-tasks.
