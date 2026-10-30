@@ -57,7 +57,7 @@ Dikerjakan per fase; **berhenti & lapor di akhir tiap fase** (selesai apa, cara 
 ---
 
 ## FASE 2 — REAL-TIME + CHAT + TEMAN
-- 2.1 **Pilih**: Photon Chat vs SignalR (biaya/skala/mudah) → **tunggu approve user**.
+- 2.1 **Pilih**: Photon Chat vs SignalR vs Nakama → perbandingan di **[[docs/36]]** (realtime-decision). **Tunggu approve user** (condong SignalR; Nakama dicabut utk meta inti). Tanpa kode sampai disetujui.
 - 2.2 Presence (Online/Di Lobby/Di Ruang Tim/Dalam Match/Offline).
 - 2.3 Chat channel (ALL/PARTY/GUILD/ROOM + whisper), format `[CH] Nama: pesan`, cooldown, filter kasar.
 - 2.4 Teman: tab LOBBY (online di lobby), BUDDY (teman+presence), Add/terima/tolak/hapus/blokir, menu (profil/whisper/undang), counter Online asli.
