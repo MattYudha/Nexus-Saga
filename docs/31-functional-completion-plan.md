@@ -11,6 +11,24 @@ Dikerjakan per fase; **berhenti & lapor di akhir tiap fase** (selesai apa, cara 
 - **SELESAI (2026-10-30)**: **Proteksi demosi** (opsi 1, docs/33): floor tier di layer tampilan (`Ranks.ApplyFloor`/`StepTierFloor`), state `Player.LastRankedTierOrder/TierFloorOrder/TierFloorLeft`, migrasi `AddTierFloor` (auto-apply, kolom terverifikasi di DB), grace `Game:DemotionGraceMatches`=3, dipakai profil+leaderboard+`/me/rank`, Glicko tetap murni, backfill akun lama. **58 tes hijau.**
 - **BELUM (URUTAN BERIKUTNYA)**: UI Tab Statistik baru (ring Flawless, grid mekanik, radar) → 1.4 Hero Favorit → 1.6 Settings → 1.7 Lobby. Arena/respawn 1v1 ditunda (user main dulu).
 
+## STATUS 2026-10-30 (terbaru) — ⚠️ antrean dikunci di `PROGRESS.md` (baca itu dulu)
+Setelah fase di atas, user menetapkan antrean a–h + sisipan T1/T2/T3. Yang **SUDAH** sejak itu:
+- **a** Proteksi demosi NONAKTIF (`grace=0`, kode/tes tetap) + konsistensi tier (tampil=rating asli; conservative hanya utk posisi). ✅
+- **b** Deteksi akun uji eksplisit (tanpa tebak deviceId). ✅
+- **c** Fitur Faksi ORDE/LEGION: layar onboarding, `POST /me/faction` (+lock+validasi), `GET /factions` (Butuh Pejuang+bonus XP), badge konsisten, **PALET 4** warna, deskripsi lore seimbang, **endpoint admin + audit log** (`FactionAdminAudit`, constant-time, UTANG RILIS role-based di docs/91). ✅ *(backend 68 tes hijau, live; klien ⚠️ butuh verifikasi editor)*
+- **T1** Kunci semantik warna UI: token `--nx-*` (ally/enemy/result-win/-loss/gain/online/hero-neutral/badge), KALAH=abu-baja, −Poin=abu-baja, grafik garis biru/band tier emas/fokus cyan, badge chip netral, `NexusMetaUI` legacy di-inert, sprite hero netral+ikon kelas. ✅ docs/34+90. *(⚠️ verifikasi editor)*
+- **1.5 Detail Match → v2** (ganti desain lama): komponen `mode history|result`, overlay layar penuh (tutup sidebar), banner/3-kolom/tug-of-war, Gear drop, akurasi `skillsUsed=0`→"–", tab "Jalannya Match" disembunyikan sampai koTimeline. ✅ docs/34. *(⚠️ verifikasi editor; wiring mode result = poin e)*
+- docs/36 realtime (Photon Chat/SignalR/Nakama) dibuat; **tunggu keputusan user** (condong SignalR).
+
+### ⏭️ BISA DILANJUT BESOK (urut; detail tiap item di PROGRESS.md)
+0. **GATE**: user re-tes editor (Detail Match v2 + faksi 1–9 + badge/grafik/hero/swatch). Gagal → perbaiki dulu. **Jangan mulai T2 sebelum hasil tes** (T2 butuh CodeGen editor).
+1. **T2** — Pulihkan C4: KO **hanya** 3 Break Stock (buang bleed-out sbg jalan KO) → penalti gerak bertingkat + **Overload** (8 dtk→terkunci 1,5 dtk, bukan KO) + **bot prioritas target Critical** + jaring AFK forfeit (**usul nilai → tanya user dulu**) + **koTimeline** (array ≤9 `{tick,killerSlot}`) utk tab "Jalannya Match". Hapus atribusi kill bleed-out; invariant 1v1 tetap hijau + tes baru. Update docs/32, docs/90. CodeGen bila `.qtn` berubah.
+2. **T3** — Audit docs 13–36/90/91 → `docs/00-ROADMAP.md`: Guild→Squad, slider antrean + Street Room, layar faksi SETELAH match pertama (pindah pemicu), pindah-gratis 1×s/d 5 placement (`FactionSwitchUsed`), demosi grace=0 (perbaiki docs/31 yg masih grace=3), tabel konflik. Milestone aktif "Ranked 1v1 end-to-end".
+3. **Poin d** — **1.6 Settings** (Grafis/Audio/Kontrol/Antarmuka/Akun+Logout, simpan lokal + langsung terapkan) + **1.7 Lobby tidak kosong** (hero terakhir di tengah + panel Pengumuman/Event; `/api/announcements`) + tombol belum siap → nonaktif + "Segera Hadir".
+4. **Poin e** — Wiring Detail Match v2 **mode result** ke NexusGame (ganti IMGUI) sbg layar hasil pasca-match.
+5. **Poin f** Tab Statistik baru (ring Flawless, grid mekanik, radar) · **g** kartu Disputed "TIDAK DIHITUNG" · **h** Fase 2 (chat/teman/party/guild/mail, pakai keputusan docs/36).
+6. Kosmetik nitip: **ikon per-badge + ikon stat-row** (dikerjakan bersama T2).
+
 ## ATURAN UMUM (wajib)
 - **Tanpa data dummy.** Tombol tampil = berfungsi; kalau belum siap → **disabled + "Segera Hadir"**.
 - **Nama konsisten** = `display name` yang sama di semua layar (`NexusLobbyController.PlayerName`).
