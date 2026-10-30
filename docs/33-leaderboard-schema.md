@@ -4,13 +4,14 @@ Papan yang **bisa dipahami pemain**. Menggantikan urutan lama (rating mentah, ak
 
 ## 1. SYARAT MASUK
 - **Selesai placement**: minimal **5 match ranked selesai** (`Match.Mode="ranked"`, `Status=Finished`). Akun W0/L0 / belum 5 match → tidak tampil.
-- **Bukan akun uji**: `Player.IsTestAccount=true` → tidak tampil. Deteksi (`Ranks.IsTestIdentity`): guest game asli pakai `deviceId "nx-*"`; selain itu (`e2e-`, `fb-`, `device-`, `gate`, `persisttest`, `logintest`, dll.) = uji. Di-set saat buat akun + backfill startup.
+- **Bukan akun uji**: `Player.IsTestAccount=true` → tidak tampil. **Default `false` untuk SEMUA akun baru, deviceId apa pun** (termasuk `fb-…` login asli). Ditandai uji **hanya EKSPLISIT** lewat jalur tes: `isTest=true` DAN server `Game:AllowTestAccounts=true` (hanya dev/test). **TANPA tebakan awalan deviceId.** Backfill SATU KALI untuk akun uji LAMA berbasis **NAMA saja** (`Ranks.IsLegacyTestName`: `e2e_`, `fb_`, `gate`, `persisttest`, `logintest`). Tes jaga: akun baru deviceId `fb-…` tanpa flag → BUKAN uji.
 - Ban / Disputed berulang: TODO (belum ada sistem ban).
 
-## 2. URUTAN (bisa dipahami)
+## 2. URUTAN & TIER (KONSISTEN di semua layar)
 Angka tampil = **Poin Ladder** (`Ranks.LadderPoints`, 0–100 progres di dalam tier), BUKAN MMR mentah.
-Urut: **tier tertinggi → Poin Ladder → win rate → jumlah match.**
-Posisi pakai **conservative rating = `rating − 2·RD`** (bukan rating mentah) → tier & poin dihitung dari conservative, jadi akun sedikit-match (RD tinggi) tak melompat ke puncak. `TierOrder` 0 Rookie … 5 Nexus Legend.
+- **TIER & Poin yang DITAMPILKAN = dari RATING ASLI** (`p.Rating`) — **SAMA** di profil, lobby, ruang ladder, leaderboard, dan riwayat. (Sumber tunggal: `Ranks.TierFor`/`LadderPoints` atas rating asli.)
+- **URUTAN POSISI** di leaderboard pakai **conservative rating = `rating − 2·RD`** (kontinu) → akun RD tinggi (sedikit match) tak melompat ke puncak. Tiebreak: win rate → jumlah match. **Conservative HANYA untuk posisi, TIDAK untuk tier/poin yang tampil.**
+- Akibatnya dua pemain bisa sama-sama "Rival" tapi beda posisi (yang RD-nya kecil di atas). Itu disengaja. `TierOrder` 0 Rookie … 5 Nexus Legend.
 
 ## 3. KOLOM
 Peringkat · emblem+tier · nama · Poin Ladder · W/L · win rate. Baris pemain sendiri di-highlight.
@@ -28,8 +29,10 @@ Peringkat · emblem+tier · nama · Poin Ladder · W/L · win rate. Baris pemain
 - `GET /api/leaderboard?limit=100` → `[{rank, displayName, tier, ladderPoints, wins, losses, winRate, matches}]` (sudah terurut, sudah tersaring).
 - `GET /api/me/rank` (auth) → `{placed:true, rank, tier, ladderPoints, wins, losses, winRate, matches}` atau `{placed:false, needed, rankedMatches}`.
 
-## PROTEKSI DEMOSI (opsi 1 — IMPLEMENTASI 2026-10-30)
-Floor tier di **layer tampilan**: setelah naik tier, tier tampil tak boleh turun `Game:DemotionGraceMatches` match ranked (default **3**). **Glicko tetap murni** (rating/RD/matchmaking tak tersentuh).
+## PROTEKSI DEMOSI (opsi 1 — ⛔ NONAKTIF selama development)
+> **NONAKTIF** (`Game:DemotionGraceMatches=0`, default dev & produksi) → tier tampil SELALU = tier rating asli, floor tak pernah aktif. **Kode, kolom DB, dan tes dipertahankan. AKTIFKAN KEMBALI (nilai 3) SEBELUM RILIS PUBLIK.** Floor aktif sisa masa percobaan dibersihkan saat startup (`TierFloorLeft/Order=0`).
+
+Saat diaktifkan (grace>0): floor tier di **layer tampilan**: setelah naik tier, tier tampil tak boleh turun `Game:DemotionGraceMatches` match ranked. **Glicko tetap murni** (rating/RD/matchmaking tak tersentuh).
 - **State** (`Player`): `LastRankedTierOrder` (tier mentah setelah match terakhir → deteksi promosi), `TierFloorOrder` (floor aktif), `TierFloorLeft` (sisa match floor berlaku). Migrasi `AddTierFloor`.
 - **Logika** (`Ranks.StepTierFloor`, murni & diuji): tier mentah > terakhir → promosi, pasang floor di tier baru + reset grace. Selain itu → grace −1; habis → floor lepas. Dipanggil di `MatchService.FinalizeAsync` untuk kedua pemain.
 - **Tampil** (`Ranks.ApplyFloor(baseOrder, floorOrder, floorLeft)` = `floorLeft>0 ? max(base,floor) : base`): dipakai di **profil** (`/api/me`, base = rating mentah) DAN **leaderboard** (base = conservative; saat di-floor → Poin Ladder 0). `/api/me/rank` ikut lewat leaderboard. Stats/radar tetap pakai tier mentah (populasi pembanding jujur).
