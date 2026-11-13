@@ -7,7 +7,7 @@
 
 <!-- FOCUS:START -->
 ## 🎯 FOKUS SEKARANG (WIP = 1)
-**NX-12 — T2: Pulihkan C4** (epic M1, MANDATORI) — ⏳ **kode selesai, menunggu tes editor user** (checklist di NX-12). Sisa: ikon badge (usul dipecah).
+**NX-12 (T2) + NX-13 (UI lobby) + NX-16 (daftar akun)** — kode selesai & ter-compile, **menunggu tes editor user** (checklist di masing-masing tiket). Berikutnya: NX-14 layar hasil.
 Tiket mandatori tersisa di M1: NX-12, NX-13, NX-14, NX-15, NX-16.
 **Kerjaan baru apa pun → tulis ke INBOX dulu, JANGAN dikerjakan** sampai M1 ✅ (kecuali user menulis `OVERRIDE`).
 <!-- FOCUS:END -->
@@ -80,14 +80,16 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
   6. Biarkan waktu habis → "WAKTU HABIS — … MENANG/SERI"; Riwayat menampilkan label + tab **Jalannya Match** berisi urutan KO
   7. Practice vs bot: bot mengejar target Critical
 
-#### NX-13 ❌ Poin d — UI Lobby
-- ❌ Settings 1.6: tab Grafis / Audio / Kontrol / Antarmuka / Akun+Logout, simpan lokal, langsung diterapkan (overlay sekarang kosong, `LobbyMain.uxml:50`)
-- ❌ Lobby 1.7: hero terakhir di tengah
-- ✅ Backend `/api/announcements` (publik, maks 5 aktif) + admin POST/DELETE (`X-Admin-Secret`, sumber tercatat, soft delete) — migrasi `AddAnnouncements` live, 88 tes
-- ❌ Lobby 1.7: panel Pengumuman/Event di UI (kosong → "Belum ada pengumuman") — **menunggu NX-12 lolos tes editor** (jangan tumpuk kode klien)
-- ❌ Semua tombol belum berfungsi → nonaktif + "Segera Hadir" (Shop, Inventory, Hero Deck, Quest, Event, Squad, Mail, HQ, Plaza)
-- ❌ Slider = Ranked / Battle 3v3 / 1 teaser "Segera Hadir"
-- ❌ Tombol Street Room di samping HQ/Plaza
+#### NX-13 ⏳ Poin d — UI Lobby — kode selesai, **menunggu tes editor** (ditumpuk di atas NX-12 atas permintaan user)
+- ✅🧪 Settings 1.6: 5 tab (Grafis: resolusi/mode layar/VSync/batas FPS/kualitas · Audio: volume utama + bisu · Kontrol: daftar tombol · Antarmuka: tampil FPS · Akun: nama/akun/ID+salin/daftar akun/Logout), simpan PlayerPrefs, langsung diterapkan (`NexusSettings.cs`); Esc menutup. Musik/SFX terpisah, rebinding, ping, sosial = SEGERA HADIR
+- ✅🧪 Lobby 1.7: hero terakhir dimainkan di tengah (default TITAN-01)
+- ✅ Backend `/api/announcements` live
+- ✅🧪 Lobby 1.7: panel Pengumuman kiri-atas — kosong → "Belum ada pengumuman", gagal → "Gagal memuat" (juga Q45)
+- ✅🧪 Shop, Inventory, Hero Deck, Quest, Event, Squad, Mail, HQ, Plaza → nonaktif + tag SEGERA HADIR; tombol "+" mata uang disembunyikan
+- ✅🧪 Slider = RANKED / BATTLE / teaser "FACTION WAR · NEXUS CUP" (MAIN nonaktif "SEGERA HADIR"), 3 titik
+- ✅🧪 Tombol STREET (Street Room) di samping HQ/Plaza — SEGERA HADIR (room browser = NX-28)
+- ✅ Bugfix T2: `SimVersion` dinaikkan ke `nx-sim-2026-11-13-t2` (klien + backend `RequiredSimVersion`, live) — build lama tak bisa dipasangkan dengan build T2
+- 🧪 Tes editor: buka Settings → ubah tiap opsi (VSync/FPS/kualitas/volume langsung berubah; restart → tetap); tab Akun (guest) → daftar akun; lobby menampilkan pengumuman & hero; tombol SEGERA HADIR tidak bisa diklik; slider 3 mode
 
 #### NX-14 ❌ Poin e — Layar hasil pasca-match
 - ❌ `NexusGame` memanggil Detail Match v2 `DetailMode.Result` (animasi Poin Ladder, "NAIK TIER!")
@@ -99,7 +101,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 #### NX-16 ⏳ Guest → daftar akun membawa faksi/rating/riwayat (**K-10**)
 - ✅ Keputusan: opsi (a) endpoint upgrade (2026-11-13)
 - ✅ Backend `POST /api/auth/upgrade`: Player sama, faksi/rating/riwayat terbawa, deviceId dilepas, akun terdaftar → 409 — 2 tes (**90 hijau**), live & diuji di server
-- ❌ UI: tombol "Daftarkan akun" di tab Akun Settings (bagian NX-13) — menunggu NX-12 lolos tes editor
+- ✅🧪 UI: "Daftarkan akun" di Settings › Akun (hanya untuk guest) — menunggu tes editor
 
 ---
 
