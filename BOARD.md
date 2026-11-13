@@ -45,11 +45,11 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 | NX-10 | Audit docs → ROADMAP + Guild→Squad (T3) | ✅ | `69b5afe`, `9706ec8` |
 
 ### Belum
-#### NX-11 ❓ Keputusan user untuk T2 (prasyarat NX-12)
-- ❌ Ambang AFK = disconnect (usul: **20 dtk → forfeit**, satu angka untuk keduanya)
-- ❌ Timer Ranked (usul: **300 dtk** sebagai jaring pengaman)
-- ❌ Waktu habis & skor seri (usul: **DRAW**, rating tidak berubah)
-<sub>Sumber: `docs/research/battle-flow/01-match-lifecycle.md` §6.</sub>
+#### NX-11 ⏳ Keputusan user untuk T2 (prasyarat NX-12) — diputus 2026-11-13
+- ✅ AFK = disconnect: **20 dtk tanpa input/terputus → forfeit** (satu angka untuk keduanya)
+- ✅ Timer Ranked: **100 dtk** (user; catatan: ~20 dtk/KO → banyak match berakhir karena waktu; nilai di config)
+- ❓ Waktu habis & skor KO seri → tie-break: (a) **gear rontok terbanyak kalah** → (b) **darah tersisa paling sedikit kalah** → (c) masih sama = DRAW tanpa rating — **urutan menunggu konfirmasi user**
+<sub>Sumber: `docs/research/battle-flow/01-match-lifecycle.md` §6; keputusan di docs/90 2026-11-13.</sub>
 
 #### NX-12 ⏳ T2 — Pulihkan C4 (KO hanya 3 Break Stock) — 🎯 FOKUS
 - ❌ Hapus KO via `CritTimer`/`CritBleedTicks` (`NxCombatSystem.cs:38` masih ada) + atribusi kill bleed-out
@@ -57,8 +57,8 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 - ❌ Indikator posisi Critical untuk lawan
 - ❌ Overload: tak tersentuh 8 dtk → terkunci 1,5 dtk, rentan, bukan KO, reset saat kena pukul
 - ❌ Bot memprioritaskan target Critical dalam jangkauan
-- ❌ Batas waktu match (angka dari NX-11)
-- ❌ AFK forfeit (angka dari NX-11)
+- ❌ Batas waktu match **100 dtk** + tie-break gear rontok → darah → DRAW
+- ❌ AFK/disconnect forfeit **20 dtk**
 - ❌ `koTimeline` (≤9 `{tick, killerSlot}`, deterministik, dibandingkan antar-klien, disimpan per match)
 - ❌ Tab "Jalannya Match" di Detail Match v2 (`ProfileController.cs:431` masih disembunyikan)
 - ❌ Ikon per-badge + ikon baris statistik
@@ -114,9 +114,9 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 ## ❓ KEPUTUSAN MENUNGGU USER
 | # | Keputusan | Menghambat | Usul |
 |---|---|---|---|
-| D1 | Ambang AFK/disconnect | NX-12 | 20 dtk → forfeit |
-| D2 | Timer Ranked | NX-12 | 300 dtk |
-| D3 | Waktu habis seri | NX-12 | DRAW |
+| D1 | ~~Ambang AFK/disconnect~~ | NX-12 | ✅ **20 dtk → forfeit** (2026-11-13) |
+| D2 | ~~Timer Ranked~~ | NX-12 | ✅ **100 dtk** (2026-11-13) |
+| D3 | Waktu habis seri | NX-12 | user: gear rontok → darah → (DRAW) — **konfirmasi urutan** |
 | D4 | K-10 guest → akun | NX-16 | endpoint upgrade |
 | D5 | Posisi Hero Favorit di antrean | NX-22 | setelah NX-14 |
 | D6 | Model juggle (S1 vs per-penyerang) | tuning combat | S1 |
@@ -135,6 +135,7 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 | NX-IN-02 | Input buffer/cancel/juice dari `ikemen-extract` → implementasi (draf `07-patch-qtn.md` ditahan) | riset Ikemen |
 | NX-IN-03 | Kit hero data-driven (`hero-ability/04`), ultimate, modifier | riset hero-ability |
 | NX-IN-04 | Replay, spectator, killcam | riset Ikemen 04 |
+| NX-IN-05 | **Mode Deathmatch ala LostSaga**: waktu habis → semua darah jadi "sekali pukul mati" (sudden death), yang mati kalah. Tafsiran "darah jadi 0" menunggu konfirmasi user | user 2026-11-13 |
 
 ---
 

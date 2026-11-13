@@ -301,3 +301,12 @@ Dibuat checklist master (11 item selesai, 26 belum) supaya urutan kerja tidak be
 A antrean terkunci (a–h, T1–T3 dengan sub-item T2) · B riset selesai · C riset belum (R1–R5) ·
 D keputusan menunggu (K-09..K-12, T2-AFK, BF-1..5, HA-1) · E utang rilis · F larangan.
 Aturan kerja ditulis di §G: satu item → bukti → centang; item yang butuh keputusan dipindah ke D, bukan dikerjakan setengah.
+
+## 2026-11-13 — NX-11: keputusan untuk T2 (alur match Ranked)
+| Topik | Keputusan | Status |
+|---|---|---|
+| AFK / disconnect | **20 dtk** tanpa input atau terputus → **forfeit** (satu ambang untuk keduanya) | Diputus user |
+| Timer Ranked 1v1 | **100 dtk** (match cepat). Catatan: ~20 dtk/KO → banyak match akan berakhir oleh waktu. Nilai di config | Diputus user |
+| Waktu habis, skor KO seri | Tie-break: gear rontok terbanyak kalah → darah tersisa paling sedikit kalah → masih sama = DRAW tanpa rating | Arah diputus user, **urutan menunggu konfirmasi** |
+| Mode Deathmatch (ala LostSaga) | Waktu habis → sudden death (darah semua jadi sekali-pukul-mati), yang mati kalah | **INBOX NX-IN-05** (mode baru, di luar milestone); tafsiran menunggu konfirmasi |
+Menggantikan usulan riset battle-flow §6 (#1 timer 300 dtk, #2 DRAW langsung, #3 grace 20 dtk).
