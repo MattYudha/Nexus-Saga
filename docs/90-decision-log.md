@@ -307,7 +307,7 @@ Aturan kerja ditulis di §G: satu item → bukti → centang; item yang butuh ke
 |---|---|---|
 | AFK / disconnect | **20 dtk** tanpa input atau terputus → **forfeit** (satu ambang untuk keduanya) | Diputus user |
 | Timer Ranked 1v1 | **100 dtk** (match cepat). Catatan: ~20 dtk/KO → banyak match akan berakhir oleh waktu. Nilai di config | Diputus user |
-| Waktu habis, skor KO seri | Tie-break: gear rontok terbanyak kalah → darah tersisa paling sedikit kalah → masih sama = DRAW tanpa rating | Arah diputus user, **urutan menunggu konfirmasi** |
+| Waktu habis, skor KO seri | Tie-break: gear rontok terbanyak kalah → darah tersisa paling sedikit kalah → masih sama = DRAW tanpa rating | **Diputus user** (dikonfirmasi 2026-11-13) |
 | Mode Deathmatch (ala LostSaga) | Waktu habis → darah semua jadi 0, lalu tiap pukulan merontokkan gear satu per satu; gear habis duluan = kalah (koreksi user, bukan sekali-pukul-mati) | **INBOX NX-IN-05** (mode baru, di luar milestone) |
 Menggantikan usulan riset battle-flow §6 (#1 timer 300 dtk, #2 DRAW langsung, #3 grace 20 dtk).
 

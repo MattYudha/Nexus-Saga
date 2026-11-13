@@ -7,8 +7,8 @@
 
 <!-- FOCUS:START -->
 ## 🎯 FOKUS SEKARANG (WIP = 1)
-**NX-12 — T2: Pulihkan C4** (epic M1, MANDATORI). Prasyarat: **NX-11** (3 keputusan user: AFK, timer, seri).
-Tiket mandatori tersisa di M1: NX-11, NX-12, NX-13, NX-14, NX-15, NX-16.
+**NX-12 — T2: Pulihkan C4** (epic M1, MANDATORI) — ⏳ sedang dikerjakan. NX-11 ✅ (AFK 20 dtk, timer 100 dtk, tie-break gear→darah→DRAW).
+Tiket mandatori tersisa di M1: NX-12, NX-13, NX-14, NX-15, NX-16.
 **Kerjaan baru apa pun → tulis ke INBOX dulu, JANGAN dikerjakan** sampai M1 ✅ (kecuali user menulis `OVERRIDE`).
 <!-- FOCUS:END -->
 
@@ -45,10 +45,10 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 | NX-10 | Audit docs → ROADMAP + Guild→Squad (T3) | ✅ | `69b5afe`, `9706ec8` |
 
 ### Belum
-#### NX-11 ⏳ Keputusan user untuk T2 (prasyarat NX-12) — diputus 2026-11-13
+#### NX-11 ✅ Keputusan user untuk T2 (prasyarat NX-12) — diputus 2026-11-13
 - ✅ AFK = disconnect: **20 dtk tanpa input/terputus → forfeit** (satu angka untuk keduanya)
 - ✅ Timer Ranked: **100 dtk** (user; catatan: ~20 dtk/KO → banyak match berakhir karena waktu; nilai di config)
-- ❓ Waktu habis & skor KO seri → tie-break: (a) **gear rontok terbanyak kalah** → (b) **darah tersisa paling sedikit kalah** → (c) masih sama = DRAW tanpa rating — **urutan menunggu konfirmasi user**
+- ✅ Waktu habis & skor KO seri → tie-break: (a) **gear rontok terbanyak kalah** → (b) **darah tersisa paling sedikit kalah** → (c) masih sama = DRAW tanpa rating — **dikonfirmasi user**
 <sub>Sumber: `docs/research/battle-flow/01-match-lifecycle.md` §6; keputusan di docs/90 2026-11-13.</sub>
 
 #### NX-12 ⏳ T2 — Pulihkan C4 (KO hanya 3 Break Stock) — 🎯 FOKUS
@@ -116,7 +116,7 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 |---|---|---|---|
 | D1 | ~~Ambang AFK/disconnect~~ | NX-12 | ✅ **20 dtk → forfeit** (2026-11-13) |
 | D2 | ~~Timer Ranked~~ | NX-12 | ✅ **100 dtk** (2026-11-13) |
-| D3 | Waktu habis seri | NX-12 | user: gear rontok → darah → (DRAW) — **konfirmasi urutan** |
+| D3 | ~~Waktu habis seri~~ | NX-12 | ✅ **gear rontok → darah → DRAW** (2026-11-13) |
 | D4 | K-10 guest → akun | NX-16 | endpoint upgrade |
 | D5 | Posisi Hero Favorit di antrean | NX-22 | setelah NX-14 |
 | D6 | Model juggle (S1 vs per-penyerang) | tuning combat | S1 |
