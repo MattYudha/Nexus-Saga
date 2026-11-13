@@ -18,7 +18,7 @@ Deskripsi kartu onboarding **tidak boleh berat sebelah** (jangan satu terdengar 
 ## ONBOARDING — pemicu (T3: SETELAH match pertama)
 - **Keputusan T3**: layar pilih faksi muncul **SETELAH layar hasil match pertama** (mode apa pun), **tidak** sebelum lobby. Layar (`faction-screen`), badge, kunci & warna **dipakai ulang**; hanya **pemicunya** yang dipindah.
 - ⏳ **Klien belum dipindah (butuh Unity)** — saat ini masih: login/guest + `faction==0` → `faction-screen` sebelum lobby (`NexusGame.NeedsFaction`). Pemindahan pemicu ke pasca-hasil-match-1 bergantung pada **poin e** (layar hasil UITK = Detail Match v2 mode `result`). Status: **Antre**.
-- Guest **ikut** memilih. ⚠️ **Guest → daftar akun: faksi TIDAK terbawa** — `POST /auth/register` selalu membuat akun **baru**; belum ada jalur upgrade guest→akun. **Konflik K-10, menunggu keputusan user** (docs/00-ROADMAP).
+- Guest **ikut** memilih. **Guest → daftar akun (K-10, 2026-11-13):** `POST /api/auth/upgrade` (login guest) memasang username+password ke **Player yang sama** → faksi, rating, riwayat, statistik terbawa. DeviceId dilepas (akun berpassword tak bisa dibuka hanya dengan deviceId). Akun terdaftar → 409. UI (tab Akun di Settings) = poin d.
 
 ## KESEIMBANGAN — "Butuh Pejuang"
 - `FactionService` (cache 1 menit) hitung populasi akun **non-uji** per faksi, server-authoritative.

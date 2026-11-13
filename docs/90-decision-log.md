@@ -363,3 +363,9 @@ KO dan timer di tick yang sama dimenangkan timer. 8 item dimasukkan ke checklist
 - `koTimeline` (≤9) dilaporkan, wajib sama antar-klien, disimpan per match; tab "Jalannya Match" aktif. Seri = rating/W/L tidak berubah, statistik menghitung seri terpisah. Warna SERI = token baru `--nx-result-draw` (netral terang).
 - Proses: kode simulasi awal dari sesi DeepSeek (`--bare`, tanpa gate BOARD) dilanjutkan sesi ini; 5 bug diperbaiki (forfeit memalsukan skor → Disputed; respawn mereset AFK; Overload saat guard tetap menangkis; bot menghitung diri sendiri; label "akumulatif" ≠ kode).
 - Verifikasi tanpa Unity: CodeGen headless (`Quantum.CodeGen.Qtn.dll`) menghasilkan file **identik byte** dengan `Generated/` di repo, lalu `Quantum.Simulation`, `Quantum.Unity`, Assembly-CSharp ter-compile terhadap Unity 2022.3.62f1 (menemukan & memperbaiki 1 error di HUD). Backend 84 tes, deploy live, 9 match lama tak berubah.
+
+## 2026-11-13 — K-10 diputus: guest → akun lewat upgrade (opsi a)
+`POST /api/auth/upgrade` (butuh token guest): username+password dipasang ke Player yang sama → faksi, rating, riwayat,
+statistik terbawa. **DeviceId dilepas** setelah upgrade (keamanan: akun berpassword tak boleh dibuka hanya dengan deviceId;
+perangkat itu berikutnya login pakai username). Akun yang sudah terdaftar → 409. Backend live, 2 tes (90 hijau).
+UI menyusul di Settings › Akun (poin d). Juga hari ini: QA pass 3 (Q42 TTL 180 dtk, Q43 retry laporan, Q44 separation).

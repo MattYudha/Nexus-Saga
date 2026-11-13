@@ -95,9 +95,10 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 #### NX-15 ❌ Pemicu layar faksi → setelah hasil match pertama
 - ❌ Pindahkan pemicu (bergantung NX-14); layar + backend dipakai ulang
 
-#### NX-16 🚫 Guest → daftar akun membawa faksi/rating/riwayat (**K-10**)
-- ❓ Keputusan user (usul: endpoint upgrade guest→akun)
-- ❌ Implementasi + tes
+#### NX-16 ⏳ Guest → daftar akun membawa faksi/rating/riwayat (**K-10**)
+- ✅ Keputusan: opsi (a) endpoint upgrade (2026-11-13)
+- ✅ Backend `POST /api/auth/upgrade`: Player sama, faksi/rating/riwayat terbawa, deviceId dilepas, akun terdaftar → 409 — 2 tes (**90 hijau**), live & diuji di server
+- ❌ UI: tombol "Daftarkan akun" di tab Akun Settings (bagian NX-13) — menunggu NX-12 lolos tes editor
 
 ---
 
@@ -130,7 +131,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | D1 | ~~Ambang AFK/disconnect~~ | NX-12 | ✅ **20 dtk → forfeit** (2026-11-13) |
 | D2 | ~~Timer Ranked~~ | NX-12 | ✅ **100 dtk** (2026-11-13) |
 | D3 | ~~Waktu habis seri~~ | NX-12 | ✅ **gear rontok → darah → DRAW** (2026-11-13) |
-| D4 | K-10 guest → akun | NX-16 | endpoint upgrade |
+| D4 | ~~K-10 guest → akun~~ | NX-16 | ✅ **endpoint upgrade** (2026-11-13) |
 | D5 | Posisi Hero Favorit di antrean | NX-22 | setelah NX-14 |
 | D6 | Model juggle (S1 vs per-penyerang) | tuning combat | S1 |
 | D7 | K-09 format Squad War | NX-25 | rebut distrik |
