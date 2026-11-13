@@ -67,6 +67,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅ Docs: docs/32 (§C4 + akhir match) + docs/90; **K-03 ditutup** (menunggu tes)
 - ✅ CodeGen: file `Generated/` sudah diperbarui (identik byte dengan CodeGen Unity) → user **tidak wajib** CodeGen manual
 - ✅ **Triase laporan tester Q1–Q41** (`docs/qa/03-triase-dan-fix-2026-11-13.md`): fix Q4 durasi dari tick, Q21/Q22 separation, Q31 rotasi, Q15 guard TickRate, Q18 WinnerTeam awal, **Q36/Q37 matchmaking TTL** (klien crash tak lagi terkunci; pemain hantu dibuang) — backend **87 tes**. Q1–Q3/Q7/Q8/Q32 basi (sudah benar di `83c98e0`)
+- ✅ QA pass 3 (`docs/qa/05-…`): Q42 TTL assignment 180 dtk, **Q43 retry laporan hasil** + pesan bila gagal, Q44 separation hitstop berdua
 - ❌ Tes simulasi otomatis (Critical 30 dtk, Overload, skor tetap) — **belum ada harness Quantum headless**; diganti checklist editor di bawah
 - ❌ Ikon per-badge + ikon baris statistik — **belum** (kosmetik; usul dipecah jadi tiket sendiri, menunggu user)
 - 🧪 Tes editor user — checklist:
@@ -152,6 +153,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | NX-IN-08 | Input: aim (AimYaw), gamepad/touch, ambang analog, PendingPick per pemain (Q27–Q30) | QA |
 | NX-IN-09 | KoTarget per mode + KoLog lebih besar saat Battle 3v3 (Q16, Q5) | QA |
 | NX-IN-10 | Matchmaking multi-replika (store bersama) + pesan error region kosong (Q39, Q40) | QA |
+| NX-IN-11 | UI: bedakan "gagal memuat" vs "kosong" saat respons server error (Q45) — kerjakan bersama NX-13 | QA Q45 |
 | NX-IN-05 | **Mode Deathmatch ala LostSaga** (tafsiran dikoreksi user): waktu habis → **darah semua jadi 0**; setelah itu tiap pukulan **merontokkan gear satu per satu** (kepala, aksesoris, baju, senjata, dst). Pemain yang **gear-nya habis duluan kalah**. Mirip mekanik Break Stock kita | user 2026-11-13 |
 
 ---
