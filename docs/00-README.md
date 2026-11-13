@@ -2,6 +2,7 @@
 
 > **Orang baru / pindah device: baca [`../HANDOFF.md`](../HANDOFF.md) dulu.** Checklist status & langkah berikutnya ada di sana.
 > **Status, milestone & konflik terkini → [`00-ROADMAP.md`](00-ROADMAP.md).** Urutan kerja yang mengikat → [`../PROGRESS.md`](../PROGRESS.md).
+> **Sudah/belum per item → [`00-CHECKLIST.md`](00-CHECKLIST.md).**
 
 Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil analisis disimpan di sini.
 
