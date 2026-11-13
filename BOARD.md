@@ -112,7 +112,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 |---|---|---|---|
 | NX-20 | Poin f — UI Tab Statistik baru (ring Flawless, grid mekanik, radar) | ❌ | backend radar sudah ada (`StatsEndpoints.cs`) |
 | NX-21 | Poin g — kartu Disputed "TIDAK DIHITUNG" di UI | ⏳ kode selesai, menunggu tes editor | `DisputeReason` (mismatch/sanity/invariant) + `/api/matches?includeDisputed=true` → kartu abu + alasan di Riwayat & layar hasil; statistik/papan tak berubah |
-| NX-22 | 1.4 Tab Hero Favorit (agregasi per hero) | ❌ ❓ | **terlewat dari antrean a–h** — posisi menunggu user (usul: setelah NX-14) |
+| NX-22 | 1.4 Tab Hero Favorit (agregasi per hero) | ⏳ kode selesai, menunggu tes editor | `GET /api/me/heroes` (per hero dominan; ranked1v1+battle; K/D hanya ranked1v1; menit main) + grid kartu hero + hero teratas di tab Profil; 126 tes |
 | NX-23 | Poin h — Fase 2: presence, chat ALL/PARTY/SQUAD/ROOM, teman | 🚫 | **K-11** stack realtime |
 | NX-24 | Fase 3 — Party | ❌ | docs/29 |
 | NX-25 | Fase 4 — Squad | 🚫 | **K-09** format Squad War |
@@ -138,7 +138,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | D2 | ~~Timer Ranked~~ | NX-12 | ✅ **100 dtk** (2026-11-13) |
 | D3 | ~~Waktu habis seri~~ | NX-12 | ✅ **gear rontok → darah → DRAW** (2026-11-13) |
 | D4 | ~~K-10 guest → akun~~ | NX-16 | ✅ **endpoint upgrade** (2026-11-13) |
-| D5 | Posisi Hero Favorit di antrean | NX-22 | setelah NX-14 |
+| D5 | ~~Posisi Hero Favorit~~ | NX-22 | ✅ dikerjakan setelah NX-14 (OVERRIDE M2) |
 | D6 | Model juggle (S1 vs per-penyerang) | tuning combat | S1 |
 | D7 | K-09 format Squad War | NX-25 | rebut distrik |
 | D8 | K-11 stack realtime | NX-23 | SignalR |
