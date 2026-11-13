@@ -15,13 +15,13 @@ Satu pemain bisa: **login → lobby → ruang ladder → match ranked 1v1 → la
 | 1 | Login | Akun username + guest, JWT, profil | **Selesai** | docs/26 (Postgres persisten). Akun uji eksplisit (poin b). |
 | 2 | Faksi | Onboarding ORDE/LEGION, badge, PALET 4, audit admin (poin c) | **Selesai** | Diverifikasi editor 2026-11-13. docs/35. |
 | 2a | Faksi | Pindah gratis 1× selama placement (`FactionSwitchUsed`) | **Selesai** | T3-6, backend + 4 tes, live. |
-| 2b | Faksi | Pindahkan **pemicu** layar faksi ke **setelah hasil match pertama** | **Antre** | Bergantung #6 (layar hasil UITK, poin e). |
+| 2b | Faksi | Pindahkan **pemicu** layar faksi ke **setelah hasil match pertama** | **Sedang — kode selesai, menunggu tes editor** | `NeedsFaction` butuh match pertama (NX-15). |
 | 2c | Faksi | Guest → daftar akun: faksi terbawa | **Sedang** — backend selesai | K-10 diputus (opsi a): `POST /api/auth/upgrade`, live, 2 tes. UI tombol "Daftarkan akun" ikut Settings (poin d). |
 | 3 | Lobby | Settings (1.6), lobby tidak kosong (1.7), tombol "Segera Hadir" | **Antre** | **Poin d**. Termasuk slider Ranked/Battle/teaser + tombol Street Room (T3-5). |
 | 4 | Ruang ladder | Ruang ladder (struktur Lost Saga), papan + baris saya | **Selesai** | docs/27, docs/33. |
 | 5 | Match | Ranked 1v1 first-to-5 KO, Glicko-2, invariant kills A = deaths B | **Selesai** | docs/32. |
 | 5a | Match | **Pulihkan C4**: KO hanya 3 Break Stock (buang bleed-out), penalti bertingkat, Overload, bot prioritas Critical, AFK forfeit, `koTimeline`, timer 100 dtk + tie-break | **Sedang — kode selesai, menunggu tes editor** | NX-11 diputus (AFK 20 dtk, timer 100 dtk, gear→darah→seri). Backend live. Checklist di BOARD NX-12. |
-| 6 | Layar hasil | Detail Match v2 sebagai **layar hasil** (mode `result`) menggantikan IMGUI | **Antre** | **Poin e**. Komponen dua mode sudah siap & terverifikasi (mode history). |
+| 6 | Layar hasil | Detail Match v2 sebagai **layar hasil** (mode `result`) menggantikan IMGUI | **Sedang — kode selesai, menunggu tes editor** | NX-14: halaman Result + cari match di riwayat + cadangan teks. |
 | 7 | Riwayat | Tab Riwayat + Detail Match v2 | **Selesai** | Diverifikasi editor 2026-11-13. docs/34. Tab "Jalannya Match" menunggu `koTimeline` (T2). |
 | 8 | Leaderboard | Tier dari rating asli; urut tier → conservative → WR → match | **Selesai** | T3-2, tes Gladiator vs Rival. docs/33. |
 | 9 | Warna | Semantik warna UI (token `--nx-*`) | **Selesai** | T1, diverifikasi editor. docs/90. |

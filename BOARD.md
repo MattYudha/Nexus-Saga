@@ -7,7 +7,7 @@
 
 <!-- FOCUS:START -->
 ## 🎯 FOKUS SEKARANG (WIP = 1)
-**NX-12 (T2) + NX-13 (UI lobby) + NX-16 (daftar akun)** — kode selesai & ter-compile, **menunggu tes editor user** (checklist di masing-masing tiket). Berikutnya: NX-14 layar hasil.
+**Semua tiket M1 (NX-12..NX-16) kode selesai & ter-compile — menunggu TES EDITOR user** (checklist per tiket). Setelah lolos → M1 ✅, fokus pindah ke M2.
 Tiket mandatori tersisa di M1: NX-12, NX-13, NX-14, NX-15, NX-16.
 **Kerjaan baru apa pun → tulis ke INBOX dulu, JANGAN dikerjakan** sampai M1 ✅ (kecuali user menulis `OVERRIDE`).
 <!-- FOCUS:END -->
@@ -91,12 +91,14 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅ Bugfix T2: `SimVersion` dinaikkan ke `nx-sim-2026-11-13-t2` (klien + backend `RequiredSimVersion`, live) — build lama tak bisa dipasangkan dengan build T2
 - 🧪 Tes editor: buka Settings → ubah tiap opsi (VSync/FPS/kualitas/volume langsung berubah; restart → tetap); tab Akun (guest) → daftar akun; lobby menampilkan pengumuman & hero; tombol SEGERA HADIR tidak bisa diklik; slider 3 mode
 
-#### NX-14 ❌ Poin e — Layar hasil pasca-match
-- ❌ `NexusGame` memanggil Detail Match v2 `DetailMode.Result` (animasi Poin Ladder, "NAIK TIER!")
-- ❌ Hapus layar hasil IMGUI (`NexusGame.cs:443 OnGUI`)
+#### NX-14 ⏳ Poin e — Layar hasil pasca-match — kode selesai, **menunggu tes editor**
+- ✅🧪 Selesai match → laporan → banner akhir ~1,5 dtk → keluar room → halaman **Result** (`NexusGame.Page.Result`)
+- ✅🧪 `ProfileController` mencari match di Riwayat (coba ulang 1 dtk, maks 15 dtk, karena lawan mungkin belum melapor) → **Detail Match v2 `DetailMode.Result`** (animasi Poin Ladder, "NAIK TIER!", tombol LANJUT/Enter/Esc → lobby)
+- ✅🧪 Tak ketemu (belum tercatat / Disputed / server mati) → ringkasan teks + alasan jujur + LANJUT
+- ✅ Kotak hasil IMGUI tidak dipakai lagi saat `UseNewProfile` (aktif di `NexusOnline.unity`)
 
-#### NX-15 ❌ Pemicu layar faksi → setelah hasil match pertama
-- ❌ Pindahkan pemicu (bergantung NX-14); layar + backend dipakai ulang
+#### NX-15 ⏳ Pemicu layar faksi → setelah hasil match pertama — kode selesai, **menunggu tes editor**
+- ✅🧪 `NeedsFaction` = belum berfaksi **dan** sudah pernah menyelesaikan match (`MatchesPlayed > 0` atau baru selesai match di sesi ini). Pemain baru langsung ke lobby; layar faksi muncul setelah LANJUT dari hasil match pertama. Layar + backend dipakai ulang
 
 #### NX-16 ⏳ Guest → daftar akun membawa faksi/rating/riwayat (**K-10**)
 - ✅ Keputusan: opsi (a) endpoint upgrade (2026-11-13)
