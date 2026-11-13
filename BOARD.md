@@ -147,8 +147,8 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | D11 | Effekseer vs VFX bawaan Unity | fase aset | tunda |
 | D12 | ~~Glicko RD~~ | kualitas leaderboard | ✅ **lantai 30, inflasi per 7 hari maks 350, RD tak turun saat anti-kolusi** (2026-11-13, live) |
 | D13 | ~~Basis badge~~ | statistik | ✅ **ranked1v1 + battle; K/D tetap ranked1v1; format lama tanpa badge** (2026-11-13, live) |
-| D14 | Nama tampil: unik / daftar nama terlarang / boleh sama (Q63, Q65) | impersonasi di papan | unik case-insensitive + nama reserved |
-| D15 | Batas rate limit auth per IP (warnet = banyak pemain satu IP) | Q61 | 10/menit, naikkan bila warnet terdampak |
+| D14 | ~~Nama tampil~~ | impersonasi | ✅ **unik case-insensitive + nama terlarang (admin/GM/staff/…)**; guest bentrok → nama Guest lain otomatis (2026-11-13, live) |
+| D15 | ~~Batas rate limit~~ | Q61 | ✅ **15/menit per IP** (auth & guest), bisa diubah via konfigurasi (2026-11-13, live) |
 
 ---
 

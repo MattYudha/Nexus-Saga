@@ -373,3 +373,7 @@ UI menyusul di Settings › Akun (poin d). Juga hari ini: QA pass 3 (Q42 TTL 180
 ## 2026-11-13 — D12/D13 diputus & live
 - **D12 (RD Glicko):** lantai RD 30; inflasi RD per 7 hari tanpa match ranked (maks 350); match teredam anti-kolusi tidak menurunkan RD. Detail docs/33.
 - **D13 (badge):** Flawless/Comeback/Close dari ranked1v1 + battle; K/D tetap ranked1v1; match format lama tanpa badge. FLAWLESS hanya menang KO (Q53).
+
+## 2026-11-13 — D14/D15 diputus & live
+- **D14 nama tampil:** unik tanpa membedakan huruf besar-kecil + daftar nama terlarang (admin, GM, moderator, staff, official, system, nexus, dan variasinya). Guest yang bentrok otomatis diberi nama Guest lain.
+- **D15 rate limit:** 15 permintaan/menit per IP untuk login/daftar/upgrade dan pembuatan guest (konfigurasi `RateLimit:*`).
