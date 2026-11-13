@@ -70,7 +70,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅ QA pass 3 (`docs/qa/05-…`): Q42 TTL assignment 180 dtk, **Q43 retry laporan hasil** + pesan bila gagal, Q44 separation hitstop berdua
 - ✅ QA pass 4 (`docs/qa/06-…`): **Q53 FLAWLESS hanya menang KO** (backend+klien), 91 tes; Q48/Q49/Q51/Q55 → keputusan D12/D13
 - ❌ Tes simulasi otomatis (Critical 30 dtk, Overload, skor tetap) — **belum ada harness Quantum headless**; diganti checklist editor di bawah
-- ❌ Ikon per-badge + ikon baris statistik — **belum** (kosmetik; usul dipecah jadi tiket sendiri, menunggu user)
+- ✅🧪 Ikon per-badge (FLAWLESS emas, COMEBACK, FIRST BLOOD, PARTY) + ikon 9 baris statistik Detail Match — 12 sprite baru `Sprites/ic_b_*` & `ic_s_*` (glyph putih, diwarnai via tint token)
 - 🧪 Tes editor user — checklist:
   1. Console bersih setelah Unity import (tanpa error compile)
   2. Ranked/practice 1v1: gerak/guard/hit/KO normal; timer 1:40 turun di atas layar
