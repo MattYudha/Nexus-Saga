@@ -135,7 +135,7 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 | NX-IN-02 | Input buffer/cancel/juice dari `ikemen-extract` → implementasi (draf `07-patch-qtn.md` ditahan) | riset Ikemen |
 | NX-IN-03 | Kit hero data-driven (`hero-ability/04`), ultimate, modifier | riset hero-ability |
 | NX-IN-04 | Replay, spectator, killcam | riset Ikemen 04 |
-| NX-IN-05 | **Mode Deathmatch ala LostSaga**: waktu habis → semua darah jadi "sekali pukul mati" (sudden death), yang mati kalah. Tafsiran "darah jadi 0" menunggu konfirmasi user | user 2026-11-13 |
+| NX-IN-05 | **Mode Deathmatch ala LostSaga** (tafsiran dikoreksi user): waktu habis → **darah semua jadi 0**; setelah itu tiap pukulan **merontokkan gear satu per satu** (kepala, aksesoris, baju, senjata, dst). Pemain yang **gear-nya habis duluan kalah**. Mirip mekanik Break Stock kita | user 2026-11-13 |
 
 ---
 

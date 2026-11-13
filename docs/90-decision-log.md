@@ -308,5 +308,20 @@ Aturan kerja ditulis di §G: satu item → bukti → centang; item yang butuh ke
 | AFK / disconnect | **20 dtk** tanpa input atau terputus → **forfeit** (satu ambang untuk keduanya) | Diputus user |
 | Timer Ranked 1v1 | **100 dtk** (match cepat). Catatan: ~20 dtk/KO → banyak match akan berakhir oleh waktu. Nilai di config | Diputus user |
 | Waktu habis, skor KO seri | Tie-break: gear rontok terbanyak kalah → darah tersisa paling sedikit kalah → masih sama = DRAW tanpa rating | Arah diputus user, **urutan menunggu konfirmasi** |
-| Mode Deathmatch (ala LostSaga) | Waktu habis → sudden death (darah semua jadi sekali-pukul-mati), yang mati kalah | **INBOX NX-IN-05** (mode baru, di luar milestone); tafsiran menunggu konfirmasi |
+| Mode Deathmatch (ala LostSaga) | Waktu habis → darah semua jadi 0, lalu tiap pukulan merontokkan gear satu per satu; gear habis duluan = kalah (koreksi user, bukan sekali-pukul-mati) | **INBOX NX-IN-05** (mode baru, di luar milestone) |
 Menggantikan usulan riset battle-flow §6 (#1 timer 300 dtk, #2 DRAW langsung, #3 grace 20 dtk).
+
+### 2026-11-13 (lanjutan 7) — R1: SPESIFIKASI T2
+`docs/research/t2-spec/01-rules-and-numbers.md` — angka & aturan T2 sebelum eksekusi:
+bleed-out dihapus; penalti gerak 70/50/35 dengan dash terkunci di stock 1; Overload 480 tick -> lock 90 tick
+(damage x1.2, bukan KO); skor target bot (Critical -40, Overload -80, penumpukan tumpukan +30, tie-break index);
+AFK 8 dtk peringatan / 30 dtk forfeit akumulatif (bot tidak menggantikan di Ranked); `koTimeline`.
+**Temuan penting:** permintaan `koTimeline` maks 9 entri hanya benar untuk Ranked 1v1; Battle 3v3 butuh sampai 19,
+5v5 sampai 29 -> usul opsi (c) 9 KO terakhir + `TotalKos`. 8 tes/invariant + 4 angka disiapkan untuk persetujuan.
+Tidak ada kode diubah.
+
+### 2026-11-13 — Upaya cek aturan waktu-habis LostSaga dengan REA: DIHENTIKAN
+`rs.iop` = arsip ZIP dengan header diacak; **isi entri terenkripsi** (pola XOR berulang). Logika match ada di
+`lostsaga.exe` (Themida). Membuka keduanya = membongkar proteksi → dilarang (keputusan 2026-10-24). Ekstrak
+sementara dihapus, sesi REA ditutup. Klaim aturan LostSaga dari sumber luar (prioritas jumlah pemain bertahan →
+skor ronde → DRAW bila skor 0) **tidak terverifikasi**; hanya boleh dipakai sebagai inspirasi desain, bukan fakta.
