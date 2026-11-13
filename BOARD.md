@@ -126,6 +126,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | ID | Tiket | Status |
 |---|---|---|
 | NX-R1 | Admin berbasis role (ganti `X-Admin-Secret`) — docs/91 #10 | ❌ |
+| NX-R3 | JWT: jti + revokasi ("logout semua perangkat"), cek audience/umur token (Q64) | ❌ |
 | NX-R2 | Aktifkan kembali proteksi demosi `grace=3` — docs/33 | ❌ |
 
 ---
@@ -146,6 +147,8 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | D11 | Effekseer vs VFX bawaan Unity | fase aset | tunda |
 | D12 | ~~Glicko RD~~ | kualitas leaderboard | ✅ **lantai 30, inflasi per 7 hari maks 350, RD tak turun saat anti-kolusi** (2026-11-13, live) |
 | D13 | ~~Basis badge~~ | statistik | ✅ **ranked1v1 + battle; K/D tetap ranked1v1; format lama tanpa badge** (2026-11-13, live) |
+| D14 | Nama tampil: unik / daftar nama terlarang / boleh sama (Q63, Q65) | impersonasi di papan | unik case-insensitive + nama reserved |
+| D15 | Batas rate limit auth per IP (warnet = banyak pemain satu IP) | Q61 | 10/menit, naikkan bila warnet terdampak |
 
 ---
 
