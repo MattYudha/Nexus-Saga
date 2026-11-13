@@ -190,5 +190,19 @@ Keputusan warna ambigu (diputus user 2026-10-30):
 - **Sprite hero placeholder**: regen **netral + ikon kelas** — `hero_titan`=Grappler (kepalan), `hero_pulse`=Zoner (crosshair), bidang `--nx-hero-neutral`, nama samar (TITAN/PULSE). `hero_unknown` = "?".
 
 **Pending (editor, user)**: tes faksi 1–9 (+teks kartu baru +KALAH abu-baja) · tampilan badge & grafik baru · screenshot swatch — dalam SATU sesi. T2 (CodeGen) **tunggu hasil tes**.
+→ **2026-11-13: tes editor user AMAN semua** (faksi, T1, Detail Match v2 terverifikasi).
+
+## 2026-11-13 — 🗺️ T3: AUDIT DOCS + KEPUTUSAN (peta penuh: `docs/00-ROADMAP.md`)
+| # | Keputusan | Menggantikan | Status |
+|---|---|---|---|
+| T3-1 | **Solo Ladder ≠ Survival.** Solo Ladder = Ranked 1v1, **first-to-5 KO, tanpa ronde**. Survival = Race-to-6, ronde 90 dtk, sudden death, **1v1/3v3 menyusul**. (docs/24 §5a) | docs/24 §5 "berlaku utk 1v1 Solo Ranked" | Disepakati |
+| T3-2 | **Leaderboard**: urut **tier tampil ↓ → conservative (`rating−2·RD`) di dalam tier → WR → match**. Kode + tes (Gladiator RD tinggi tak di bawah Rival). (docs/33) | urut conservative murni | ✅ Implementasi |
+| T3-3 | **Nakama** = opsi ke-3 di docs/36 (bersama Photon Chat & SignalR). Belum implementasi. | — | Menunggu user (docs/36) |
+| T3-4 | **"Guild" → "Squad"** di semua docs, UI (BottomNav, FriendPanel), channel chat (**SQUAD**). "Guild War/Board" → Squad War/Board. | baris 2026-10-26 "Guild War→Guild Board", "orthogonal dgn guild" (nama saja) | ✅ Diterapkan |
+| T3-5 | **Mode**: slider lobby = **ANTREAN saja** → Ranked + **Battle** (3v3 santai, bot isi slot) + 1 kartu teaser "Segera Hadir" (Faction War, Nexus Cup). **Street Room = room browser** 1v1–3v3 tanpa MMR, tombol sendiri samping HQ/Plaza. **2v2 dicabut dari MVP.** Survival 1v1/3v3 menyusul; Faction War/Nexus Cup 5v5 Fase 3+. *[UBAH bila user koreksi]* | 2026-10-24 "MVP mode 1v1 & 2v2"; 2026-10-24 "Mode MVP Survival/Elimination + TDM"; 2026-10-26 "MVP tetap 1v1+2v2"; docs/24 Street Room 1v1–5v5 | Disepakati (klien = poin d) |
+| T3-6 | **Faksi**: layar pilih **SETELAH hasil match pertama** (bukan sebelum lobby; pemicu saja yg pindah). **Pindah gratis 1×** selama placement <5 (`FactionSwitchUsed`, validasi `POST /me/faction`, admin reset mengembalikan jatah). Guest→akun: faksi terbawa → **tidak mungkin saat ini (K-10)**. | docs/35 "terkunci satu season", `FactionLocked`; docs/24 "cooldown per season" | Backend ✅ · pemicu klien Antre (poin e) · guest K-10 menunggu |
+| T3-7 | **Proteksi demosi** status resmi = **NONAKTIF (grace=0)**; docs/31 dikoreksi. | docs/31 "grace=3" | ✅ Diterapkan |
+
+**Konflik BARU yang menunggu keputusan user** (tidak diputus sendiri): **K-09** format Squad War (distrik vs match) · **K-10** guest→akun (faksi/progres tak terbawa) · **K-11** Nakama vs ASP.NET (via docs/36) · **K-12** papan poin Survival belum ditentukan. Rincian di `docs/00-ROADMAP.md`.
 
 TODO besok: (a) tombol Back di Profile, (b) rebuild SELURUH UI on-theme (fondasi design system) — lihat memory nexus-ui-rebuild-tasks.

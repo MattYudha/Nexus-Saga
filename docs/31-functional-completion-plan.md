@@ -7,8 +7,8 @@ Dikerjakan per fase; **berhenti & lapor di akhir tiap fase** (selesai apa, cara 
 - **SELESAI**: 1.1 (match metadata backend+game, migrasi `AddMatchMeta` auto-apply), 1.2 (hide MMR, avatar inisial, emblem per tier [bentuk+warna], konsistensi stub), 1.3 Statistik (filter, 3 ring, grid, 2 grafik Painter2D). Perbaikan ladder (emblem bentuk, progres tier di kartu RANK, Rekaman hero+lawan, kartu isi tinggi).
 - **BUG 1.3 SELESAI (2026-10-29)**: (1) filter Ranked kosong → backfill `Mode="ranked"` di `Program.cs` + compare **case-insensitive** (`ModeOf`); (2) Kill Tertinggi vs Kill bertentangan → **semua angka dari SATU sumber per-match** (`Mine(m)`), tak campur `/me`; (3) data lama (hero/durasi/KDA) → tampil **"–"** + label `stats-note` "Sebagian data dari pertandingan lama tidak tersedia"; (4) grafik WR label Y (0/50/100%) + rank Y (tier) + X tanggal (`FillDates`). Schema di `32-stats-schema.md`. Backend build OK.
 - **STATS SCHEMA v2 (2026-10-29)**: docs/32 ditulis ulang penuh (audit mekanik, Lapisan 1/2, radar 5 sumbu, keamanan). **Backend SELESAI**: akumulator simulasi Quantum (damage/skill/block/dodge/guardCrush/critical/gearDrop/firstBlood/streak/maxDeficit + per-hero) di `NxCombat`/`NxDamage`/`NxHit`/`NxProjectile`/`NxCombatSystem`; payload hasil LENGKAP (`NexusGame.BuildStatsPayload`) + pembandingan backend (payload identik → Finished, beda → Disputed) + sanity-check (durasi/laju KO) + anti-kolusi (redam rating pasangan berulang); DB `AddDetailedStats` (kolom `MatchPlayer` + tabel `MatchPlayerHeroes`) auto-applied via Docker rebuild; endpoint `/api/me/stats` & `/api/players/{id}/stats` (agregat + flawless/comeback/close + radar persentil). 34 tes hijau. **CATATAN: buka Unity sekali untuk regen codegen Quantum** (field .qtn baru).
-- **SELESAI (2026-10-29/30)**: 1v1 ranked (PlayerCount-based spawn, bleed-out credit, Kills vs BotKills, invariant kills A=deaths B + tes, `Match.Format` ranked1v1/battle/legacy5v5, `runInBackground` fix disconnect). **Leaderboard** (docs/33): placement ≥5, flag akun uji EKSPLISIT (default false, jalur tes), Poin Ladder 0–100 dari conservative rating, urut tier→poin→WR→match, cache 1 menit, `/api/leaderboard`+`/api/me/rank`, UI kolom+placement row. **Tab Riwayat** (docs/34): kartu ML 240×420 (hero placeholder TITAN/PULSE, Poin Ladder Δ, badge FLAWLESS/COMEBACK/FIRST BLOOD, FORMAT LAMA) + Detail scoreboard (juga layar hasil). 52 tes backend hijau.
-- **SELESAI (2026-10-30)**: **Proteksi demosi** (opsi 1, docs/33): floor tier di layer tampilan (`Ranks.ApplyFloor`/`StepTierFloor`), state `Player.LastRankedTierOrder/TierFloorOrder/TierFloorLeft`, migrasi `AddTierFloor` (auto-apply, kolom terverifikasi di DB), grace `Game:DemotionGraceMatches`=3, dipakai profil+leaderboard+`/me/rank`, Glicko tetap murni, backfill akun lama. **58 tes hijau.**
+- **SELESAI (2026-10-29/30)**: 1v1 ranked (PlayerCount-based spawn, bleed-out credit, Kills vs BotKills, invariant kills A=deaths B + tes, `Match.Format` ranked1v1/battle/legacy5v5, `runInBackground` fix disconnect). **Leaderboard** (docs/33): placement ≥5, flag akun uji EKSPLISIT (default false, jalur tes), Poin Ladder 0–100 ~~dari conservative rating, urut tier→poin→WR→match~~ *(direvisi: tier & poin dari **rating asli** [poin a]; urut **tier tampil → conservative di dalam tier → WR → match** [T3], docs/33)*, cache 1 menit, `/api/leaderboard`+`/api/me/rank`, UI kolom+placement row. **Tab Riwayat** (docs/34): kartu ML 240×420 (hero placeholder TITAN/PULSE, Poin Ladder Δ, badge FLAWLESS/COMEBACK/FIRST BLOOD, FORMAT LAMA) + Detail scoreboard (juga layar hasil). 52 tes backend hijau.
+- **SELESAI (2026-10-30)**: **Proteksi demosi** (opsi 1, docs/33): floor tier di layer tampilan (`Ranks.ApplyFloor`/`StepTierFloor`), state `Player.LastRankedTierOrder/TierFloorOrder/TierFloorLeft`, migrasi `AddTierFloor` (auto-apply, kolom terverifikasi di DB), grace `Game:DemotionGraceMatches`=3 *(**kini NONAKTIF = 0** sejak poin a — kode/kolom/tes tetap; aktifkan kembali 3 sebelum rilis publik, docs/33)*, dipakai profil+leaderboard+`/me/rank`, Glicko tetap murni, backfill akun lama. **58 tes hijau.**
 - **BELUM (URUTAN BERIKUTNYA)**: UI Tab Statistik baru (ring Flawless, grid mekanik, radar) → 1.4 Hero Favorit → 1.6 Settings → 1.7 Lobby. Arena/respawn 1v1 ditunda (user main dulu).
 
 ## STATUS 2026-10-30 (terbaru) — ⚠️ antrean dikunci di `PROGRESS.md` (baca itu dulu)
@@ -21,12 +21,12 @@ Setelah fase di atas, user menetapkan antrean a–h + sisipan T1/T2/T3. Yang **S
 - docs/36 realtime (Photon Chat/SignalR/Nakama) dibuat; **tunggu keputusan user** (condong SignalR).
 
 ### ⏭️ BISA DILANJUT BESOK (urut; detail tiap item di PROGRESS.md)
-0. **GATE**: user re-tes editor (Detail Match v2 + faksi 1–9 + badge/grafik/hero/swatch). Gagal → perbaiki dulu. **Jangan mulai T2 sebelum hasil tes** (T2 butuh CodeGen editor).
+0. ✅ **GATE lulus 2026-11-13 (semua aman).** ~~**GATE**: user re-tes editor~~ (Detail Match v2 + faksi 1–9 + badge/grafik/hero/swatch). Gagal → perbaiki dulu. **Jangan mulai T2 sebelum hasil tes** (T2 butuh CodeGen editor).
 1. **T2** — Pulihkan C4: KO **hanya** 3 Break Stock (buang bleed-out sbg jalan KO) → penalti gerak bertingkat + **Overload** (8 dtk→terkunci 1,5 dtk, bukan KO) + **bot prioritas target Critical** + jaring AFK forfeit (**usul nilai → tanya user dulu**) + **koTimeline** (array ≤9 `{tick,killerSlot}`) utk tab "Jalannya Match". Hapus atribusi kill bleed-out; invariant 1v1 tetap hijau + tes baru. Update docs/32, docs/90. CodeGen bila `.qtn` berubah.
-2. **T3** — Audit docs 13–36/90/91 → `docs/00-ROADMAP.md`: Guild→Squad, slider antrean + Street Room, layar faksi SETELAH match pertama (pindah pemicu), pindah-gratis 1×s/d 5 placement (`FactionSwitchUsed`), demosi grace=0 (perbaiki docs/31 yg masih grace=3), tabel konflik. Milestone aktif "Ranked 1v1 end-to-end".
+2. ✅ **T3 SELESAI 2026-11-13** (lihat `docs/00-ROADMAP.md`; K-09..K-12 menunggu user) — Audit docs 13–36/90/91 → `docs/00-ROADMAP.md`: Guild→Squad, slider antrean + Street Room, layar faksi SETELAH match pertama (pindah pemicu), pindah-gratis 1×s/d 5 placement (`FactionSwitchUsed`), demosi grace=0 (perbaiki docs/31 yg masih grace=3), tabel konflik. Milestone aktif "Ranked 1v1 end-to-end".
 3. **Poin d** — **1.6 Settings** (Grafis/Audio/Kontrol/Antarmuka/Akun+Logout, simpan lokal + langsung terapkan) + **1.7 Lobby tidak kosong** (hero terakhir di tengah + panel Pengumuman/Event; `/api/announcements`) + tombol belum siap → nonaktif + "Segera Hadir".
 4. **Poin e** — Wiring Detail Match v2 **mode result** ke NexusGame (ganti IMGUI) sbg layar hasil pasca-match.
-5. **Poin f** Tab Statistik baru (ring Flawless, grid mekanik, radar) · **g** kartu Disputed "TIDAK DIHITUNG" · **h** Fase 2 (chat/teman/party/guild/mail, pakai keputusan docs/36).
+5. **Poin f** Tab Statistik baru (ring Flawless, grid mekanik, radar) · **g** kartu Disputed "TIDAK DIHITUNG" · **h** Fase 2 (chat/teman/party/squad/mail, pakai keputusan docs/36).
 6. Kosmetik nitip: **ikon per-badge + ikon stat-row** (dikerjakan bersama T2).
 
 ## ATURAN UMUM (wajib)
@@ -77,17 +77,17 @@ Setelah fase di atas, user menetapkan antrean a–h + sisipan T1/T2/T3. Yang **S
 ## FASE 2 — REAL-TIME + CHAT + TEMAN
 - 2.1 **Pilih**: Photon Chat vs SignalR vs Nakama → perbandingan di **[[docs/36]]** (realtime-decision). **Tunggu approve user** (condong SignalR; Nakama dicabut utk meta inti). Tanpa kode sampai disetujui.
 - 2.2 Presence (Online/Di Lobby/Di Ruang Tim/Dalam Match/Offline).
-- 2.3 Chat channel (ALL/PARTY/GUILD/ROOM + whisper), format `[CH] Nama: pesan`, cooldown, filter kasar.
+- 2.3 Chat channel (ALL/PARTY/SQUAD/ROOM + whisper), format `[CH] Nama: pesan`, cooldown, filter kasar.
 - 2.4 Teman: tab LOBBY (online di lobby), BUDDY (teman+presence), Add/terima/tolak/hapus/blokir, menu (profil/whisper/undang), counter Online asli.
 
 ## FASE 3 — PARTY (Ruang Tim Tahap 2–4, docs/29)
 Undang teman/kode, gabung/keluar/kick/pindah ketua/siap, party chat, matchmaking party (1 tim, partyId → badge PARTY di riwayat).
 
-## FASE 4 — GUILD
-Buat/cari/gabung/keluar, peran (ketua/wakil/anggota)/kick, daftar anggota+presence, tab GUILD, guild chat.
+## FASE 4 — SQUAD *(dulu "Guild"; T3 — docs/16: Squad = guild/clan)*
+Buat/cari/gabung/keluar, peran (ketua/wakil/anggota)/kick, daftar anggota+presence, tab SQUAD, squad chat.
 
 ## FASE 5 — MAIL
-Inbox (sistem/permintaan teman/undangan guild/pesan), read/unread + badge amplop, hapus/tandai semua, lampiran hadiah "Segera Hadir" (sampai ekonomi).
+Inbox (sistem/permintaan teman/undangan squad/pesan), read/unread + badge amplop, hapus/tandai semua, lampiran hadiah "Segera Hadir" (sampai ekonomi).
 
 ---
 **Urutan**: Fase 1 (1.1→1.7), lapor tiap sub-fase besar. Mulai 1.1 + 1.2.

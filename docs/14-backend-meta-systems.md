@@ -59,7 +59,7 @@ Match Nakama (plaza/room) = **lapisan koordinasi saja**. Saat match terbentuk / 
 - **Rekomendasi:**
   - Ranked ladder: authoritative, DESC, operator **set** (RP dihitung ulang tiap game), reset CRON per season.
   - Per-mode board: `rank_survival_s1`, `rank_tdm_s1`.
-  - **Top Squad:** leaderboard owner = **group/guild id**; tulis skor agregat squad dari job terjadwal.
+  - **Top Squad:** leaderboard owner = **group/squad id**; tulis skor agregat squad dari job terjadwal.
   - "Your rank" UI = around-owner.
 
 ## 6. Sosial
@@ -73,7 +73,7 @@ Match Nakama (plaza/room) = **lapisan koordinasi saja**. Saat match terbentuk / 
 - **Rekomendasi — pemetaan channel:**
   - Room → global (`global`), plaza-local (`plaza:<shard>`), custom-room (`room:<matchId>`)
   - Party → `SendPartyData` atau Room `party:<id>`
-  - Guild → Group channel (type 3)
+  - Squad → Group channel (type 3)
   - Whisper/DM → DirectMessage (type 2)
   - Semua filter + rate limit + mute di **satu hook** `ChannelMessageSend` (cek mute §1 → token-bucket rate limit → go-away → cek block). RPC GM role-gated untuk mute/kick + audit log.
 
@@ -92,7 +92,7 @@ Match Nakama (plaza/room) = **lapisan koordinasi saja**. Saat match terbentuk / 
 | shop schema | `15 §8` |
 | quest | `15 §10` |
 | chat / friends / messenger | §6, §7 |
-| guild war / squad list / top squad / community lobby | `16` |
+| squad war / squad list / top squad / community lobby | `16` |
 | list hero / training / bot | `17` |
 
 ## Keputusan terbuka

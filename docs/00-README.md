@@ -1,11 +1,12 @@
 ﻿# Nexus Saga: Chronicles — Design Docs
 
 > **Orang baru / pindah device: baca [`../HANDOFF.md`](../HANDOFF.md) dulu.** Checklist status & langkah berikutnya ada di sana.
+> **Status, milestone & konflik terkini → [`00-ROADMAP.md`](00-ROADMAP.md).** Urutan kerja yang mengikat → [`../PROGRESS.md`](../PROGRESS.md).
 
 Folder ini adalah "memori" proyek. Setiap kesepakatan brainstorming dan hasil analisis disimpan di sini.
 
 ## Ground Rules
-- **Belum ada coding** (Unity/C#/TypeScript) sampai diperintahkan.
+- ~~**Belum ada coding** (Unity/C#/TypeScript) sampai diperintahkan.~~ → Izin coding diberikan (docs/90 2026-10-26, S-00). Kode di repo `photon-backend` (backend ASP.NET + game Quantum/Unity).
 - Setiap analisis game referensi → ringkasan di `research/`.
 - Setiap keputusan final → dicatat di `90-decision-log.md`.
 - Pertanyaan yang belum terjawab → `91-open-questions.md`.

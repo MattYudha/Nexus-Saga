@@ -4,12 +4,12 @@
 > Nakama dicatat sebagai keputusan meta-backend lama (docs/90, 2026-10-24/26) → **wajib dibandingkan ulang atau dicabut resmi** di sini.
 
 ## 1. KEBUTUHAN FASE 2 (docs/31 §2)
-Presence (online/offline), **teman** (add/accept/list), **party/undangan**, **chat** (lobby/world + party; guild menyusul Fase 3). Realtime, hemat, cocok dengan stack saat ini: **ASP.NET Core (PhotonBackend.Api) + Photon Quantum/Realtime (arena)**.
+Presence (online/offline), **teman** (add/accept/list), **party/undangan**, **chat** (lobby/world + party; squad menyusul Fase 3). Realtime, hemat, cocok dengan stack saat ini: **ASP.NET Core (PhotonBackend.Api) + Photon Quantum/Realtime (arena)**.
 
 ## 2. KONTEKS: apa yang SUDAH ada
 - Match/arena = **Photon** (Quantum 3 + Realtime room). Sudah jalan.
 - Meta (auth, profil, match result, rating, leaderboard, stats, **faksi**) = **PhotonBackend.Api (ASP.NET + Postgres)**. Sudah tumbuh jauh melampaui "Pong-spesifik".
-- Keputusan lama (docs/90): meta sosial (party/guild/chat/shop/wallet) = **Nakama**. **Belum** diimplementasi; ASP.NET sudah mengambil alih sebagian (auth/leaderboard/stats).
+- Keputusan lama (docs/90): meta sosial (party/squad/chat/shop/wallet) = **Nakama**. **Belum** diimplementasi; ASP.NET sudah mengambil alih sebagian (auth/leaderboard/stats).
 
 ## 3. OPSI
 
@@ -27,7 +27,7 @@ Presence (online/offline), **teman** (add/accept/list), **party/undangan**, **ch
 
 ### C. Nakama (keputusan lama)
 - **Apa**: server sosial open-source lengkap — chat, teman, party, presence, storage, matchmaking, (wallet/inventory).
-- **+**: fitur sosial **paling lengkap out-of-the-box**; satu sistem untuk teman+party+chat+guild; skala teruji.
+- **+**: fitur sosial **paling lengkap out-of-the-box**; satu sistem untuk teman+party+chat+squad; skala teruji.
 - **−**: **server terpisah** (ops: deploy, DB sendiri, upgrade) → **dua sumber identitas** (Nakama vs ASP.NET yang sudah pegang akun/rating/faksi) → perlu sinkronisasi/menyatukan auth. Sebagian perannya **sudah diambil** ASP.NET → tumpang tindih. Kurva belajar (runtime Lua/Go).
 - **Status**: karena ASP.NET sudah jadi sumber kebenaran akun/kompetitif, mengadopsi Nakama sekarang = **duplikasi identitas**. Pilihan jujur: **cabut Nakama** untuk meta sosial inti, ATAU pakai Nakama HANYA untuk lapisan dunia besar (Plaza/Excavation 20–50 pemain, docs/90 2026-10-26) dan BUKAN untuk auth/teman.
 

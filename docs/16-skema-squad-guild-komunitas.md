@@ -1,4 +1,6 @@
-﻿# 16 — Squad / Guild, Guild War & Komunitas (DRAFT v0.1, 2026-10-24)
+﻿# 16 — Squad, Squad War & Komunitas (DRAFT v0.1, 2026-10-24)
+
+> **Istilah (T3, 2026-11-13):** nama resmi = **Squad** (dulu juga disebut "guild"). File tetap bernama `16-skema-squad-guild-komunitas.md` agar tautan lama tak putus. ⚠️ Format **Squad War** (rebut distrik vs match langsung) = **K-09, menunggu keputusan user** (docs/00-ROADMAP).
 
 Disusun dari keputusan terkunci + riset AyoDance (guild "Fam" mendalam) + LostSaga (guild/war). **Desain data, bukan kode.** Storage menyesuaikan Nakama groups (lihat `14`).
 

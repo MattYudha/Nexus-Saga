@@ -10,8 +10,9 @@ Papan yang **bisa dipahami pemain**. Menggantikan urutan lama (rating mentah, ak
 ## 2. URUTAN & TIER (KONSISTEN di semua layar)
 Angka tampil = **Poin Ladder** (`Ranks.LadderPoints`, 0–100 progres di dalam tier), BUKAN MMR mentah.
 - **TIER & Poin yang DITAMPILKAN = dari RATING ASLI** (`p.Rating`) — **SAMA** di profil, lobby, ruang ladder, leaderboard, dan riwayat. (Sumber tunggal: `Ranks.TierFor`/`LadderPoints` atas rating asli.)
-- **URUTAN POSISI** di leaderboard pakai **conservative rating = `rating − 2·RD`** (kontinu) → akun RD tinggi (sedikit match) tak melompat ke puncak. Tiebreak: win rate → jumlah match. **Conservative HANYA untuk posisi, TIDAK untuk tier/poin yang tampil.**
-- Akibatnya dua pemain bisa sama-sama "Rival" tapi beda posisi (yang RD-nya kecil di atas). Itu disengaja. `TierOrder` 0 Rookie … 5 Nexus Legend.
+- **URUTAN POSISI** (T3, 2026-11-13): **(1) TIER TAMPIL turun** → **(2) conservative rating `rating − 2·RD` di DALAM tier** → **(3) win rate** → **(4) jumlah match**. Conservative HANYA untuk urutan, TIDAK untuk tier/poin yang tampil.
+- Kenapa tier dulu: dulu urut conservative murni → Gladiator ber-RD tinggi bisa jatuh di bawah Rival (tier di papan terbalik). Sekarang tier di papan **selalu monoton turun** (tes `Position_TierFirst_HighRdGladiatorNotBelowRival`).
+- Di dalam satu tier, dua "Rival" bisa beda posisi (RD lebih kecil di atas) — disengaja. `TierOrder` 0 Rookie … 5 Nexus Legend.
 
 ## 3. KOLOM
 Peringkat · emblem+tier · nama · Poin Ladder · W/L · win rate. Baris pemain sendiri di-highlight.
@@ -35,6 +36,6 @@ Peringkat · emblem+tier · nama · Poin Ladder · W/L · win rate. Baris pemain
 Saat diaktifkan (grace>0): floor tier di **layer tampilan**: setelah naik tier, tier tampil tak boleh turun `Game:DemotionGraceMatches` match ranked. **Glicko tetap murni** (rating/RD/matchmaking tak tersentuh).
 - **State** (`Player`): `LastRankedTierOrder` (tier mentah setelah match terakhir → deteksi promosi), `TierFloorOrder` (floor aktif), `TierFloorLeft` (sisa match floor berlaku). Migrasi `AddTierFloor`.
 - **Logika** (`Ranks.StepTierFloor`, murni & diuji): tier mentah > terakhir → promosi, pasang floor di tier baru + reset grace. Selain itu → grace −1; habis → floor lepas. Dipanggil di `MatchService.FinalizeAsync` untuk kedua pemain.
-- **Tampil** (`Ranks.ApplyFloor(baseOrder, floorOrder, floorLeft)` = `floorLeft>0 ? max(base,floor) : base`): dipakai di **profil** (`/api/me`, base = rating mentah) DAN **leaderboard** (base = conservative; saat di-floor → Poin Ladder 0). `/api/me/rank` ikut lewat leaderboard. Stats/radar tetap pakai tier mentah (populasi pembanding jujur).
+- **Tampil** (`Ranks.ApplyFloor(baseOrder, floorOrder, floorLeft)` = `floorLeft>0 ? max(base,floor) : base`): dipakai di **profil** (`/api/me`, base = rating asli) DAN **leaderboard** (base = **rating asli** juga — sejak poin a; dulu tertulis "conservative", sudah tidak berlaku; saat di-floor → Poin Ladder 0). `/api/me/rank` ikut lewat leaderboard. Stats/radar tetap pakai tier mentah (populasi pembanding jujur).
 - **Backfill**: akun lama `LastRankedTierOrder` di-set ke tier mentah terkini (sekali, idempoten) agar match berikutnya tak salah dibaca promosi.
 - Tes: `ApplyFloor` aktif/lepas, `StepTierFloor` promosi→tahan 3 match→turun, re-promosi reset grace, `TierName`↔`TierOrder`.

@@ -14,7 +14,7 @@ Lihat juga: [15 — skema data](15-skema-data-pemain-ekonomi.md), [24 — strukt
   mode belum siap = terkunci "Segera Hadir" (disabled). Jangan pernah hard-code angka palsu.
 - **Satu pemilih mode** (di tengah) dan **satu tombol utama** (oranye glow, fungsinya mengikuti mode terpilih).
   Create Room = tombol sekunder, hanya muncul di mode room.
-- **Satu blok rank** (kiri). Bottom nav **maksimal 6**: Shop, Inventory, Hero Deck, Quest, Event, Guild.
+- **Satu blok rank** (kiri). Bottom nav **maksimal 6**: Shop, Inventory, Hero Deck, Quest, Event, Squad.
 - **GM / Dev Lounge hanya di editor / development build** (`#if UNITY_EDITOR || DEVELOPMENT_BUILD`), pojok, kecil.
 - Logout + FB/TikTok masuk **Settings**, bukan panel utama.
 - Friend list & chat **selalu terbuka** (bukan popup).
@@ -77,7 +77,7 @@ File: `Assets/NexusUI/Fonts/` — `ChakraPetch-Bold.ttf` + `Exo2-Variable.ttf` (
 - **Top bar**: kiri kartu profil (avatar→Profile+Back, nama, level, XP) + ikon sosial/Settings; tengah logo NEXUS SAGA + "CHRONICLES"; kanan currency (Gold/Ticket/Diamond, tombol "+") + Mail + Live.
 - **Kiri**: blok RANK (emblem + nama tier) lalu daftar mode vertikal (ikon + judul 2 baris + badge).
 - **Tengah**: panel mode (panah ganti mode, emblem, progress) di atas scene; QUICK JOIN + CREATE ROOM; tombol besar RANKED MATCHMAKING; LOBBY CHAT + input.
-- **Kanan**: online count; Quest Notification (closable); Friend List (tab LOBBY/BUDDY/GUILD); Add Friend + Settings.
+- **Kanan**: online count; Quest Notification (closable); Friend List (tab LOBBY/BUDDY/SQUAD); Add Friend + Settings.
 - **Bottom nav**: 6 item (lihat §1).
 
 ## 6. Mapping ke fitur yang sudah ada

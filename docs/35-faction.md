@@ -1,6 +1,6 @@
 # 35 — Faksi ORDE / LEGION
 
-Dua faksi abadi. **Keputusan user (2026-10-30):** terkunci satu season · Guest ikut memilih · akun lama tanpa faksi diminta memilih saat login berikutnya.
+Dua faksi abadi. **Keputusan user (2026-10-30):** Guest ikut memilih · akun lama tanpa faksi diminta memilih. **Revisi T3 (2026-11-13):** ~~terkunci satu season~~ → **pindah gratis 1× selama placement** (lihat MODEL) · layar pilih faksi **SETELAH layar hasil match pertama** (bukan sebelum lobby).
 
 ## LORE (docs/23) — dua-duanya abu-abu, sama-sama menarik
 Deskripsi kartu onboarding **tidak boleh berat sebelah** (jangan satu terdengar jahat, satu pahlawan — bila tidak, pemain condong + bonus +15% macet di satu faksi). Keduanya punya alasan mulia & cara yang keras.
@@ -10,12 +10,15 @@ Deskripsi kartu onboarding **tidak boleh berat sebelah** (jangan satu terdengar 
 
 ## MODEL
 - `Player.Faction`: 0 belum pilih · 1 ORDE · 2 LEGION. (kolom sudah ada sejak `AddUserAccounts`.)
-- **Terkunci**: setelah memilih (≠0), tak bisa pindah selama `Game:FactionLocked=true` (satu season).
-- ⚠️ **BELUM ADA SISTEM SEASON** → kunci saat ini **efektif permanen**. Ganti/reset faksi hanya lewat **endpoint admin** (lihat ENDPOINT) sampai season dibangun.
+- **Aturan pindah (T3, backend ✅ 2026-11-13)**: pilihan pertama (0→1/2) **selalu boleh**. **PINDAH** (1↔2) **GRATIS 1×** selama placement ranked belum selesai (**<5** match ranked Finished = `LeaderboardService.PlacementMatches`, satu angka dgn syarat leaderboard). Setelah jatah dipakai **atau** placement selesai → **terkunci** (409).
+  - `Player.FactionSwitchUsed` (bool, migrasi `AddFactionSwitchUsed`). Opsi lama `Game:FactionLocked` **dihapus** (diganti jendela placement).
+  - Kenapa bukan "sebelum ranked pertama": layar faksi kini muncul **setelah** match pertama → kalau match itu ranked, jendela sudah lewat (nol). Placement 5 match memberi jendela nyata.
+- ⚠️ **BELUM ADA SISTEM SEASON** → setelah terkunci, ganti faksi hanya lewat **endpoint admin** (yang juga **mengembalikan jatah pindah gratis**).
 
-## ONBOARDING (sebelum lobby)
-- Setelah login/guest, jika `faction==0` → **layar pilih faksi** (bukan lobby). Klien: `NexusGame.NeedsFaction` → `NexusLobbyController` menampilkan `faction-screen` (dua kartu, deskripsi lore docs/23, emblem perisai vs chevron), tombol **KUNCI FAKSI** → `UiSetFaction` → `POST /api/me/faction`. Sukses → lobby.
-- Guest **ikut** memilih (beda dari IMGUI lama yang hanya untuk akun terdaftar).
+## ONBOARDING — pemicu (T3: SETELAH match pertama)
+- **Keputusan T3**: layar pilih faksi muncul **SETELAH layar hasil match pertama** (mode apa pun), **tidak** sebelum lobby. Layar (`faction-screen`), badge, kunci & warna **dipakai ulang**; hanya **pemicunya** yang dipindah.
+- ⏳ **Klien belum dipindah (butuh Unity)** — saat ini masih: login/guest + `faction==0` → `faction-screen` sebelum lobby (`NexusGame.NeedsFaction`). Pemindahan pemicu ke pasca-hasil-match-1 bergantung pada **poin e** (layar hasil UITK = Detail Match v2 mode `result`). Status: **Antre**.
+- Guest **ikut** memilih. ⚠️ **Guest → daftar akun: faksi TIDAK terbawa** — `POST /auth/register` selalu membuat akun **baru**; belum ada jalur upgrade guest→akun. **Konflik K-10, menunggu keputusan user** (docs/00-ROADMAP).
 
 ## KESEIMBANGAN — "Butuh Pejuang"
 - `FactionService` (cache 1 menit) hitung populasi akun **non-uji** per faksi, server-authoritative.
@@ -35,19 +38,19 @@ Badge faksi di **semua layar** via helper tunggal `NexusLobbyController.SetFacti
 - Top bar (`player-faction`), Profil (`prof-faction`), Ruang Ladder header (teks ORDE/LEGION). Beda lewat **teks nama + warna token**, bukan biru/merah.
 
 ## ENDPOINT
-- `POST /api/me/faction {faction:1|2}` (auth): validasi 1/2, **terkunci** bila sudah pilih (409), idempoten bila sama. → `{faction, locked}`.
+- `POST /api/me/faction {faction:1|2}` (auth): validasi 1/2; idempoten bila sama; pindah gratis 1× selama placement <5, selain itu 409. → `{faction, switchAvailable, locked}`.
 - `GET /api/factions` (publik): `{orde, legion, needsWarriors:0|1|2, bonusPercent}`.
 - `POST /api/admin/faction {playerId, faction:0|1|2, adminSource?}` (header **`X-Admin-Secret`** = `Admin:Secret`; kosong = nonaktif): set/reset faksi **lewati kunci** (0 = reset → pemain pilih lagi · 1 ORDE · 2 LEGION). Untuk akun uji / dukungan sampai sistem season ada.
   - **Constant-time**: secret dibandingkan `SHA256` + `CryptographicOperations.FixedTimeEquals` (`SecretsEqual`), bukan `==`.
   - **Audit WAJIB**: tiap perubahan menulis `FactionAdminAudit` (sumber `adminSource@ip`, `playerId`, faksi **lama→baru**, waktu) + log `AdminFaction`. Respons memuat `previous`.
-  - Reset juga **mengembalikan status pindah-gratis** begitu field `FactionSwitchUsed` ada (Tugas 3) — sekarang field belum ada (TODO di kode).
+  - Reset **mengembalikan jatah pindah gratis** (`FactionSwitchUsed=false`) ✅ (T3).
   - ⚠️ **UTANG RILIS**: ganti `X-Admin-Secret` dengan **admin berbasis role di server + audit log resmi** (docs/90, docs/91) sebelum rilis publik.
 
 ## OPSI (`Game:*` / `Admin:*`)
-`FactionLocked=true` · `FactionMinPopulation=2` · `FactionImbalanceThreshold=0.45` · `FactionJoinBonusPercent=15` · `Admin:Secret=""` (set di env utk aktifkan endpoint admin).
+`FactionMinPopulation=2` · `FactionImbalanceThreshold=0.45` · `FactionJoinBonusPercent=15` · `Admin:Secret=""` (set di env utk aktifkan endpoint admin). *(`FactionLocked` dihapus T3.)*
 
 ## TES
-Backend: `FactionService` (seimbang→tanpa bonus, timpang→minoritas+bonus, di bawah min-pop, akun uji dikecualikan); API (lock+validasi, `/api/factions`, **admin reset lewati kunci + butuh secret**). 68 hijau. Klien: butuh compile editor (tak bisa diuji headless).
+Backend: `FactionService` (seimbang→tanpa bonus, timpang→minoritas+bonus, di bawah min-pop, akun uji dikecualikan); API (`/api/factions`, admin reset lewati kunci + butuh secret + audit). **T3**: pindah gratis 1× lalu terkunci · 5 placement → terkunci · 4 placement → masih boleh · admin mengembalikan jatah. **72 hijau.** Klien faksi: ✅ diverifikasi editor user (2026-11-13).
 
 ## BELUM / NANTI
 - **Sistem season** (buka kunci faksi otomatis) — sekarang kunci permanen, reset manual via admin. Faction War (Fase 3). Badge di baris leaderboard (opsional). Bonus selain XP (reward) bila diinginkan.
