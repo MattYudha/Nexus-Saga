@@ -68,6 +68,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅ CodeGen: file `Generated/` sudah diperbarui (identik byte dengan CodeGen Unity) → user **tidak wajib** CodeGen manual
 - ✅ **Triase laporan tester Q1–Q41** (`docs/qa/03-triase-dan-fix-2026-11-13.md`): fix Q4 durasi dari tick, Q21/Q22 separation, Q31 rotasi, Q15 guard TickRate, Q18 WinnerTeam awal, **Q36/Q37 matchmaking TTL** (klien crash tak lagi terkunci; pemain hantu dibuang) — backend **87 tes**. Q1–Q3/Q7/Q8/Q32 basi (sudah benar di `83c98e0`)
 - ✅ QA pass 3 (`docs/qa/05-…`): Q42 TTL assignment 180 dtk, **Q43 retry laporan hasil** + pesan bila gagal, Q44 separation hitstop berdua
+- ✅ QA pass 4 (`docs/qa/06-…`): **Q53 FLAWLESS hanya menang KO** (backend+klien), 91 tes; Q48/Q49/Q51/Q55 → keputusan D12/D13
 - ❌ Tes simulasi otomatis (Critical 30 dtk, Overload, skor tetap) — **belum ada harness Quantum headless**; diganti checklist editor di bawah
 - ❌ Ikon per-badge + ikon baris statistik — **belum** (kosmetik; usul dipecah jadi tiket sendiri, menunggu user)
 - 🧪 Tes editor user — checklist:
@@ -139,6 +140,8 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | D9 | K-12 papan Survival | NX-29 | tunda |
 | D10 | Pause & rematch (battle-flow §6 #4–5) | M2 | tanpa pause Ranked; rematch casual saja |
 | D11 | Effekseer vs VFX bawaan Unity | fase aset | tunda |
+| D12 | Glicko: lantai RD 30 + inflasi RD saat pasif + RD tak turun saat anti-kolusi (Q48/Q49/Q51) | kualitas leaderboard | lantai 30, periode 7 hari |
+| D13 | Basis badge Flawless/Comeback/Close: ranked1v1+battle atau ranked1v1 saja (Q55) | statistik | ranked1v1+battle, K/D tetap ranked1v1 |
 
 ---
 
@@ -155,6 +158,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | NX-IN-09 | KoTarget per mode + KoLog lebih besar saat Battle 3v3 (Q16, Q5) | QA |
 | NX-IN-10 | Matchmaking multi-replika (store bersama) + pesan error region kosong (Q39, Q40) | QA |
 | NX-IN-11 | UI: bedakan "gagal memuat" vs "kosong" saat respons server error (Q45) — kerjakan bersama NX-13 | QA Q45 |
+| NX-IN-12 | Radar: cache agregat populasi + desain sumbu ketahanan (Q56, Q58) — bersama poin f | QA |
 | NX-IN-05 | **Mode Deathmatch ala LostSaga** (tafsiran dikoreksi user): waktu habis → **darah semua jadi 0**; setelah itu tiap pukulan **merontokkan gear satu per satu** (kepala, aksesoris, baju, senjata, dst). Pemain yang **gear-nya habis duluan kalah**. Mirip mekanik Break Stock kita | user 2026-11-13 |
 
 ---
