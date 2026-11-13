@@ -111,7 +111,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | ID | Tiket | Status | Catatan |
 |---|---|---|---|
 | NX-20 | Poin f — UI Tab Statistik baru (ring Flawless, grid mekanik, radar) | ❌ | backend radar sudah ada (`StatsEndpoints.cs`) |
-| NX-21 | Poin g — kartu Disputed "TIDAK DIHITUNG" di UI | ❌ | backend sudah menandai |
+| NX-21 | Poin g — kartu Disputed "TIDAK DIHITUNG" di UI | ⏳ kode selesai, menunggu tes editor | `DisputeReason` (mismatch/sanity/invariant) + `/api/matches?includeDisputed=true` → kartu abu + alasan di Riwayat & layar hasil; statistik/papan tak berubah |
 | NX-22 | 1.4 Tab Hero Favorit (agregasi per hero) | ❌ ❓ | **terlewat dari antrean a–h** — posisi menunggu user (usul: setelah NX-14) |
 | NX-23 | Poin h — Fase 2: presence, chat ALL/PARTY/SQUAD/ROOM, teman | 🚫 | **K-11** stack realtime |
 | NX-24 | Fase 3 — Party | ❌ | docs/29 |
@@ -172,4 +172,5 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 
 ## LOG BOARD
 - 2026-11-13: BOARD dibuat dari audit PROGRESS + docs/31 + ROADMAP + grep kode. Fokus = NX-12 (T2).
+- 2026-11-13: **OVERRIDE oleh user** ("sembari implement di atas"): M2 dimulai sebelum tes editor M1 lolos — alasan: seluruh kode M1 selesai & menunggu tes. Dimulai NX-21.
 - 2026-11-13: NX-11 ✅. NX-12 kode selesai (lanjutan kode sesi DeepSeek + 5 bug diperbaiki + timer/tie-break/koTimeline/HUD/Riwayat), backend live, 84 tes; menunggu tes editor.

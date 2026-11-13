@@ -377,3 +377,8 @@ UI menyusul di Settings › Akun (poin d). Juga hari ini: QA pass 3 (Q42 TTL 180
 ## 2026-11-13 — D14/D15 diputus & live
 - **D14 nama tampil:** unik tanpa membedakan huruf besar-kecil + daftar nama terlarang (admin, GM, moderator, staff, official, system, nexus, dan variasinya). Guest yang bentrok otomatis diberi nama Guest lain.
 - **D15 rate limit:** 15 permintaan/menit per IP untuk login/daftar/upgrade dan pembuatan guest (konfigurasi `RateLimit:*`).
+
+## 2026-11-13 — OVERRIDE gate fokus: M2 dimulai sebelum tes editor M1
+User meminta lanjut implementasi M2 sembari menunggu tes editor. Alasan: seluruh kode M1 (NX-12..16) selesai & ter-compile.
+Risiko yang diterima: kode klien belum terverifikasi editor makin menumpuk. Mitigasi: compile 3 assembly terhadap Unity 2022.3.62f1
+setiap perubahan. Pertama: NX-21 kartu Disputed "TIDAK DIHITUNG" (kolom `Match.DisputeReason`, riwayat `includeDisputed`).
