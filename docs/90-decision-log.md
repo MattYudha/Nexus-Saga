@@ -206,3 +206,98 @@ Keputusan warna ambigu (diputus user 2026-10-30):
 **Konflik BARU yang menunggu keputusan user** (tidak diputus sendiri): **K-09** format Squad War (distrik vs match) · **K-10** guest→akun (faksi/progres tak terbawa) · **K-11** Nakama vs ASP.NET (via docs/36) · **K-12** papan poin Survival belum ditentukan. Rincian di `docs/00-ROADMAP.md`.
 
 TODO besok: (a) tombol Back di Profile, (b) rebuild SELURUH UI on-theme (fondasi design system) — lihat memory nexus-ui-rebuild-tasks.
+
+## 2026-11-13 — 🔬 RISET COMBAT: ekstraksi mekanik Ikemen GO → `docs/research/ikemen-extract/`
+Tujuan: menutup baris ⬜ di tabel kebutuhan LostSaga/AyoDance **tanpa** menyentuh client komersial.
+Sumber tunggal: Ikemen GO **v1.0.0, MIT** (`Nexus_Lab/src/Ikemen-GO`), dibaca statis, tidak dijalankan.
+
+| Hasil | Isi |
+|---|---|
+| `ikemen-extract/01-input-buffer-cancel.md` | `time`/`buffer.time`/`step.time`, buffer **membeku saat hitstop**, cancel = state -1 + `movecontact`; usulan `NxCmd` + skema `cancels[]` |
+| `ikemen-extract/02-juice-hit-feedback.md` | EnvShake default (freq 60, ampl -4), hit spark, SuperPause (30 tick, darken 0.5), KO slow-mo **60 tick / 0.25× / ramp 45**, corner push (guard ×1.3) |
+| `ikemen-extract/03-guard-dizzy-counter-juggle.md` | dizzy = 1000 poin dari damage; guard break Ikemen = flag, bukan gauge; **counter hit bonus TIDAK ada di Ikemen** → kita desain; juggle per-penyerang |
+| `ikemen-extract/04-replay-spectator.md` | replay = input log (~60 KB/match), `LiveChecksum` CRC32, killcam, kartu Disputed + batas jujurnya |
+| `ikemen-extract/05-hero-swap-tag.md` | TagIn/`SCF_standby` (tidak bisa dipukul, tidak dikontrol), pemetaan ke `NxSwap` |
+| `ikemen-extract/06-camera-views.md` | 3 CameraView, batas kamera bergantung zoom (0.625–1.0) |
+| `ikemen-extract/combat-tuning.json` | angka usulan siap config (belum dipakai kode) |
+| `kebutuhan-lostsaga-ayodance.md` | checklist status ✅/🟡/⬜/🚫 + rujukan bukti |
+
+**Koreksi teknis yang dicatat:** Photon Quantum = simulasi **deterministik + prediksi + rollback**, server
+meneruskan input & memvalidasi (plugin), **bukan** authoritative-server + reconciliation. Konsekuensi:
+efek visual dipisah dari state sim; anti-cheat lewat checksum/desync; replay dari input, bukan dari posisi.
+
+**Kebijakan tidak berubah** (baris 2026-10-24 tetap berlaku): riset AyoDance statis, tidak membongkar
+proteksi/packer LostSaga, tidak mengekstrak aset dari client. Mode dance tetap **arsip** (docs/12).
+
+**Pertanyaan baru untuk user (belum diputus):** model juggle — **S1 satu pool milik korban** (docs/08,
+lebih ketat, combo tag tidak memperpanjang juggle) vs **per-penyerang** seperti Ikemen (lebih bebas).
+Rekomendasi riset: S1. Tidak diubah sebelum user memutus.
+
+### 2026-11-13 (lanjutan) — PATCH `.qtn` diterapkan (aditif, belum aktif)
+`Nexus.qtn` +36 baris, **tanpa** field lama yang diubah dan **tanpa** komponen baru:
+`NxCombat` += `DirHistory`, `BtnHistory`, `MotionMask`, `MotionAge`, `StateId`, `StateTime`,
+`FrameIndex`, `MoveType`, `Juggle`, `AttackId`, `CancelMask`, `ArmorTier`, `ArmorTicks`, `CounterHit`,
+`JuiceSeq/Kind/Power/Ticks/Pos`; `global` += `KoSlowTicks`, `SuperFreezeTicks`, `SuperFreezeSlot`.
+Belum ada sistem yang membacanya → perilaku game **tidak berubah**. Butuh **CodeGen** di Unity.
+Spesifikasi & urutan update per tick: `docs/research/ikemen-extract/07-patch-qtn.md`.
+**T2 tidak disentuh** (tetap berikutnya).
+
+### 2026-11-13 (lanjutan 2) — SISTEM PERTAMA: `NxInputSystem`
+File baru `Simulation/Nexus/NxInputSystem.cs` (data-only) + registrasi di `Editor/NexusSetup.cs`
+(sebelum `NxCombatSystem`, jalur Local & Online). Mengisi histori input, `MotionMask`, `StateTime`,
+`MoveType`, decay `JuiceTicks`. **Tidak mengubah** gerak/hit/KO → perilaku game tetap.
+Gesture = rotasi mentah (bukan "QCF") supaya pemetaan skill tetap di data. Butuh CodeGen + jalankan ulang
+menu scene (sistem disimpan di asset `NexusSystemsConfig`, bukan di kode).
+
+### 2026-11-13 (lanjutan 3) — PROMPT RISET + BACKLOG (docs saja)
+Dibuat `docs/research/PROMPT-riset-legal.md` (prompt inisiator: peran, aturan label OBSERVED/DERIVED/PROPOSED,
+sumber izin vs larang, format keluaran, "jangan implement") dan `docs/research/backlog-riset-logic.md`
+(11 domain: combat, battle, hero/ability, animasi, map, sound, VFX, room, matchmaking, netcode, ekonomi).
+Sumber: open source (Ikemen GO MIT, Nakama, Open Match, Colyseus, Effekseer, SoLoud, miniaudio, OpenDota),
+dokumentasi publik Dota 2 (Wiki/Liquipedia/dev blog/paper), aset berlisensi/CC0.
+**Batas tetap:** tidak mengekstrak aset client komersial, tidak membongkar anti-cheat, tidak memakai source bocor.
+Tidak ada kode/aset yang diubah di sesi ini.
+
+### 2026-11-13 (lanjutan 4) — RISET DOMAIN 1: hero/ability → `docs/research/hero-ability/`
+| File | Hasil |
+|---|---|
+| `01-ability-data.md` | skema ability (cast point/backswing/channel/charge/target/phases), urutan eksekusi, aturan cancel & buffer, validator |
+| `02-formulas.md` | pipeline damage, **armor `1−0.06A/(1+0.06|A|)`**, MR & SR & CDR multiplikatif, evasion, block, aturan pembulatan FP |
+| `03-modifiers-dispel.md` | model modifier slot tetap, 4 stacking rule, `DispelBasic`/`DispelStrong`, debuff immunity, aturan buang-slot deterministik |
+| `04-kit-titan-pulse.md` | kit TITAN-01 & PULSE-X + combo route + anggaran cooldown (angka dekat spike) |
+
+Sumber: dokumentasi publik Dota 2 (`DK`) + Ikemen GO (MIT). **Formula ditulis ulang**, tidak ada teks/aset
+yang disalin. Status backlog domain hero/ability: ⬜ → 🟡 (artefak ada, implementasi belum).
+**Tidak ada kode/`.qtn` yang diubah.** Angka di `04` = PROPOSED, belum masuk `combat-tuning.json`.
+Menunggu user: angka kit, slot ultimate MVP, resource (cooldown murni vs energy), jumlah slot modifier.
+
+### 2026-11-13 (lanjutan 5) — REA DIPAKAI + PATCH DITAHAN + RISET battle-flow
+**1. `rea` dibangun & dipakai.** `npm ci` (400 paket) + `npm run build:cached` (3 task, 13 s) sukses.
+Dipakai pada **kode kita sendiri** (legal): `inspect-managed-members` → `PhotonBackend.Api.dll`,
+provider `rea-dotnet-static`, sha256 `f6e35d6a…f0f6d3`, evidence `ev_abe8dcae…beed3`.
+Catatan: `analyze` (native) **tidak** tersedia di mesin ini (Hopper unsupported di win32, Ghidra Windows
+native addon belum dibangun, IDA belum dikonfigurasi) → untuk .NET pakai perintah `inspect-managed-*`.
+rea **tidak** dipakai pada client komersial mana pun.
+
+**2. Patch `.qtn` + `NxInputSystem.cs` DITAHAN (di-revert).** Alasan diterima: deteksi rotasi & double-tap
+salah, komentar `.qtn` tak sinkron dengan kode, `StateTime` tak pernah reset, ~20 field mengunci desain
+sebelum diputuskan, dan melanggar aturan "jangan menumpuk kode belum terverifikasi" + "T2 berikutnya".
+**Aturan baru: field `.qtn` hanya ditambah lewat T2, dan hanya bila ada sistem yang memakainya.**
+`git checkout` pada `Nexus.qtn` + `NexusSetup.cs`, file `NxInputSystem.cs` dihapus. Working tree bersih.
+
+**3. Koreksi `hero-ability/`.** `04` ditulis ulang: charge TITAN = **Invuln 15** (bukan armor), **tidak ada
+chip damage** saat guard (hanya gauge 34/hit), Jab 11/Heavy 18 + combo route = **desain baru**, satu tipe
+damage, ultimate **ditunda**, resource **cooldown murni**, `pulse_overcharge` keluar dari MVP.
+`02` (formula damage) & `03` (modifier/dispel) diberi label **ARSIP PASCA-MVP**; yang tetap relevan dari
+`02` hanya aturan pembulatan & urutan pipeline.
+
+**4. Riset domain berikutnya: battle/match flow** → `docs/research/battle-flow/01-match-lifecycle.md`.
+Temuan: model ronde Ikemen tidak cocok (Ranked first-to-5 tanpa ronde); yang belum ada = timer, aturan
+waktu habis, draw, pause, disconnect, rematch. Menunggu user 5 keputusan (§6): timer Ranked, hasil saat
+seri, durasi grace disconnect, pause casual, rematch.
+
+### 2026-11-13 (lanjutan 6) — `docs/00-CHECKLIST.md`
+Dibuat checklist master (11 item selesai, 26 belum) supaya urutan kerja tidak berantakan:
+A antrean terkunci (a–h, T1–T3 dengan sub-item T2) · B riset selesai · C riset belum (R1–R5) ·
+D keputusan menunggu (K-09..K-12, T2-AFK, BF-1..5, HA-1) · E utang rilis · F larangan.
+Aturan kerja ditulis di §G: satu item → bukti → centang; item yang butuh keputusan dipindah ke D, bukan dikerjakan setengah.
