@@ -81,7 +81,8 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 #### NX-13 ❌ Poin d — UI Lobby
 - ❌ Settings 1.6: tab Grafis / Audio / Kontrol / Antarmuka / Akun+Logout, simpan lokal, langsung diterapkan (overlay sekarang kosong, `LobbyMain.uxml:50`)
 - ❌ Lobby 1.7: hero terakhir di tengah
-- ❌ Lobby 1.7: panel Pengumuman/Event + endpoint `/api/announcements`
+- ✅ Backend `/api/announcements` (publik, maks 5 aktif) + admin POST/DELETE (`X-Admin-Secret`, sumber tercatat, soft delete) — migrasi `AddAnnouncements` live, 88 tes
+- ❌ Lobby 1.7: panel Pengumuman/Event di UI (kosong → "Belum ada pengumuman") — **menunggu NX-12 lolos tes editor** (jangan tumpuk kode klien)
 - ❌ Semua tombol belum berfungsi → nonaktif + "Segera Hadir" (Shop, Inventory, Hero Deck, Quest, Event, Squad, Mail, HQ, Plaza)
 - ❌ Slider = Ranked / Battle 3v3 / 1 teaser "Segera Hadir"
 - ❌ Tombol Street Room di samping HQ/Plaza
