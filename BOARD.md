@@ -7,7 +7,7 @@
 
 <!-- FOCUS:START -->
 ## 🎯 FOKUS SEKARANG (WIP = 1)
-**NX-12 — T2: Pulihkan C4** (epic M1, MANDATORI) — ⏳ sedang dikerjakan. NX-11 ✅ (AFK 20 dtk, timer 100 dtk, tie-break gear→darah→DRAW).
+**NX-12 — T2: Pulihkan C4** (epic M1, MANDATORI) — ⏳ **kode selesai, menunggu tes editor user** (checklist di NX-12). Sisa: ikon badge (usul dipecah).
 Tiket mandatori tersisa di M1: NX-12, NX-13, NX-14, NX-15, NX-16.
 **Kerjaan baru apa pun → tulis ke INBOX dulu, JANGAN dikerjakan** sampai M1 ✅ (kecuali user menulis `OVERRIDE`).
 <!-- FOCUS:END -->
@@ -51,21 +51,31 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 - ✅ Waktu habis & skor KO seri → tie-break: (a) **gear rontok terbanyak kalah** → (b) **darah tersisa paling sedikit kalah** → (c) masih sama = DRAW tanpa rating — **dikonfirmasi user**
 <sub>Sumber: `docs/research/battle-flow/01-match-lifecycle.md` §6; keputusan di docs/90 2026-11-13.</sub>
 
-#### NX-12 ⏳ T2 — Pulihkan C4 (KO hanya 3 Break Stock) — 🎯 FOKUS
-- ❌ Hapus KO via `CritTimer`/`CritBleedTicks` (`NxCombatSystem.cs:38` masih ada) + atribusi kill bleed-out
-- ❌ Penalti gerak bertingkat 70% → 50% → 35%, dash dikunci
-- ❌ Indikator posisi Critical untuk lawan
-- ❌ Overload: tak tersentuh 8 dtk → terkunci 1,5 dtk, rentan, bukan KO, reset saat kena pukul
-- ❌ Bot memprioritaskan target Critical dalam jangkauan
-- ❌ Batas waktu match **100 dtk** + tie-break gear rontok → darah → DRAW
-- ❌ AFK/disconnect forfeit **20 dtk**
-- ❌ `koTimeline` (≤9 `{tick, killerSlot}`, deterministik, dibandingkan antar-klien, disimpan per match)
-- ❌ Tab "Jalannya Match" di Detail Match v2 (`ProfileController.cs:431` masih disembunyikan)
-- ❌ Ikon per-badge + ikon baris statistik
-- ❌ Semua nilai di config, bukan hardcode
-- ❌ Tes: Critical 30 dtk tak tersentuh → tidak KO · Overload terpicu · skor tetap · invariant 1v1 hijau
-- ❌ Docs: docs/32 + docs/90 (tutup **K-03**)
-- ❌ CodeGen + tes editor oleh user
+#### NX-12 ⏳ T2 — Pulihkan C4 (KO hanya 3 Break Stock) — 🎯 FOKUS · kode selesai, **menunggu tes editor user**
+Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless identik Unity + compile 3 assembly) · 🧪 = perlu dibuktikan di editor.
+- ✅🧪 Bleed-out dihapus (`CritTimer`/`CritBleedTicks`/`LastHitBy*` dibuang) — KO hanya 3 Break Stock
+- ✅🧪 Penalti gerak 70% → 50% → 35%; dash **dan lunge TITAN** dikunci saat Critical
+- ✅🧪 Indikator Critical lawan (penanda merah / panah tepi layar, `NexusView`)
+- ✅🧪 Overload 8 dtk → terkunci 1,5 dtk (guard lepas, rentan, bukan KO, reset saat kena/guard)
+- ✅🧪 Bot prioritas Critical/Overload (+ hitung penumpukan tanpa dirinya sendiri)
+- ✅🧪 Batas waktu **100 dtk** + tie-break gear rontok → darah → SERI (`NxMatch.cs`) + timer HUD
+- ✅🧪 AFK/disconnect **20 dtk** berturut-turut → forfeit (peringatan HUD 10 dtk); skor tidak dipalsukan; respawn tidak mereset AFK
+- ✅🧪 `koTimeline` (array `.qtn` ≤9) → dilaporkan → disimpan per match → dibandingkan antar-klien
+- ✅🧪 Tab "Jalannya Match" + label SERI/Waktu habis/WO di Riwayat & Detail Match v2
+- ✅ Backend: `endReason`/`winnerSlot`/`koTimeline`, seri tanpa rating, migrasi `AddMatchEndReason` **live** (`ef5b095`), **84 tes hijau**
+- ✅ Nilai di `NxTuning.cs` (satu tempat)
+- ✅ Docs: docs/32 (§C4 + akhir match) + docs/90; **K-03 ditutup** (menunggu tes)
+- ✅ CodeGen: file `Generated/` sudah diperbarui (identik byte dengan CodeGen Unity) → user **tidak wajib** CodeGen manual
+- ❌ Tes simulasi otomatis (Critical 30 dtk, Overload, skor tetap) — **belum ada harness Quantum headless**; diganti checklist editor di bawah
+- ❌ Ikon per-badge + ikon baris statistik — **belum** (kosmetik; usul dipecah jadi tiket sendiri, menunggu user)
+- 🧪 Tes editor user — checklist:
+  1. Console bersih setelah Unity import (tanpa error compile)
+  2. Ranked/practice 1v1: gerak/guard/hit/KO normal; timer 1:40 turun di atas layar
+  3. Lawan Critical tak disentuh 30 dtk → **tidak KO**; tiap 8 dtk muncul OVERLOAD 1,5 dtk; skor tetap
+  4. Saat Critical: kecepatan turun per stock; Shift (dash) & K TITAN tidak jalan
+  5. Diam 10 dtk → peringatan AFK; 20 dtk → match selesai "AFK — WO", lawan menang
+  6. Biarkan waktu habis → "WAKTU HABIS — … MENANG/SERI"; Riwayat menampilkan label + tab **Jalannya Match** berisi urutan KO
+  7. Practice vs bot: bot mengejar target Critical
 
 #### NX-13 ❌ Poin d — UI Lobby
 - ❌ Settings 1.6: tab Grafis / Audio / Kontrol / Antarmuka / Akun+Logout, simpan lokal, langsung diterapkan (overlay sekarang kosong, `LobbyMain.uxml:50`)
@@ -141,3 +151,4 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 
 ## LOG BOARD
 - 2026-11-13: BOARD dibuat dari audit PROGRESS + docs/31 + ROADMAP + grep kode. Fokus = NX-12 (T2).
+- 2026-11-13: NX-11 ✅. NX-12 kode selesai (lanjutan kode sesi DeepSeek + 5 bug diperbaiki + timer/tie-break/koTimeline/HUD/Riwayat), backend live, 84 tes; menunggu tes editor.

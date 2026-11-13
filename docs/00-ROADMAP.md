@@ -20,7 +20,7 @@ Satu pemain bisa: **login → lobby → ruang ladder → match ranked 1v1 → la
 | 3 | Lobby | Settings (1.6), lobby tidak kosong (1.7), tombol "Segera Hadir" | **Antre** | **Poin d**. Termasuk slider Ranked/Battle/teaser + tombol Street Room (T3-5). |
 | 4 | Ruang ladder | Ruang ladder (struktur Lost Saga), papan + baris saya | **Selesai** | docs/27, docs/33. |
 | 5 | Match | Ranked 1v1 first-to-5 KO, Glicko-2, invariant kills A = deaths B | **Selesai** | docs/32. |
-| 5a | Match | **Pulihkan C4**: KO hanya 3 Break Stock (buang bleed-out), penalti bertingkat, Overload, bot prioritas Critical, AFK forfeit, `koTimeline` | **Antre — BERIKUTNYA (T2)** | Tes editor sudah aman → terbuka. Butuh **CodeGen editor user**. Angka AFK **ditanyakan dulu**. Menyelesaikan **K-03**. |
+| 5a | Match | **Pulihkan C4**: KO hanya 3 Break Stock (buang bleed-out), penalti bertingkat, Overload, bot prioritas Critical, AFK forfeit, `koTimeline`, timer 100 dtk + tie-break | **Sedang — kode selesai, menunggu tes editor** | NX-11 diputus (AFK 20 dtk, timer 100 dtk, gear→darah→seri). Backend live. Checklist di BOARD NX-12. |
 | 6 | Layar hasil | Detail Match v2 sebagai **layar hasil** (mode `result`) menggantikan IMGUI | **Antre** | **Poin e**. Komponen dua mode sudah siap & terverifikasi (mode history). |
 | 7 | Riwayat | Tab Riwayat + Detail Match v2 | **Selesai** | Diverifikasi editor 2026-11-13. docs/34. Tab "Jalannya Match" menunggu `koTimeline` (T2). |
 | 8 | Leaderboard | Tier dari rating asli; urut tier → conservative → WR → match | **Selesai** | T3-2, tes Gladiator vs Rival. docs/33. |
@@ -57,7 +57,7 @@ Satu pemain bisa: **login → lobby → ruang ladder → match ranked 1v1 → la
 |---|---|---|---|---|---|
 | K-01 | docs/90 (2026-10-24 "MVP 1v1 & 2v2"; 2026-10-26 "MVP tetap 1v1+2v2"; "Mode MVP Survival + TDM") | docs/24 §10 (MVP = Solo 1v1 + Street Room) | Mode MVP | T3-5: 2v2 dicabut; slider Ranked/Battle/teaser; Street Room = room browser | **Selesai** |
 | K-02 | docs/24 §5 ("Survival berlaku utk 1v1 Solo Ranked") | docs/32 (Ranked = first-to-5 KO tanpa ronde) | Format Solo Ranked | T3-1: Solo Ladder ≠ Survival (docs/24 §5a) | **Selesai** |
-| K-03 | docs/32 (bleed-out → auto-KO + kill ke penyerang terakhir); docs/90 2026-10-27 (fix respawn bleed-out; deaths termasuk bleed-out) | docs/90 2026-10-24 C4 ("penalti gerak/dash + indikator posisi, **tanpa bleed-out**") | Jalan KO selain 3 Break Stock | Diputus user: pulihkan C4 (T2). docs/32 **sengaja belum diubah** — mencerminkan kode saat ini sampai T2 mendarat | **Antre (T2)** |
+| K-03 | docs/32 (bleed-out → auto-KO + kill ke penyerang terakhir); docs/90 2026-10-27 (fix respawn bleed-out; deaths termasuk bleed-out) | docs/90 2026-10-24 C4 ("penalti gerak/dash + indikator posisi, **tanpa bleed-out**") | Jalan KO selain 3 Break Stock | Diputus user: pulihkan C4 (T2). Kode + docs/32 diperbarui 2026-11-13 | **Selesai di kode — menunggu tes editor** |
 | K-04 | docs/31 ("grace=3") | docs/33, PROGRESS (NONAKTIF, grace=0) | Status proteksi demosi | T3-7: docs/31 dikoreksi | **Selesai** |
 | K-05 | docs/33 §2 + `LeaderboardService` (urut conservative murni) | Keputusan T3-2 | Tier di papan bisa terbalik | Kode + tes + docs/33 | **Selesai** |
 | K-06 | docs/33 §2 ("conservative HANYA utk posisi") | docs/33 Proteksi demosi ("leaderboard base = conservative") | Kontradiksi internal (sisa sebelum poin a) | Kalimat basi diperbaiki: base = rating asli | **Selesai** |

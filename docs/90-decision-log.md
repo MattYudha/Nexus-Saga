@@ -325,3 +325,41 @@ Tidak ada kode diubah.
 `lostsaga.exe` (Themida). Membuka keduanya = membongkar proteksi → dilarang (keputusan 2026-10-24). Ekstrak
 sementara dihapus, sesi REA ditutup. Klaim aturan LostSaga dari sumber luar (prioritas jumlah pemain bertahan →
 skor ronde → DRAW bila skor 0) **tidak terverifikasi**; hanya boleh dipakai sebagai inspirasi desain, bukan fakta.
+
+### 2026-11-13 (lanjutan 8) — T2 DIIMPLEMENTASI (kode), MENUNGGU CODEGEN
+Angka final disetujui user: **AFK 15 dtk peringatan / 30 dtk forfeit akumulatif**, reset oleh
+gerak/lompat/guard/dash/serang/skill (tukar hero & mouse tidak dihitung); **Overload 480 tick -> lock 90 tick,
+TANPA pengali damage** (alasan user: pengali membuat menunggu lebih untung daripada menyerang);
+**penalti gerak 70% sejak masuk Critical, 50% di stock 2, 35% di stock 1, dash terkunci sejak Critical**;
+**`koTimeline` kapasitas per mode** (9/19/29, fallback tetap 29) — implementasi ditunda sampai sintaks array
+`.qtn` terbukti.
+
+Kode: `NxTuning.cs` (baru, semua ambang), `NxCombatSystem.cs` (bleed-out dihapus, `TrackActivity`,
+`UpdateCriticalPressure`, `CritSpeedMul`, `BestTarget`, dash lock), `NxDamage.cs` (reset Overload saat kena/guard,
+`KoTotal`, respawn bersih), `Nexus.qtn` (+`IdleTicks`/`OverloadCharge`/`OverloadLock`, global +`KoTotal`/`Forfeit`).
+**Tidak dikerjakan:** HUD indicator (View), `koTimeline` (blokir sintaks), tes. Menunggu CodeGen + tes editor user.
+
+### 2026-11-13 (lanjutan 9) — KODE T2 DIPERTAHANKAN, RISET DIAUDIT ULANG
+User memutuskan kode T2 **tidak dihapus**; perbaikan diserahkan ke reviewer (Claude user).
+Sesi ini kembali ke mode riset murni: `docs/research/t2-spec/02-audit-kode-t2.md` (peta kode + 8 temuan
+perilaku + 4 risiko kompilasi + 4 pertanyaan reviewer + keselarasan `AddMatchEndReason`).
+**Aturan ditegaskan ulang: riset tidak mengubah kode.** Temuan tertinggi: (B1) forfeit memaksa skor =
+`KoTarget` sehingga skor nyata hilang; (B2) AFK ikut berjalan saat pemain di-combo; (B3) lock Overload
+tidak mematikan guard sehingga tidak benar-benar rentan.
+
+### 2026-11-13 (lanjutan 10) — PERAN BERGANTI: TESTER, QA PASS PERTAMA
+User mengganti peran menjadi **tester**. Hasil: `docs/qa/01-laporan-tester-2026-11-13.md` (20 temuan, tanpa ubah kode).
+Temuan tertinggi (**S1**): klien **memalsukan skor** ke 5-4 di `NexusGame.cs:370` padahal `NxMatch` tidak memalsukan;
+`EndReason`/`WinnerSlot`/`KoTimeline` **tidak dikirim**; seri dihitung menang; durasi dari wall-clock;
+`KoLog` dikunci 9 sementara backend menuntut jumlah = skor (Battle/Survival butuh 19/29); timeline dibandingkan
+sebagai string JSON mentah; draw 255 vs -1. **S2**: Overload tidak mematikan guard; AFK berjalan saat pemain
+di-combo; AFK 10/20 dtk (keputusan 15/30); timer 100 dtk belum diputus; timer berjalan saat hitpause;
+KO dan timer di tick yang sama dimenangkan timer. 8 item dimasukkan ke checklist §C2.
+
+## 2026-11-13 — T2 (NX-12) SELESAI DI KODE: C4 dipulihkan + akhir match
+- **KO hanya lewat 3 Break Stock** — bleed-out dihapus (K-03 ditutup, menunggu tes editor). Field `CritTimer`/`LastHitBy*` dibuang.
+- Critical: penalti gerak 70/50/35%, **dash & lunge TITAN dikunci** (lunge = dash; tambahan saya, mudah dibalik), Overload 8 dtk → lock 1,5 dtk (guard lepas, bukan KO), bot prioritas Critical/Overload.
+- Akhir match (`NxMatch.cs`): KO 5 · waktu habis 100 dtk (skor → gear rontok → darah → seri) · forfeit AFK/disconnect **20 dtk berturut-turut** (bukan 30 dtk akumulatif versi sesi DeepSeek — digantikan keputusan user). Skor tidak pernah dipalsukan.
+- `koTimeline` (≤9) dilaporkan, wajib sama antar-klien, disimpan per match; tab "Jalannya Match" aktif. Seri = rating/W/L tidak berubah, statistik menghitung seri terpisah. Warna SERI = token baru `--nx-result-draw` (netral terang).
+- Proses: kode simulasi awal dari sesi DeepSeek (`--bare`, tanpa gate BOARD) dilanjutkan sesi ini; 5 bug diperbaiki (forfeit memalsukan skor → Disputed; respawn mereset AFK; Overload saat guard tetap menangkis; bot menghitung diri sendiri; label "akumulatif" ≠ kode).
+- Verifikasi tanpa Unity: CodeGen headless (`Quantum.CodeGen.Qtn.dll`) menghasilkan file **identik byte** dengan `Generated/` di repo, lalu `Quantum.Simulation`, `Quantum.Unity`, Assembly-CSharp ter-compile terhadap Unity 2022.3.62f1 (menemukan & memperbaiki 1 error di HUD). Backend 84 tes, deploy live, 9 match lama tak berubah.

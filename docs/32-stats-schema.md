@@ -8,7 +8,7 @@ Semua angka dikumpulkan **di simulasi Quantum (deterministik, FP, tanpa RNG non-
 ---
 
 ## MEKANIK YANG ADA (hasil audit LANGKAH 0) — hanya ini yang boleh jadi statistik
-Gerak 8 arah/lompat/dash(i-frame) · Skill per-hero (TITAN lunge, PULSE charged shot) · melee + projectile · **Guard 180°** (gauge, crush→**Faint**) · **Critical** saat HP=0 (3 Break Stock, **gear drop**) · knockback/launch/hitstun/hitpause · KO + respawn · **ganti hero di tengah match (tombol H)** · bleed-out (nyangkut di Critical → auto-KO).
+Gerak 8 arah/lompat/dash(i-frame) · Skill per-hero (TITAN lunge, PULSE charged shot) · melee + projectile · **Guard 180°** (gauge, crush→**Faint**) · **Critical** saat HP=0 (3 Break Stock, **gear drop**) · knockback/launch/hitstun/hitpause · KO + respawn · **ganti hero di tengah match (tombol H)**. ~~bleed-out~~ **dihapus di T2** (lihat §C4 di bawah).
 Format match: **first-to-5 KO** (tim pertama 5 KO menang). `ScoreA/ScoreB` = total KO kumulatif per tim (BUKAN ronde).
 
 ### TIDAK ADA (jangan dicatat; kandidat fitur, lihat bagian akhir)
@@ -26,12 +26,30 @@ Bot di-spawn saat match MULAI (`StartMatch`, setelah jumlah manusia pasti), BUKA
 ### KILL/DEATH (deterministik di sim)
 - `Kills` = KO terhadap **MANUSIA**. `BotKills` = KO terhadap **BOT** (dipisah; TIDAK dihitung ranked/leaderboard).
 - `Kos` (deaths) = KO yang dialami (siapa pun pembunuhnya).
-- **Bleed-out (`CritBleedTicks`) memberi kill ke penyerang TERAKHIR** (`LastHitByPlayer/Team`), bukan "mati tanpa pembunuh".
+- ~~Bleed-out memberi kill ke penyerang terakhir~~ → **dihapus (T2, 2026-11-13)**: KO **hanya** lewat 3 Break Stock, jadi pembunuh selalu penyerang yang memecahkan stock terakhir. Field `CritTimer`/`LastHitBy*` dibuang dari `.qtn`.
+
+### C4 — CRITICAL TANPA BLEED-OUT (T2, kode `NxCombatSystem`/`NxDamage`, angka di `NxTuning.cs`)
+- HP 0 → Critical dengan 3 Break Stock. Tiap pukulan saat Critical memecah 1 stock + merontokkan 1 gear. Stock habis → **KO**. Tidak ada jalan KO lain.
+- **Penalti gerak bertingkat**: 70% (stock 3) → 50% (stock 2) → 35% (stock 1). **Dash & lunge TITAN dikunci** selama Critical.
+- **Overload**: 8 dtk (480 tick) di Critical tanpa kena damage → **terkunci 1,5 dtk** (90 tick), guard lepas, bisa dipukul. **Bukan KO**, tanpa pengali damage. Kena pukul/guard mereset timer.
+- **Bot** memilih target dengan skor jarak² − 40 (Critical) − 80 (Overload) + 30 per kawan LAIN di dekat target.
+- **Indikator Critical** untuk lawan: penanda merah di atas kepala / panah di tepi layar (HUD `NexusView`).
+
+### AKHIR MATCH (T2 / NX-11, `NxMatch.cs`)
+| Sebab (`endReason`) | Kapan | Pemenang |
+|---|---|---|
+| `ko` | satu tim mencapai 5 KO | tim itu |
+| `time` | **100 dtk** habis | skor KO lebih tinggi → seri: **gear rontok terbanyak KALAH** → **darah tersisa paling sedikit KALAH** → masih sama = **SERI** |
+| `forfeit` | **20 dtk** berturut-turut tanpa input (AFK/disconnect) | lawan; skor **tidak dipalsukan** |
+
+- Seri: rating, Wins/Losses, floor tier **tidak berubah**; K/D + statistik tetap dicatat; di statistik seri dihitung terpisah (win rate = menang/(menang+kalah)).
+- **`koTimeline`**: array ≤9 `{tick, killerSlot}` (tick relatif awal match), deterministik, **wajib sama** di kedua klien (beda → Disputed), disimpan per match → tab **"Jalannya Match"** di Detail Match v2.
+- Backend memvalidasi per sebab (`MatchService.IsLegalResult`/`IsLegalTimeline`); klien lama tanpa `endReason` tetap aturan `ko`.
 
 ### ATURAN 1v1 (WAJIB, divalidasi backend → pelanggar **Disputed**; ada tes otomatis)
 Untuk match `mode=ranked` dengan payload lengkap (2 pemain):
 1. `kills` pemain A = `deaths` pemain B (dan sebaliknya).
-2. `deaths` pemain = skor lawan; `kills` pemain = skor timnya (**pemenang = 5**).
+2. `deaths` pemain = skor lawan; `kills` pemain = skor timnya (pemenang = 5 bila `endReason=ko`; waktu habis/forfeit = skor apa adanya).
 3. `botKills` = 0 (ranked tak boleh ada KO bot).
 Lolos → `Match.Format = "ranked1v1"` (K/D valid). Tanpa payload → `"legacy5v5"` (K/D tak dihitung).
 
