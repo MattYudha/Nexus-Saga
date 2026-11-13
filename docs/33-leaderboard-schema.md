@@ -39,3 +39,10 @@ Saat diaktifkan (grace>0): floor tier di **layer tampilan**: setelah naik tier, 
 - **Tampil** (`Ranks.ApplyFloor(baseOrder, floorOrder, floorLeft)` = `floorLeft>0 ? max(base,floor) : base`): dipakai di **profil** (`/api/me`, base = rating asli) DAN **leaderboard** (base = **rating asli** juga — sejak poin a; dulu tertulis "conservative", sudah tidak berlaku; saat di-floor → Poin Ladder 0). `/api/me/rank` ikut lewat leaderboard. Stats/radar tetap pakai tier mentah (populasi pembanding jujur).
 - **Backfill**: akun lama `LastRankedTierOrder` di-set ke tier mentah terkini (sekali, idempoten) agar match berikutnya tak salah dibaca promosi.
 - Tes: `ApplyFloor` aktif/lepas, `StepTierFloor` promosi→tahan 3 match→turun, re-promosi reset grace, `TierName`↔`TierOrder`.
+
+## Kebijakan RD (D12, 2026-11-13)
+- **Lantai RD 30**: RD tidak pernah di bawah 30 → `conservative = rating − 2·RD` tetap memberi jarak keyakinan.
+- **Inflasi saat pasif**: tiap 7 hari tanpa match ranked, RD naik `φ* = √(φ² + σ²)` per periode (maks 350), diterapkan
+  tepat sebelum match berikutnya (`Player.LastRatedAt`). Pemain yang kembali → posisi papan lebih hati-hati.
+- **Anti-kolusi**: match yang poinnya diredam tidak menurunkan RD.
+- Seri tidak mengubah rating/RD (NX-11).

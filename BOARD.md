@@ -140,8 +140,8 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 | D9 | K-12 papan Survival | NX-29 | tunda |
 | D10 | Pause & rematch (battle-flow §6 #4–5) | M2 | tanpa pause Ranked; rematch casual saja |
 | D11 | Effekseer vs VFX bawaan Unity | fase aset | tunda |
-| D12 | Glicko: lantai RD 30 + inflasi RD saat pasif + RD tak turun saat anti-kolusi (Q48/Q49/Q51) | kualitas leaderboard | lantai 30, periode 7 hari |
-| D13 | Basis badge Flawless/Comeback/Close: ranked1v1+battle atau ranked1v1 saja (Q55) | statistik | ranked1v1+battle, K/D tetap ranked1v1 |
+| D12 | ~~Glicko RD~~ | kualitas leaderboard | ✅ **lantai 30, inflasi per 7 hari maks 350, RD tak turun saat anti-kolusi** (2026-11-13, live) |
+| D13 | ~~Basis badge~~ | statistik | ✅ **ranked1v1 + battle; K/D tetap ranked1v1; format lama tanpa badge** (2026-11-13, live) |
 
 ---
 

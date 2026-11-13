@@ -369,3 +369,7 @@ KO dan timer di tick yang sama dimenangkan timer. 8 item dimasukkan ke checklist
 statistik terbawa. **DeviceId dilepas** setelah upgrade (keamanan: akun berpassword tak boleh dibuka hanya dengan deviceId;
 perangkat itu berikutnya login pakai username). Akun yang sudah terdaftar → 409. Backend live, 2 tes (90 hijau).
 UI menyusul di Settings › Akun (poin d). Juga hari ini: QA pass 3 (Q42 TTL 180 dtk, Q43 retry laporan, Q44 separation).
+
+## 2026-11-13 — D12/D13 diputus & live
+- **D12 (RD Glicko):** lantai RD 30; inflasi RD per 7 hari tanpa match ranked (maks 350); match teredam anti-kolusi tidak menurunkan RD. Detail docs/33.
+- **D13 (badge):** Flawless/Comeback/Close dari ranked1v1 + battle; K/D tetap ranked1v1; match format lama tanpa badge. FLAWLESS hanya menang KO (Q53).
