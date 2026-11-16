@@ -25,7 +25,7 @@ Praktik vs bot: satu klien saja, mode practice (bot mengisi lawan).
 | 2 | Mulai 1v1, amati atas layar | timer **1:40** turun; gerak/guard(L)/hit(J)/KO normal | ☐ |
 | 3 | Buat lawan Critical, **jangan sentuh 30 dtk** | **TIDAK KO**; tiap 8 dtk muncul **OVERLOAD 1,5 dtk**; skor tetap | ☐ |
 | 4 | Saat kamu Critical, coba gerak | kecepatan turun per stock (70→50→35%); **Shift & K TITAN tidak jalan** | ☐ |
-| 5 | Diam total (tanpa WASD/J/K/Space/Shift/L) | 10 dtk → peringatan AFK di HUD; **20 dtk → "AFK — WO"**, lawan menang | ☐ |
+| 5 | Diam total (tanpa WASD/J/K/Space/Shift/L) | 60 dtk → peringatan AFK di HUD; **75 dtk → "AFK — WO"**, lawan menang | ☐ |
 | 6 | Main biasa, biarkan **timer habis** | "WAKTU HABIS — … MENANG" atau "SERI"; Riwayat punya label + tab **Jalannya Match** (urutan KO) | ☐ |
 | 7 | Practice vs bot, buat 1 bot Critical | bot **mengejar target Critical**, bukan yang sehat | ☐ |
 | 8 | 1v1 penuh sampai 5 KO | menang di 5 KO; Detail Match v2 muncul; `koTimeline` konsisten dua klien | ☐ |

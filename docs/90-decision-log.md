@@ -382,3 +382,10 @@ UI menyusul di Settings › Akun (poin d). Juga hari ini: QA pass 3 (Q42 TTL 180
 User meminta lanjut implementasi M2 sembari menunggu tes editor. Alasan: seluruh kode M1 (NX-12..16) selesai & ter-compile.
 Risiko yang diterima: kode klien belum terverifikasi editor makin menumpuk. Mitigasi: compile 3 assembly terhadap Unity 2022.3.62f1
 setiap perubahan. Pertama: NX-21 kartu Disputed "TIDAK DIHITUNG" (kolom `Match.DisputeReason`, riwayat `includeDisputed`).
+
+### 2026-11-16 — AFK forfeit dinaikkan (keputusan user)
+NX-12/T2: ambang AFK-forfeit **20 dtk → 75 dtk** (peringatan HUD 10 → 60 dtk). Alasan user: "baru kalah
+bila idle lebih dari 1 menit". `NxTuning.AfkForfeitTicks = 75*TickRate`, `AfkWarnTicks = 60*TickRate`.
+Tetap < `MatchTicks` 100 dtk (time-up menang bila idle mulai terlambat). HUD hitung-mundur otomatis
+(tidak ada string detik yang di-hardcode). Hanya recompile — tak ada `.qtn` berubah, CodeGen tidak perlu.
+Memperbarui D1 (was 20 dtk) + runbook A5 + checklist NX-12.

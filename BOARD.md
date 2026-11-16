@@ -59,7 +59,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅🧪 Overload 8 dtk → terkunci 1,5 dtk (guard lepas, rentan, bukan KO, reset saat kena/guard)
 - ✅🧪 Bot prioritas Critical/Overload (+ hitung penumpukan tanpa dirinya sendiri)
 - ✅🧪 Batas waktu **100 dtk** + tie-break gear rontok → darah → SERI (`NxMatch.cs`) + timer HUD
-- ✅🧪 AFK/disconnect **20 dtk** berturut-turut → forfeit (peringatan HUD 10 dtk); skor tidak dipalsukan; respawn tidak mereset AFK
+- ✅🧪 AFK/disconnect **75 dtk** berturut-turut → forfeit (peringatan HUD 60 dtk) — keputusan user 2026-11-16 (>1 mnt); skor tidak dipalsukan; respawn tidak mereset AFK
 - ✅🧪 `koTimeline` (array `.qtn` ≤9) → dilaporkan → disimpan per match → dibandingkan antar-klien
 - ✅🧪 Tab "Jalannya Match" + label SERI/Waktu habis/WO di Riwayat & Detail Match v2
 - ✅ Backend: `endReason`/`winnerSlot`/`koTimeline`, seri tanpa rating, migrasi `AddMatchEndReason` **live** (`ef5b095`), **84 tes hijau**
@@ -136,7 +136,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 ## ❓ KEPUTUSAN MENUNGGU USER
 | # | Keputusan | Menghambat | Usul |
 |---|---|---|---|
-| D1 | ~~Ambang AFK/disconnect~~ | NX-12 | ✅ **20 dtk → forfeit** (2026-11-13) |
+| D1 | ~~Ambang AFK/disconnect~~ | NX-12 | ✅ **75 dtk → forfeit** (user 2026-11-16, >1 mnt; was 20) |
 | D2 | ~~Timer Ranked~~ | NX-12 | ✅ **100 dtk** (2026-11-13) |
 | D3 | ~~Waktu habis seri~~ | NX-12 | ✅ **gear rontok → darah → DRAW** (2026-11-13) |
 | D4 | ~~K-10 guest → akun~~ | NX-16 | ✅ **endpoint upgrade** (2026-11-13) |
