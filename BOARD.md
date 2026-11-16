@@ -7,9 +7,10 @@
 
 <!-- FOCUS:START -->
 ## 🎯 FOKUS SEKARANG (WIP = 1)
-**Semua tiket M1 (NX-12..NX-16) kode selesai & ter-compile — menunggu TES EDITOR user** (checklist per tiket). Setelah lolos → M1 ✅, fokus pindah ke M2.
-Tiket mandatori tersisa di M1: NX-12, NX-13, NX-14, NX-15, NX-16.
-**Kerjaan baru apa pun → tulis ke INBOX dulu, JANGAN dikerjakan** sampai M1 ✅ (kecuali user menulis `OVERRIDE`).
+**M1 alur inti LULUS tes editor (user 2026-11-16): NX-12 combat, NX-14 hasil, NX-15 faksi, NX-16 upgrade.** Backend 135 tes hijau (Claude-run).
+Sisa M1: **NX-13 lobby** — fungsional (dilalui saat tes), tapi sedang **di-redesign** (NX-IN-LOBBY poin 1b/2/4) + flag **ranked-tanpa-bot** (NX-12 lanjutan).
+Pilihan user untuk langkah berikut: (a) ranked-no-bot flag · (b) lanjut redesign lobby (loop screenshot) · (c) mulai M2 (NX-20 stats / NX-21 Disputed / NX-22 Hero Favorit — kode M2 sudah ada, perlu tes editor).
+**Kerjaan baru → INBOX dulu** kecuali user menulis `OVERRIDE`.
 <!-- FOCUS:END -->
 
 ---
@@ -105,10 +106,10 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅🧪 Tak ketemu (belum tercatat / Disputed / server mati) → ringkasan teks + alasan jujur + LANJUT
 - ✅ Kotak hasil IMGUI tidak dipakai lagi saat `UseNewProfile` (aktif di `NexusOnline.unity`)
 
-#### NX-15 ⏳ Pemicu layar faksi → setelah hasil match pertama — kode selesai, **menunggu tes editor**
+#### NX-15 ✅ Pemicu layar faksi → setelah hasil match pertama — **LULUS tes editor (user 2026-11-16)**
 - ✅🧪 `NeedsFaction` = belum berfaksi **dan** sudah pernah menyelesaikan match (`MatchesPlayed > 0` atau baru selesai match di sesi ini). Pemain baru langsung ke lobby; layar faksi muncul setelah LANJUT dari hasil match pertama. Layar + backend dipakai ulang
 
-#### NX-16 ⏳ Guest → daftar akun membawa faksi/rating/riwayat (**K-10**)
+#### NX-16 ✅ Guest → daftar akun membawa faksi/rating/riwayat (**K-10**) — **LULUS tes editor (user 2026-11-16)**
 - ✅ Keputusan: opsi (a) endpoint upgrade (2026-11-13)
 - ✅ Backend `POST /api/auth/upgrade`: Player sama, faksi/rating/riwayat terbawa, deviceId dilepas, akun terdaftar → 409 — 2 tes (**90 hijau**), live & diuji di server
 - ✅🧪 UI: "Daftarkan akun" di Settings › Akun (hanya untuk guest) — menunggu tes editor
