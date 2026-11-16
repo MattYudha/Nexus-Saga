@@ -99,7 +99,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 - ✅ Bugfix T2: `SimVersion` dinaikkan ke `nx-sim-2026-11-13-t2` (klien + backend `RequiredSimVersion`, live) — build lama tak bisa dipasangkan dengan build T2
 - 🧪 Tes editor: buka Settings → ubah tiap opsi (VSync/FPS/kualitas/volume langsung berubah; restart → tetap); tab Akun (guest) → daftar akun; lobby menampilkan pengumuman & hero; tombol SEGERA HADIR tidak bisa diklik; slider 3 mode
 
-#### NX-14 ⏳ Poin e — Layar hasil pasca-match — kode selesai, **menunggu tes editor**
+#### NX-14 ✅ Poin e — Layar hasil pasca-match — **LULUS tes editor (user 2026-11-16): statistik match muncul**
 - ✅🧪 Selesai match → laporan → banner akhir ~1,5 dtk → keluar room → halaman **Result** (`NexusGame.Page.Result`)
 - ✅🧪 `ProfileController` mencari match di Riwayat (coba ulang 1 dtk, maks 15 dtk, karena lawan mungkin belum melapor) → **Detail Match v2 `DetailMode.Result`** (animasi Poin Ladder, "NAIK TIER!", tombol LANJUT/Enter/Esc → lobby)
 - ✅🧪 Tak ketemu (belum tercatat / Disputed / server mati) → ringkasan teks + alasan jujur + LANJUT
