@@ -51,7 +51,7 @@ Login → lobby → ruang ladder → match ranked 1v1 → layar hasil UITK → r
 - ✅ Waktu habis & skor KO seri → tie-break: (a) **gear rontok terbanyak kalah** → (b) **darah tersisa paling sedikit kalah** → (c) masih sama = DRAW tanpa rating — **dikonfirmasi user**
 <sub>Sumber: `docs/research/battle-flow/01-match-lifecycle.md` §6; keputusan di docs/90 2026-11-13.</sub>
 
-#### NX-12 ⏳ T2 — Pulihkan C4 (KO hanya 3 Break Stock) — 🎯 FOKUS · kode selesai, **menunggu tes editor user**
+#### NX-12 ⏳ T2 — Pulihkan C4 (KO hanya 3 Break Stock) — kode+backend ✅ (135 tes), **blok A combat DONE (user 2026-11-16)**; sisa: cek koTimeline 2-klien
 Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless identik Unity + compile 3 assembly) · 🧪 = perlu dibuktikan di editor.
 - ✅🧪 Bleed-out dihapus (`CritTimer`/`CritBleedTicks`/`LastHitBy*` dibuang) — KO hanya 3 Break Stock
 - ✅🧪 Penalti gerak 70% → 50% → 35%; dash **dan lunge TITAN** dikunci saat Critical
