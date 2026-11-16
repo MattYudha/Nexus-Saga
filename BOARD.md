@@ -8,7 +8,7 @@
 <!-- FOCUS:START -->
 ## 🎯 FOKUS SEKARANG (WIP = 1)
 **M1 alur inti LULUS tes editor (user 2026-11-16): NX-12 combat, NX-14 hasil, NX-15 faksi, NX-16 upgrade.** Backend 135 tes hijau (Claude-run).
-Sisa M1: **NX-13 lobby** — fungsional (dilalui saat tes), tapi sedang **di-redesign** (NX-IN-LOBBY poin 1b/2/4) + flag **ranked-tanpa-bot** (NX-12 lanjutan).
+Sisa M1: **NX-13 lobby** — fungsional (dilalui saat tes), tapi sedang **di-redesign** (NX-IN-LOBBY poin 1b/2/4) + **ranked-tanpa-bot ✅ kode** (PlayerCount 2/3/10, tanpa CodeGen) + **practice statistik tanpa DB ✅ kode** — menunggu tes editor.
 Pilihan user untuk langkah berikut: (a) ranked-no-bot flag · (b) lanjut redesign lobby (loop screenshot) · (c) mulai M2 (NX-20 stats / NX-21 Disputed / NX-22 Hero Favorit — kode M2 sudah ada, perlu tes editor).
 **Kerjaan baru → INBOX dulu** kecuali user menulis `OVERRIDE`.
 <!-- FOCUS:END -->
