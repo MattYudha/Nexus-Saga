@@ -13,6 +13,33 @@ Pilihan user untuk langkah berikut: (a) ranked-no-bot flag · (b) lanjut redesig
 **Kerjaan baru → INBOX dulu** kecuali user menulis `OVERRIDE`.
 <!-- FOCUS:END -->
 
+## 🌅 RENCANA BESOK (2026-11-17) — urut prioritas
+> Claude tak bisa screenshot/compile Unity → user jadi "mata". Backend bisa di-tes Claude (saat ini 135/126 hijau).
+> Semua kode hari ini sudah di-push ke **mine = MattYudha/Nexuws-Backend** (BE) & **MattYudha/Nexus-Saga** (docs).
+
+### A. VERIFIKASI dulu (tuntaskan yang menggantung) — butuh editor
+- [ ] A1 Aim-assist PULSE: hadap menjauh → tembak → peluru ke bot (360°, range 22). Tuning di `NxTuning` bila perlu.
+- [ ] A2 Practice Result: statistik benar (Kills+BotKills, skor per-tim) + layout = template ranked + elemen ranked (tier/ladder/MatchID/JALANNYA MATCH) tersembunyi + "Latihan tidak memengaruhi rating".
+- [ ] A3 Ranked tanpa bot: 2 klien (editor + `game.exe -nxprofile 2`) → murni 1v1, nol bot.
+
+### B. NX-13 / NX-IN-LOBBY — redesign lobby (loop screenshot: Claude edit → user screenshot → ulang)
+- [ ] B1 (poin 1b) Ganti slider jadi 3 kartu mode: RANKED (ikon rank+W/L), QUICK MATCH, CUSTOM ROOM. Tombol MAIN di bawah.
+- [ ] B2 (poin 2) Layar HERO SELECT baru: model besar tengah, grid hero, slot tim kiri/kanan, timer + LOCK IN.
+- [ ] B3 (poin 4) Rapikan: HQ/Plaza/Street → sidebar kiri; chat lebih tinggi; Friends auto-tinggi; hapus gear duplikat; Squad(party) vs Guild(bottom nav); currency ikon+tooltip.
+- [ ] B4 (poin 3b) Placeholder ikon bersih (kotak/lingkaran huruf) untuk fitur "Segera".
+
+### C. M2 (kode sudah ada → tinggal TES EDITOR)
+- [ ] C1 NX-21 kartu Disputed "TIDAK DIHITUNG".
+- [ ] C2 NX-20 tab Statistik (ring Flawless, grid mekanik, radar).
+- [ ] C3 NX-22 tab Hero Favorit.
+
+### D. Utang rilis (jangan lupa)
+- [ ] D1 Rotasi secret di `appsettings.Development.json` (JWT/webhook/auth) + pindah ke .env/user-secrets — ikut ter-push.
+- [ ] D2 NX-R3: JWT `jti` + revokasi (logout semua perangkat).
+
+**Mulai dari A (cepat, menutup yang menggantung), lalu pilih B atau C.**
+
+
 ---
 
 ## 🔒 ATURAN FOKUS (gate wajib — berlaku untuk manusia & AI)
