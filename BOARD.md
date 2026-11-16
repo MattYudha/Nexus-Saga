@@ -161,7 +161,8 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 ---
 
 ## 📥 INBOX (ide/permintaan baru — TIDAK dikerjakan sampai M1 ✅)
-| ID | Isi | Asal |
+
+| NX-IN-ART | Hero Select tampil ART (potret + skill) — ganti teks IMGUI; prompt+lokasi di docs/art/hero-art-prompts.md; pasang setelah art ada | user 2026-11-16 || ID | Isi | Asal |
 |---|---|---|
 | NX-IN-01 | Riset domain lain di `docs/research/backlog-riset-logic.md` (room, matchmaking, animasi, map, sound, VFX, ekonomi) | backlog riset |
 | NX-IN-02 | Input buffer/cancel/juice dari `ikemen-extract` → implementasi (draf `07-patch-qtn.md` ditahan) | riset Ikemen |
