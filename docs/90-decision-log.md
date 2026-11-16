@@ -389,3 +389,12 @@ bila idle lebih dari 1 menit". `NxTuning.AfkForfeitTicks = 75*TickRate`, `AfkWar
 Tetap < `MatchTicks` 100 dtk (time-up menang bila idle mulai terlambat). HUD hitung-mundur otomatis
 (tidak ada string detik yang di-hardcode). Hanya recompile — tak ada `.qtn` berubah, CodeGen tidak perlu.
 Memperbarui D1 (was 20 dtk) + runbook A5 + checklist NX-12.
+
+### 2026-11-16 — PRACTICE mode (keputusan user)
+User minta mode latihan beneran (bukan buka scene lokal manual). Ditambah tombol **PRACTICE** di slider
+lobby → `NexusGame.UiPractice()` → `StartPracticeAsync()`: sesi Quantum **DeterministicGameMode.Local**
+(offline, tanpa Photon, tanpa backend), `PlayerCount=2` sehingga `NxCombatSystem.StartMatch` mengisi 1 bot
+lawan. Hasil practice **tidak dilaporkan** (guard `_matchMode=="practice"` di `Update()` saat State==2 →
+balik menu, rating tak berubah). File: `NexusGame.cs` (+UiPractice/Practice/StartPracticeAsync/guard),
+`NexusLobbyController.cs` (+mode). Pola disalin dari alur online + `QuantumRunnerLocalDebug` (proven).
+Hanya recompile — tak ada `.qtn` berubah. **Menunggu tes editor.**

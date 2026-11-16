@@ -82,6 +82,12 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 
   → **Runbook gabungan NX-12..NX-16 (sekali duduk): `docs/qa/12-runbook-tes-editor-M1.md`**
 
+#### NX-12b ⏳ PRACTICE mode (user 2026-11-16) — kode selesai, **menunggu tes editor**
+- ✅ Tombol **PRACTICE** di slider lobby (mode ke-3, "MULAI") → `NexusGame.UiPractice()`
+- ✅ `StartPracticeAsync`: sesi Quantum **Local** (offline, tanpa Photon/backend), `PlayerCount=2` → 1 pemain + bot isi lawan
+- ✅ Hasil match practice **tidak dilaporkan** (rating tak berubah) — guard di `Update()` saat `State==2`
+- ✅🧪 Hanya recompile (tak ada `.qtn` berubah → tanpa CodeGen). Butuh tes editor: tombol → pilih hero → lawan bot
+
 #### NX-13 ⏳ Poin d — UI Lobby — kode selesai, **menunggu tes editor** (ditumpuk di atas NX-12 atas permintaan user)
 - ✅🧪 Settings 1.6: 5 tab (Grafis: resolusi/mode layar/VSync/batas FPS/kualitas · Audio: volume utama + bisu · Kontrol: daftar tombol · Antarmuka: tampil FPS · Akun: nama/akun/ID+salin/daftar akun/Logout), simpan PlayerPrefs, langsung diterapkan (`NexusSettings.cs`); Esc menutup. Musik/SFX terpisah, rebinding, ping, sosial = SEGERA HADIR
 - ✅🧪 Lobby 1.7: hero terakhir dimainkan di tengah (default TITAN-01)

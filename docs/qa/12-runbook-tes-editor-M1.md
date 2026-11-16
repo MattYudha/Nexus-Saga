@@ -14,7 +14,7 @@
 | Backend | pastikan API live (`/api/factions` membalas) sebelum mulai |
 
 Cara match 1v1: jalankan **editor** + **build (`-nxprofile 2`)**, keduanya Quick Match → saling ketemu.
-Praktik vs bot: satu klien saja, mode practice (bot mengisi lawan).
+**Blok A pakai tombol PRACTICE** di lobby (slider mode ke-3, "MULAI") → match offline solo vs 1 bot, tanpa rating. Pilih hero → langsung bertarung. Inilah jalur combat T2.
 
 ---
 
@@ -27,7 +27,7 @@ Praktik vs bot: satu klien saja, mode practice (bot mengisi lawan).
 | 4 | Saat kamu Critical, coba gerak | kecepatan turun per stock (70→50→35%); **Shift & K TITAN tidak jalan** | ☐ |
 | 5 | Diam total (tanpa WASD/J/K/Space/Shift/L) | 60 dtk → peringatan AFK di HUD; **75 dtk → "AFK — WO"**, lawan menang | ☐ |
 | 6 | Main biasa, biarkan **timer habis** | "WAKTU HABIS — … MENANG" atau "SERI"; Riwayat punya label + tab **Jalannya Match** (urutan KO) | ☐ |
-| 7 | Practice vs bot, buat 1 bot Critical | bot **mengejar target Critical**, bukan yang sehat | ☐ |
+| 7 | Di PRACTICE, buat 1 bot Critical | bot **mengejar target Critical**, bukan yang sehat | ☐ |
 | 8 | 1v1 penuh sampai 5 KO | menang di 5 KO; Detail Match v2 muncul; `koTimeline` konsisten dua klien | ☐ |
 
 **Watch (QA):** langkah 5 — pastikan **guard (L) ditahan terus TIDAK** memicu AFK (desain: guard = aktif). Langkah 3 — Overload **tidak menambah damage** (hanya lock).
