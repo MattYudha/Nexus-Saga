@@ -190,6 +190,7 @@ Legend sub-tugas di sini: ✅ = kode ada + **ter-compile** (CodeGen headless ide
 
 ## 📥 INBOX (ide/permintaan baru — TIDAK dikerjakan sampai M1 ✅)
 
+| NX-IN-TOOL | **Besty Unity-Skills** (REST localhost:8090, MIT, editor-only) = jembatan Claude⇄Unity: baca error compile + screenshot + recompile sendiri → hapus friksi "tak bisa lihat Unity". Pasang ke `game/Packages/` + Window>UnitySkills server ON. Unity-Tech/skills = rujukan (ui-uitk, localize). Analisis: docs/research/unity-skills-analysis.md | user 2026-11-17 |
 | NX-IN-LOBBY | Redesign lobby (user 2026-11-16, butuh loop screenshot — Claude tak bisa screenshot Unity): **1** hapus hero tengah (✅1a) → 3 kartu mode (RANKED+rank/WL, QUICK, CUSTOM ROOM) + MAIN; **2** layar Hero Select baru (model besar, grid, slot tim kiri/kanan, timer, LOCK IN); **3** ikon SEGERA HADIR overflow (✅ badge pojok) + placeholder ikon bersih; **4** HQ/Plaza/Street ke sidebar, chat lebih tinggi, Friends auto-tinggi, hapus gear duplikat, Squad vs Guild, currency ikon+tooltip | user 2026-11-16 |
 | NX-IN-ART | ✅ kode selesai (2026-11-16): art user dipasang di hero_titan/pulse.png + Resources; HeroCard (potret+skill) di NexusView — **menunggu tes editor** | user 2026-11-16 || ID | Isi | Asal |
 |---|---|---|
